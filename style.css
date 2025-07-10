@@ -31,22 +31,12 @@
 
 
   /* 폰트 크기 */
-  --fs-xs: 0.75rem;
-  /* 새로운 작은 폰트 크기 */
   --fs-sm: 0.9rem;
   --fs-base: 1rem;
-  --fs-md: 1.125rem;
-  /* 1.2rem -> 1.125rem (일반적인 텍스트 스케일) */
-  --fs-lg: 1.25rem;
-  /* 1.4rem -> 1.25rem */
-  --fs-xl: 1.875rem;
-  /* 2rem -> 1.875rem */
-  --fs-xxl: 2.5rem;
-  /* 3rem -> 2.5rem (더 큰 제목을 위해 확장 가능) */
-  --fs-hero-heading: 3.5rem;
-  /* 히어로 섹션 제목 전용 */
-  --fs-hero-subheading: 1.5rem;
-  /* 히어로 섹션 부제목 전용 */
+  --fs-md: 1.2rem;
+  --fs-lg: 1.4rem;
+  --fs-xl: 2rem;
+  --fs-xxl: 3rem;
 
   /* 전환 효과 */
   --transition-fast: all 0.2s ease;
@@ -84,6 +74,8 @@ body {
   /* 최소 2.5rem, 최대 6.25rem, 뷰포트 너비에 따라 유동적 */
   max-width: 60rem;
   margin-inline: auto;
+  scroll-margin-top: 80px;
+  /* 네비바 높이 + 여유 */
 }
 
 /* ========================
@@ -487,25 +479,82 @@ footer {
  * ======================= */
 .gallery-grid {
   display: grid;
-  /* 갤러리 이미지 크기 원본 (minmax(250px, 1fr)) 유지 */
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 1.25rem;
-  /* 간격 원본 유지 */
   max-width: 1000px;
-  /* 전체 너비 원본 유지 */
   margin: 0 auto;
   padding: 1.25rem;
+  background: #fafafa;
+  border-radius: 12px;
 }
 
 .gallery-grid img {
   width: 100%;
-  display: block;
-  /* 이미지 높이 고정 및 object-fit 제거하여 원본 상태로 유지 */
-  border-radius: 8px;
+  height: 350px;
+  /* A4 비율에 맞는 적당한 고정 높이 값 */
+  object-fit: contain;
+  background: #ffffff;
+  border: 1px solid #e0e0e0;
+  /* 라이트 그레이 테두리 */
+  border-radius: 16px;
   box-shadow: var(--shadow-medium);
   transition: var(--transition-medium);
+  padding: 8px;
+  /* 이미지 주변 여백 약간 추가하면 더 균형 */
 }
 
 .gallery-grid img:hover {
-  transform: scale(1.05);
+  transform: scale(1.013);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.12);
+}
+
+.gallery-grid img::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.04);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.gallery-grid img:hover::after {
+  opacity: 1;
+}
+
+
+/* 이미지 확대 오버레이 스타일 */
+.image-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  cursor: zoom-out;
+}
+
+.image-overlay img {
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+}
+
+.image-overlay {
+  opacity: 0;
+  animation: fadeIn 0.3s forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
