@@ -4,7 +4,8 @@ const images = [
   "cert2.jpg",
   "3.jpg",
   "4.jpg",
-  '5.png'
+  "t.gif",
+  "5.png"
 ];
 
 // container 가져오기
