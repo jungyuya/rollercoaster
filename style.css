@@ -3,18 +3,18 @@
  * ======================= */
 :root {
   /* 색상 */
-  --primary-color: #2c7ec9;
-  --secondary-color: #225e91;
+  --primary-color: #266cb2; /* 기존 #2c7ec9 */
+  --secondary-color: #1e5687; /* 기존 #225e91 */
   --text-dark: #333;
   --text-medium: #444;
-  --text-light: #666;
+  --text-light: #7a7a7a; /* 기존 #666 */
   --background-light: #f4f6f8;
-  --background-gray: #eef1f5;
+  --background-gray: #e8ecef; /* 기존 #eef1f5 */
   --white: #fff;
   --hero-overlay-opacity: 0.35;
 
   /* 섹션 박스 스타일을 위한 변수 추가 (과하지 않은 톤) */
-  --section-box-background: #fdfdfd;
+  --section-box-background: #fbfbfc; /* 기존 #fdfdfd */
   /* 거의 흰색에 가까운 부드러운 톤 */
   --section-box-shadow: 0 5px 20px rgba(0, 0, 0, 0.03);
   /* 더욱 섬세하고 확장된 그림자 */
@@ -143,9 +143,7 @@ body {
 
 .navbar .nav-logo .logo-image {
   height: 35px;
-  /* 로고의 높이를 원하는 대로 조절하세요. 30px에서 40px 사이가 적절합니다. */
-  /* width: auto;  높이만 설정하면 너비는 비율에 맞춰 자동으로 조절됩니다. */
-  /* margin-right: 8px; /* 로고와 옆의 텍스트(만약 있다면) 사이의 간격을 조절합니다. */
+
 }
 
 /* 추가적으로, 네비게이션 메뉴의 링크들이 로고와 같은 라인에 잘 정렬되도록 */
@@ -439,9 +437,9 @@ footer {
  * ======================= */
 @media (max-width: 768px) {
   .nav-menu {
-    display: none;
+    /* 기존 스타일 (수정됨) */
     position: absolute;
-    top: 60px;
+    top: 60px; /* navbar 높이에 맞게 조정 */
     right: 20px;
     background: var(--white);
     flex-direction: column;
@@ -449,14 +447,54 @@ footer {
     padding: 10px;
     border-radius: 4px;
     box-shadow: var(--shadow-card);
+    /* --- ✨ 애니메이션을 위한 추가/수정 ✨ --- */
+    display: flex; /* Flexbox 레이아웃은 유지하되, 높이/투명도로 숨김 */
+    max-height: 0; /* 초기 높이 0으로 설정하여 숨김 */
+    opacity: 0; /* 초기 투명도 0으로 설정하여 숨김 */
+    overflow: hidden; /* 메뉴 내용이 넘칠 경우 숨김 */
+    pointer-events: none; /* 비활성화 시 클릭 이벤트 방지 */
+    transition: max-height 0.4s ease-out, opacity 0.4s ease-out, padding 0.4s ease-out; /* 부드러운 전환 효과 */
   }
 
   .nav-menu.active {
-    display: flex;
+    /* --- ✨ 애니메이션 활성화 시 스타일 ✨ --- */
+    max-height: 300px; /* 메뉴의 최대 높이 (메뉴 항목 개수에 따라 조절 필요) */
+    opacity: 1; /* 활성화 시 투명도 1 */
+    pointer-events: auto; /* 활성화 시 클릭 이벤트 허용 */
+    padding: 10px; /* 활성화 시 패딩 적용 */
   }
 
   .hamburger {
-    display: flex;
+    display: flex; /* 기존 값 유지 */
+    /* --- ✨ 햄버거 아이콘 자체 애니메이션을 위한 추가/수정 ✨ --- */
+    flex-direction: column;
+    justify-content: space-between; /* 햄버거 선 사이 공간 */
+    width: 25px; /* 햄버거 아이콘 너비 */
+    height: 20px; /* 햄버거 아이콘 높이 */
+    cursor: pointer;
+    z-index: 101; /* 네비바 위에 오도록 z-index 조정 */
+    transition: transform 0.3s ease; /* 회전 애니메이션 */
+  }
+
+  .hamburger span {
+    width: 100%;
+    height: 3px; /* 햄버거 선 두께 */
+    background: var(--text-dark);
+    border-radius: 5px;
+    transition: all 0.3s ease-in-out; /* 선 개별 애니메이션 */
+  }
+
+  /* --- ✨ 햄버거 아이콘 활성화 시 애니메이션 ✨ --- */
+  .hamburger.active span:nth-child(1) {
+    transform: translateY(8px) rotate(45deg); /* 첫 번째 선: 아래로 이동 및 회전 */
+  }
+
+  .hamburger.active span:nth-child(2) {
+    opacity: 0; /* 가운데 선 숨기기 */
+  }
+
+  .hamburger.active span:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg); /* 세 번째 선: 위로 이동 및 회전 */
   }
 
   .hero h1 {

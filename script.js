@@ -3,6 +3,7 @@ const hamburger = document.querySelector('.hamburger');
 const navMenu = document.querySelector('.nav-menu');
 hamburger.addEventListener('click', () => {
     navMenu.classList.toggle('active');
+    hamburger.classList.toggle('active');
 });
 
 // 🌟🌟🌟 중요: 여기에 API Gateway 엔드포인트를 넣어주세요! 🌟🌟🌟
