@@ -101,6 +101,8 @@ body {
   font-weight: bold;
   color: var(--text-dark);
   text-decoration: none;
+  display: flex;
+  align-items: center;
 }
 
 .nav-menu {
@@ -137,6 +139,20 @@ body {
 .nav-menu a:hover,
 .nav-menu a:focus {
   color: var(--primary-color);
+}
+
+.navbar .nav-logo .logo-image {
+  height: 35px;
+  /* 로고의 높이를 원하는 대로 조절하세요. 30px에서 40px 사이가 적절합니다. */
+  /* width: auto;  높이만 설정하면 너비는 비율에 맞춰 자동으로 조절됩니다. */
+  /* margin-right: 8px; /* 로고와 옆의 텍스트(만약 있다면) 사이의 간격을 조절합니다. */
+}
+
+/* 추가적으로, 네비게이션 메뉴의 링크들이 로고와 같은 라인에 잘 정렬되도록 */
+.nav-menu li a {
+  line-height: 35px;
+  /* 로고의 높이와 비슷하게 맞추면 좋습니다 */
+  /* 필요시 padding-top, padding-bottom을 조절할 수 있습니다 */
 }
 
 .hamburger {
