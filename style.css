@@ -3,23 +3,20 @@
  * ======================= */
 :root {
   /* 색상 */
-  --primary-color: #266cb2; /* 기존 #2c7ec9 */
-  --secondary-color: #1e5687; /* 기존 #225e91 */
+  --primary-color: #266cb2;
+  --secondary-color: #1e5687;
   --text-dark: #333;
   --text-medium: #444;
-  --text-light: #7a7a7a; /* 기존 #666 */
+  --text-light: #7a7a7a;
   --background-light: #f4f6f8;
-  --background-gray: #e8ecef; /* 기존 #eef1f5 */
+  --background-gray: #e8ecef;
   --white: #fff;
   --hero-overlay-opacity: 0.35;
 
-  /* 섹션 박스 스타일을 위한 변수 추가 (과하지 않은 톤) */
-  --section-box-background: #fbfbfc; /* 기존 #fdfdfd */
-  /* 거의 흰색에 가까운 부드러운 톤 */
+  /* 섹션 박스 스타일을 위한 변수 */
+  --section-box-background: #fbfbfc;
   --section-box-shadow: 0 5px 20px rgba(0, 0, 0, 0.03);
-  /* 더욱 섬세하고 확장된 그림자 */
   --section-box-border-radius: 16px;
-  /* 살짝 둥근 모서리 */
 
   /* 그림자 */
   --shadow-light: rgba(0, 0, 0, 0.1);
@@ -28,7 +25,6 @@
   --shadow-card: 0 2px 10px rgba(0, 0, 0, 0.06);
   --shadow-btn: 0 4px 8px rgba(0, 0, 0, 0.12);
   --shadow-btn-hover: 0 8px 20px rgba(0, 0, 0, 0.18);
-
 
   /* 폰트 크기 */
   --fs-sm: 0.9rem;
@@ -63,19 +59,15 @@ body {
   font-size: var(--fs-base);
   color: var(--text-dark);
   background-color: var(--background-light);
-  /* 폰트 로딩 최적화를 위해 추가 */
   font-display: swap;
-  /* 웹 폰트를 사용할 경우 고려 */
 }
 
-/* 모든 섹션의 기본 스타일 유지 (박스 스타일은 특정 섹션에만 적용) */
+/* 모든 섹션의 기본 스타일 유지 */
 .section {
   padding: clamp(2.5rem, 5vw, 6.25rem) 1.25rem;
-  /* 최소 2.5rem, 최대 6.25rem, 뷰포트 너비에 따라 유동적 */
   max-width: 60rem;
   margin-inline: auto;
   scroll-margin-top: 80px;
-  /* 네비바 높이 + 여유 */
 }
 
 /* ========================
@@ -93,7 +85,6 @@ body {
   z-index: 100;
   backdrop-filter: blur(5px);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
-  /* 네비게이션 그림자 개선 */
 }
 
 .nav-logo {
@@ -143,19 +134,14 @@ body {
 
 .navbar .nav-logo .logo-image {
   height: 35px;
-
 }
 
-/* 추가적으로, 네비게이션 메뉴의 링크들이 로고와 같은 라인에 잘 정렬되도록 */
 .nav-menu li a {
   line-height: 35px;
-  /* 로고의 높이와 비슷하게 맞추면 좋습니다 */
-  /* 필요시 padding-top, padding-bottom을 조절할 수 있습니다 */
 }
 
 .hamburger {
   display: none;
-  /* 모바일에서만 표시 */
   flex-direction: column;
   cursor: pointer;
 }
@@ -178,7 +164,6 @@ body {
   align-items: center;
   height: 100vh;
   text-align: center;
-  /* 배경 이미지 경로 확인 및 !important 추가로 우선순위 확보 */
   background: url("images/background1.jpg") no-repeat center center/cover fixed !important;
   overflow: hidden;
 }
@@ -257,7 +242,6 @@ body {
 /* ========================
  * 📦 '소개' 이하 섹션에 박스 스타일 적용
  * ======================= */
-/* ID 선택자로 정확히 대상 지정 */
 #about,
 #education,
 #certification,
@@ -265,45 +249,11 @@ body {
 #skills,
 #contact,
 #gallery {
-  /* #gallery 포함 */
   background: var(--section-box-background);
   border-radius: var(--section-box-border-radius);
   box-shadow: var(--section-box-shadow);
   margin-bottom: 2.5rem;
-  /* 각 섹션 하단에 여유로운 여백 추가 */
   padding: 3.5rem 3rem;
-  /* 박스 내부 패딩을 좀 더 여유롭게 조정 */
-}
-
-/* 반응형 미디어 쿼리 안에서도 섹션 박스 패딩을 조정 */
-@media (max-width: 768px) {
-
-  #about,
-  #education,
-  #certification,
-  #projects,
-  #skills,
-  #contact,
-  #gallery {
-    padding: 2.5rem 2rem;
-    /* 모바일에서 박스 내부 패딩 조정 */
-    margin-bottom: 2rem;
-  }
-}
-
-@media (max-width: 480px) {
-
-  #about,
-  #education,
-  #certification,
-  #projects,
-  #skills,
-  #contact,
-  #gallery {
-    padding: 2rem 1.5rem;
-    /* 더 작은 화면에서 박스 내부 패딩 조정 */
-    margin-bottom: 1.5rem;
-  }
 }
 
 /* ========================
@@ -378,9 +328,7 @@ body {
   gap: 0.9375rem;
   max-width: 400px;
   margin: 0 auto;
-  /* 폼 자체는 이미 섹션 박스 내부에 있으므로 별도 박스 스타일은 제거 (깔끔함 유지) */
   padding: 0;
-  /* 섹션 박스에서 패딩이 있으므로 폼 자체 패딩 제거 */
 }
 
 #contact-form input,
@@ -437,9 +385,8 @@ footer {
  * ======================= */
 @media (max-width: 768px) {
   .nav-menu {
-    /* 기존 스타일 (수정됨) */
     position: absolute;
-    top: 60px; /* navbar 높이에 맞게 조정 */
+    top: 60px;
     right: 20px;
     background: var(--white);
     flex-direction: column;
@@ -447,54 +394,50 @@ footer {
     padding: 10px;
     border-radius: 4px;
     box-shadow: var(--shadow-card);
-    /* --- ✨ 애니메이션을 위한 추가/수정 ✨ --- */
-    display: flex; /* Flexbox 레이아웃은 유지하되, 높이/투명도로 숨김 */
-    max-height: 0; /* 초기 높이 0으로 설정하여 숨김 */
-    opacity: 0; /* 초기 투명도 0으로 설정하여 숨김 */
-    overflow: hidden; /* 메뉴 내용이 넘칠 경우 숨김 */
-    pointer-events: none; /* 비활성화 시 클릭 이벤트 방지 */
-    transition: max-height 0.4s ease-out, opacity 0.4s ease-out, padding 0.4s ease-out; /* 부드러운 전환 효과 */
+    display: flex;
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    pointer-events: none;
+    transition: max-height 0.4s ease-out, opacity 0.4s ease-out, padding 0.4s ease-out;
   }
 
   .nav-menu.active {
-    /* --- ✨ 애니메이션 활성화 시 스타일 ✨ --- */
-    max-height: 300px; /* 메뉴의 최대 높이 (메뉴 항목 개수에 따라 조절 필요) */
-    opacity: 1; /* 활성화 시 투명도 1 */
-    pointer-events: auto; /* 활성화 시 클릭 이벤트 허용 */
-    padding: 10px; /* 활성화 시 패딩 적용 */
+    max-height: 300px;
+    opacity: 1;
+    pointer-events: auto;
+    padding: 10px;
   }
 
   .hamburger {
-    display: flex; /* 기존 값 유지 */
-    /* --- ✨ 햄버거 아이콘 자체 애니메이션을 위한 추가/수정 ✨ --- */
+    display: flex;
     flex-direction: column;
-    justify-content: space-between; /* 햄버거 선 사이 공간 */
-    width: 25px; /* 햄버거 아이콘 너비 */
-    height: 20px; /* 햄버거 아이콘 높이 */
+    justify-content: space-between;
+    width: 25px;
+    height: 20px;
     cursor: pointer;
-    z-index: 101; /* 네비바 위에 오도록 z-index 조정 */
-    transition: transform 0.3s ease; /* 회전 애니메이션 */
+    z-index: 101;
+    transition: transform 0.3s ease;
   }
 
   .hamburger span {
     width: 100%;
-    height: 3px; /* 햄버거 선 두께 */
+    height: 3px;
     background: var(--text-dark);
     border-radius: 5px;
-    transition: all 0.3s ease-in-out; /* 선 개별 애니메이션 */
+    transition: all 0.3s ease-in-out;
   }
 
-  /* --- ✨ 햄버거 아이콘 활성화 시 애니메이션 ✨ --- */
   .hamburger.active span:nth-child(1) {
-    transform: translateY(8px) rotate(45deg); /* 첫 번째 선: 아래로 이동 및 회전 */
+    transform: translateY(8px) rotate(45deg);
   }
 
   .hamburger.active span:nth-child(2) {
-    opacity: 0; /* 가운데 선 숨기기 */
+    opacity: 0;
   }
 
   .hamburger.active span:nth-child(3) {
-    transform: translateY(-8px) rotate(-45deg); /* 세 번째 선: 위로 이동 및 회전 */
+    transform: translateY(-8px) rotate(-45deg);
   }
 
   .hero h1 {
@@ -508,8 +451,6 @@ footer {
   .section {
     padding: 3.75rem 1.25rem;
   }
-
-  /* 기본 섹션 패딩 유지 */
 }
 
 @media (max-width: 480px) {
@@ -524,8 +465,6 @@ footer {
   .section {
     padding: 2.5rem 1rem;
   }
-
-  /* 기본 섹션 패딩 유지 */
 }
 
 /* ========================
@@ -545,16 +484,13 @@ footer {
 .gallery-grid img {
   width: 100%;
   height: 350px;
-  /* A4 비율에 맞는 적당한 고정 높이 값 */
   object-fit: contain;
   background: #ffffff;
   border: 1px solid #e0e0e0;
-  /* 라이트 그레이 테두리 */
   border-radius: 16px;
   box-shadow: var(--shadow-medium);
   transition: var(--transition-medium);
   padding: 8px;
-  /* 이미지 주변 여백 약간 추가하면 더 균형 */
 }
 
 .gallery-grid img:hover {
@@ -574,7 +510,6 @@ footer {
 .gallery-grid img:hover::after {
   opacity: 1;
 }
-
 
 /* 이미지 확대 오버레이 스타일 */
 .image-overlay {
@@ -616,6 +551,7 @@ footer {
 /* ========================
  * 🌙 다크모드 스타일
  * ======================= */
+/* 다크 모드 변수 오버라이드 */
 body[data-theme="dark"] {
   --primary-color: #90caf9;
   --secondary-color: #42a5f5;
@@ -628,23 +564,109 @@ body[data-theme="dark"] {
   --white: #ffffff;
 }
 
-.btn {
-  background: var(--primary-color);
-  color: var(--white);
-  padding: 0.5rem 1rem;
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  box-shadow: var(--shadow-btn);
-  transition: var(--transition-fast);
+/* 공통 다크모드 설정 */
+body[data-theme="dark"] {
+  background-color: #121212;
+  color: #e0e0e0;
 }
 
-.btn:hover {
-  background: var(--secondary-color);
-  box-shadow: var(--shadow-btn-hover);
+/* 네비게이션 바 다크 모드 스타일 */
+body[data-theme="dark"] .navbar {
+  background: rgba(0, 0, 0, 0.9); /* 검정색 배경으로 변경 */
+  box-shadow: 0 2px 8px rgba(255, 255, 255, 0.1); /* 흰색 계열 그림자 */
 }
 
-/* 🌙 다크모드 스위치 위치 */
+/* 네비게이션 로고와 메뉴 텍스트 색상 변경 */
+body[data-theme="dark"] .nav-logo,
+body[data-theme="dark"] .nav-menu a {
+  color: var(--white) !important; /* 흰색 글씨로 변경 */
+}
+
+/* 햄버거 메뉴 아이콘 색상 변경 */
+body[data-theme="dark"] .hamburger span {
+  background: var(--white); /* 흰색 햄버거 아이콘 */
+}
+
+/* 모바일 메뉴 열렸을 때 배경색 변경 */
+body[data-theme="dark"] .nav-menu.active {
+  background: #333; /* 어두운 배경색 */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* 네비게이션 메뉴 링크 호버/포커스 시 색상 */
+body[data-theme="dark"] .nav-menu a:hover,
+body[data-theme="dark"] .nav-menu a:focus {
+  color: var(--primary-color) !important; /* 강조 색상은 변수 사용 */
+}
+
+/* 네비게이션 메뉴 링크 밑줄 색상 */
+body[data-theme="dark"] .nav-menu a::after {
+  background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+}
+
+/* 갤러리 제목 색상 유지 (기존 설정) */
+body[data-theme="dark"] .section.gallery h2 {
+  color: #000 !important;
+}
+
+/* 갤러리 이미지 그림자 강조 (다크모드용) */
+body[data-theme="dark"] .gallery-img {
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+}
+
+/* 이미지 확대 시 배경 어둡게 처리 */
+body[data-theme="dark"] .image-overlay {
+  background-color: rgba(0, 0, 0, 0.9);
+}
+
+/* 섹션 박스 배경색 및 그림자 변경 */
+body[data-theme="dark"] #about,
+body[data-theme="dark"] #education,
+body[data-theme="dark"] #certification,
+body[data-theme="dark"] #projects,
+body[data-theme="dark"] #skills,
+body[data-theme="dark"] #contact,
+body[data-theme="dark"] #gallery {
+  background: var(--section-box-background);
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4); /* 어두운 그림자로 변경 */
+}
+
+/* 프로젝트 카드 배경 및 그림자 */
+body[data-theme="dark"] .project-card {
+  background: #2a2a2a; /* 어두운 카드 배경 */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+body[data-theme="dark"] .project-card:hover {
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.4);
+}
+
+/* 스킬 리스트 배경 */
+body[data-theme="dark"] .skills-list li {
+  background: #333;
+}
+
+/* 입력 필드 테두리 */
+body[data-theme="dark"] #contact-form input,
+body[data-theme="dark"] #contact-form textarea {
+  background: #2a2a2a;
+  border-color: #555;
+  color: var(--text-dark);
+}
+
+body[data-theme="dark"] #contact-form input:focus,
+body[data-theme="dark"] #contact-form textarea:focus {
+  border-color: var(--primary-color);
+}
+
+/* 푸터 배경 및 텍스트 */
+body[data-theme="dark"] footer {
+  background: #0d0d0d;
+  color: var(--text-light);
+}
+
+
+/* 🌙 다크모드 스위치 컨테이너 (위치) */
 .dark-toggle-container {
   position: fixed;
   bottom: 20px;
@@ -667,179 +689,53 @@ body[data-theme="dark"] {
   height: 0;
 }
 
-/* 슬라이더 모양 */
+/* 슬라이더 트랙 모양 */
 .slider {
   position: absolute;
   cursor: pointer;
   inset: 0;
-  background-color: #ccc;
+  background-color: #ccc; /* 기존 라이트 모드 트랙 색상 */
   transition: 0.4s;
   border-radius: 34px;
+  /* 살짝의 그림자 효과는 유지 */
+  box-shadow: inset 0 0 4px rgba(0,0,0,0.2);
+  /* 이모지 중앙 정렬을 위해 flexbox 추가 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-/* 동그라미 */
+/* 슬라이더 동그라미 (핸들) */
 .slider::before {
   position: absolute;
-  content: "";
+  content: "☀️"; /* 라이트 모드일 때 해 이모지 */
   height: 26px;
   width: 26px;
   left: 4px;
   bottom: 4px;
-  background-color: white;
+  background-color: white; /* 기존 라이트 모드 핸들 색상 */
   transition: 0.4s;
   border-radius: 50%;
+  /* 핸들에도 그림자 효과 유지 */
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  /* 이모지 중앙 정렬을 위해 flexbox 추가 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2em; /* 이모지 크기 */
+  color: #FFD700; /* 이모지 색상 (해) */
 }
 
-/* 체크되면 배경색 변경 */
+/* 체크되면 배경색 변경 (다크 모드 활성화) */
 .switch input:checked + .slider {
-  background-color: var(--primary-color);
+  background-color: var(--primary-color); /* 다크 모드 트랙 색상은 변수 사용 */
+  box-shadow: inset 0 0 4px rgba(0,0,0,0.4); /* 기존 효과 유지 */
 }
 
-/* 체크되면 동그라미 이동 */
+/* 체크되면 동그라미 이동 및 이모지 변경 (다크 모드 활성화) */
 .switch input:checked + .slider::before {
   transform: translateX(26px);
-}
-
-/* 🌙 다크모드 스위치 컨테이너 */
-.dark-toggle-container {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  z-index: 1000;
-}
-
-/* 스위치 외형 */
-.switch {
-  position: relative;
-  display: inline-block;
-  width: 60px;
-  height: 34px;
-}
-
-.switch input {
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
-
-/* 슬라이더 트랙 */
-.slider {
-  position: absolute;
-  cursor: pointer;
-  inset: 0;
-  background-color: #ccc;
-  transition: 0.4s;
-  border-radius: 34px;
-}
-
-/* 슬라이더 버튼 */
-.slider::before {
-  position: absolute;
-  content: "";
-  height: 26px;
-  width: 26px;
-  left: 4px;
-  bottom: 4px;
-  background-color: white;
-  transition: 0.4s;
-  border-radius: 50%;
-}
-
-/* 체크 시 색상 */
-.switch input:checked + .slider {
-  background-color: var(--primary-color);
-}
-
-/* 체크 시 버튼 이동 */
-.switch input:checked + .slider::before {
-  transform: translateX(26px);
-}
-
-/* 다크모드에서도 상단 메뉴 텍스트를 검정색으로 유지 */
-body[data-theme="dark"] .nav-menu a,
-body[data-theme="dark"] .nav-menu li,
-body[data-theme="dark"] header nav li a,
-body[data-theme="dark"] .nav-logo {
-  color: #000 !important;
-}
-
-/* 🔄 공통 다크모드 설정 */
-body[data-theme="dark"] {
-  background-color: #121212;
-  color: #e0e0e0;
-}
-
-/* 네비게이션 메뉴 텍스트 다크모드에서도 검정 유지 */
-body[data-theme="dark"] .nav-menu a,
-body[data-theme="dark"] .nav-logo {
-  color: #000 !important;
-}
-
-/* 갤러리 제목 색상 유지 */
-body[data-theme="dark"] .section.gallery h2 {
-  color: #000 !important;
-}
-
-/* 갤러리 이미지 그림자 강조 (다크모드용) */
-body[data-theme="dark"] .gallery-img {
-  box-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
-}
-
-/* 이미지 확대 시 배경 어둡게 처리 */
-body[data-theme="dark"] .image-overlay {
-  background-color: rgba(0, 0, 0, 0.9);
-}
-
-/* 우측 하단 토글 버튼 */
-.darkmode-toggle {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  z-index: 999;
-}
-
-/* 스위치 스타일 */
-.switch {
-  position: relative;
-  display: inline-block;
-  width: 50px;
-  height: 26px;
-}
-
-.switch input {
-  opacity: 0;
-  width: 0;
-  height: 0;
-}
-
-.slider {
-  position: absolute;
-  cursor: pointer;
-  background-color: #ccc;
-  transition: 0.4s;
-  border-radius: 34px;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-}
-
-.slider:before {
-  position: absolute;
-  content: "";
-  height: 20px;
-  width: 20px;
-  left: 4px;
-  bottom: 3px;
-  background-color: white;
-  transition: 0.4s;
-  border-radius: 50%;
-}
-
-input:checked + .slider {
-  background-color: #2196F3;
-}
-
-input:checked + .slider:before {
-  transform: translateX(24px);
+  background-color: #000; /* 다크 모드일 때 달 이모지 배경색을 검정색으로 변경 */
+  content: "🌙"; /* 다크 모드일 때 달 이모지 */
+  color: #F0E68C; /* 이모지 색상 (달) */
 }

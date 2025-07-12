@@ -2,54 +2,40 @@
 <html lang="ko">
 
 <head>
-  <meta charset="UTF-8">
-  <title>갤러리</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="style.css">
-  <script src="common.js" defer></script> <!-- ✅ 공통 스크립트 연결 -->
-
+    <meta charset="UTF-8">
+    <title>갤러리</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-  <header>
-    <nav class="navbar">
-      <a href="index.html" class="nav-logo">🎢 RollerCoaster</a>
-      <ul class="nav-menu">
-        <li><a href="index.html">🏠홈</a></li>
-        <li><a href="gallery.html">📸갤러리</a></li>
-      </ul>
-    </nav>
-  </header>
+    <header>
+        <nav class="navbar">
+            <a href="index.html" class="nav-logo">🎢 RollerCoaster</a>
+            <ul class="nav-menu">
+                <li><a href="index.html">🏠홈</a></li>
+                <li><a href="gallery.html">📸갤러리</a></li>
+            </ul>
 
-  <section class="section gallery">
-    <h2>📸 갤러리</h2>
-    <div class="gallery-grid" id="gallery-container"></div>
-  </section>
+            <div class="hamburger">
+                <span></span><span></span><span></span>
+            </div>
+        </nav>
+    </header>
 
-  <script src="gallery.js"></script>
+    <section class="section gallery">
+        <h2>📸 갤러리</h2>
+        <div class="gallery-grid" id="gallery-container"></div>
+    </section>
 
-  <!-- 다크모드 토글 스위치 -->
-  <div class="darkmode-toggle">
-    <label class="switch">
-      <input type="checkbox" id="theme-toggle">
-      <span class="slider round"></span>
-    </label>
-  </div>
+    <div class="dark-toggle-container">
+        <label class="switch">
+            <input type="checkbox" id="dark-mode-toggle" aria-label="다크 모드 토글">
+            <span class="slider round"></span>
+        </label>
+    </div>
 
-  <script>
-    // 토글 스위치 기능
-    const toggle = document.getElementById('theme-toggle');
-    toggle.addEventListener('change', function () {
-      if (this.checked) {
-        document.body.setAttribute('data-theme', 'dark');
-      } else {
-        document.body.removeAttribute('data-theme');
-      }
-    });
-  </script>
-
-
-</body>
+    <script src="gallery.js"></script> <script src="common.js"></script>
+    <script src="script.js"></script> </body>
 
 </html>
