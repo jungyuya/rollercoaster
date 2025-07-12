@@ -1,29 +1,38 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>RollerCoaster</title>
   <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
 
   <!-- 네비게이션 -->
   <header>
-  <nav class="navbar">
-    <a href="#home" class="nav-logo">
-      <img src="images/homelogo.png" alt="Portfolio" class="logo-image" /> <span class="logo-text">RollerCoaster </span> </a>
-    <ul class="nav-menu">
+    <nav class="navbar">
+      <a href="#home" class="nav-logo">
+        <img src="images/homelogo.png" alt="Portfolio" class="logo-image" /> <span class="logo-text">RollerCoaster
+        </span> </a>
+      <ul class="nav-menu">
         <li><a href="#about">👤소개</a></li>
         <li><a href="#projects">💼프로젝트</a></li>
         <li><a href="#skills">💻기술 스택</a></li>
         <li><a href="#contact">📞연락처</a></li>
         <li><a href="gallery.html">📸갤러리</a></li>
       </ul>
+
+      <!--<button id="dark-mode-btn" class="btn">🌙 다크모드</button>
+       -->
       <div class="hamburger">
         <span></span><span></span><span></span>
       </div>
     </nav>
+    <link rel="stylesheet" href="style.css">
+    <script src="common.js" defer></script> <!-- ✅ 공통 스크립트 연결 -->
+
   </header>
 
   <!-- 홈 섹션 -->
@@ -45,49 +54,50 @@
     <h2>교육 사항</h2>
     <p>
       솔데스크 - Ansible 자동화로 구현한 아마존 AWS 클라우드 환경 DevOps<br>
-      [KOSA] NIPA-AWS Developer 부트캠프(2기) 
+      [KOSA] NIPA-AWS Developer 부트캠프(2기)
     </p>
   </section>
-  
+
   <section id="certification" class="section certification">
     <h2>자격증</h2>
     <p>
       리눅스마스터 2급 <br>
-      네트워크관리사 2급 <br>    
-      AWS Certified Solutions Architect - Associate 
+      네트워크관리사 2급 <br>
+      AWS Certified Solutions Architect - Associate
     </p>
   </section>
 
   <!-- 프로젝트 섹션 -->
-<section id="projects" class="section projects">
-  <h2>프로젝트</h2>
-  <div class="projects-grid">
-    <a href="https://docs.google.com/presentation/d/1uBBbbRDRsrr6D8dfGmaN-vBXXFjmXaDP2wu_v7q5KEg/edit?pli=1&slide=id.p1#slide=id.p1" target="_blank" class="project-card">
-      <img src="images/project1.jpg" alt="프로젝트1" />
-      <h3>챗라스틱</h3>
-      <p>Serverless기반 챗봇 웹 애플리케이션 구현</p>
-    </a>
+  <section id="projects" class="section projects">
+    <h2>프로젝트</h2>
+    <div class="projects-grid">
+      <a href="https://docs.google.com/presentation/d/1uBBbbRDRsrr6D8dfGmaN-vBXXFjmXaDP2wu_v7q5KEg/edit?pli=1&slide=id.p1#slide=id.p1"
+        target="_blank" class="project-card">
+        <img src="images/project1.jpg" alt="프로젝트1" />
+        <h3>챗라스틱</h3>
+        <p>Serverless기반 챗봇 웹 애플리케이션 구현</p>
+      </a>
 
-    <div class="project-card">
-      <img src="images/project2.png" alt="프로젝트2" />
-      <h3>펫커넥트</h3>
-      <p>EKS기반 펫 입양 플랫폼 + Github Action, ArgoCD를 통한 CI/CD</p>
-    </div>
+      <div class="project-card">
+        <img src="images/project2.png" alt="프로젝트2" />
+        <h3>펫커넥트</h3>
+        <p>EKS기반 펫 입양 플랫폼 + Github Action, ArgoCD를 통한 CI/CD</p>
+      </div>
 
-    <div class="project-card">
-      <img src="images/project3.png" alt="프로젝트3" />
-      <h3>메랜쌀먹</h3>
-      <p>3상 황갑, 일비 등등 쌀먹완료</p>
+      <div class="project-card">
+        <img src="images/project3.png" alt="프로젝트3" />
+        <h3>메랜쌀먹</h3>
+        <p>3상 황갑, 일비 등등 쌀먹완료</p>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
 
   <!-- 기술 스택 섹션 -->
   <section id="skills" class="section skills">
     <h2>기술 스택</h2>
     <ul class="skills-list">
-      <li>ㅇㅇㄷㅂㅇㅇㅅ </li> 
-      <li>ㄹㄴㅅ </li> 
+      <li>ㅇㅇㄷㅂㅇㅇㅅ </li>
+      <li>ㄹㄴㅅ </li>
       <li>ㅇㅅ ㅇㅍㅁㅇ ㅍㅌㅈ ㅅㄱㅁ ㄸㅈㅇ ㄱㅇ ㅈㄱㅅ </li>
     </ul>
   </section>
@@ -108,5 +118,15 @@
   </footer>
 
   <script src="script.js"></script>
+
+  <!-- 다크모드 토글 스위치 UI (우측 하단 고정) -->
+  <div class="dark-toggle-container">
+    <label class="switch">
+      <input type="checkbox" id="dark-mode-toggle" />
+      <span class="slider round"></span>
+    </label>
+  </div>
+
 </body>
+
 </html>

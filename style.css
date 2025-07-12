@@ -612,3 +612,234 @@ footer {
     opacity: 1;
   }
 }
+
+/* ========================
+ * 🌙 다크모드 스타일
+ * ======================= */
+body[data-theme="dark"] {
+  --primary-color: #90caf9;
+  --secondary-color: #42a5f5;
+  --text-dark: #eeeeee;
+  --text-medium: #bbbbbb;
+  --text-light: #999999;
+  --background-light: #121212;
+  --background-gray: #1e1e1e;
+  --section-box-background: #1c1c1c;
+  --white: #ffffff;
+}
+
+.btn {
+  background: var(--primary-color);
+  color: var(--white);
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  box-shadow: var(--shadow-btn);
+  transition: var(--transition-fast);
+}
+
+.btn:hover {
+  background: var(--secondary-color);
+  box-shadow: var(--shadow-btn-hover);
+}
+
+/* 🌙 다크모드 스위치 위치 */
+.dark-toggle-container {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 9999;
+}
+
+/* 🌙 토글 스위치 스타일 */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+/* 숨긴 checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* 슬라이더 모양 */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  inset: 0;
+  background-color: #ccc;
+  transition: 0.4s;
+  border-radius: 34px;
+}
+
+/* 동그라미 */
+.slider::before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+/* 체크되면 배경색 변경 */
+.switch input:checked + .slider {
+  background-color: var(--primary-color);
+}
+
+/* 체크되면 동그라미 이동 */
+.switch input:checked + .slider::before {
+  transform: translateX(26px);
+}
+
+/* 🌙 다크모드 스위치 컨테이너 */
+.dark-toggle-container {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 1000;
+}
+
+/* 스위치 외형 */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* 슬라이더 트랙 */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  inset: 0;
+  background-color: #ccc;
+  transition: 0.4s;
+  border-radius: 34px;
+}
+
+/* 슬라이더 버튼 */
+.slider::before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+/* 체크 시 색상 */
+.switch input:checked + .slider {
+  background-color: var(--primary-color);
+}
+
+/* 체크 시 버튼 이동 */
+.switch input:checked + .slider::before {
+  transform: translateX(26px);
+}
+
+/* 다크모드에서도 상단 메뉴 텍스트를 검정색으로 유지 */
+body[data-theme="dark"] .nav-menu a,
+body[data-theme="dark"] .nav-menu li,
+body[data-theme="dark"] header nav li a,
+body[data-theme="dark"] .nav-logo {
+  color: #000 !important;
+}
+
+/* 🔄 공통 다크모드 설정 */
+body[data-theme="dark"] {
+  background-color: #121212;
+  color: #e0e0e0;
+}
+
+/* 네비게이션 메뉴 텍스트 다크모드에서도 검정 유지 */
+body[data-theme="dark"] .nav-menu a,
+body[data-theme="dark"] .nav-logo {
+  color: #000 !important;
+}
+
+/* 갤러리 제목 색상 유지 */
+body[data-theme="dark"] .section.gallery h2 {
+  color: #000 !important;
+}
+
+/* 갤러리 이미지 그림자 강조 (다크모드용) */
+body[data-theme="dark"] .gallery-img {
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+}
+
+/* 이미지 확대 시 배경 어둡게 처리 */
+body[data-theme="dark"] .image-overlay {
+  background-color: rgba(0, 0, 0, 0.9);
+}
+
+/* 우측 하단 토글 버튼 */
+.darkmode-toggle {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 999;
+}
+
+/* 스위치 스타일 */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 26px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  background-color: #ccc;
+  transition: 0.4s;
+  border-radius: 34px;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 20px;
+  width: 20px;
+  left: 4px;
+  bottom: 3px;
+  background-color: white;
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:checked + .slider:before {
+  transform: translateX(24px);
+}
