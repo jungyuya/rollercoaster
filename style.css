@@ -488,6 +488,8 @@ footer {
     box-shadow: var(--shadow-light); /* ✨ 그림자 추가 */
 }
 
+
+
 /* 갤러리 컨트롤 (다중 삭제 버튼) 컨테이너 */
 .gallery-controls {
     text-align: right;
@@ -497,6 +499,13 @@ footer {
     margin-left: auto;
     margin-right: auto;
 }
+
+/* 🌙 다크모드 시 갤러리 그리드 배경색 변경 */
+body[data-theme="dark"] .gallery-grid {
+    background: var(--background-gray); /* ✨ 다크모드에 어울리는 그레이색으로 변경 */
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4); /* 그림자 강화 */
+}
+
 body[data-theme="dark"] .gallery-controls {
     background: var(--section-box-background);
     border-radius: var(--section-box-border-radius);
@@ -504,6 +513,7 @@ body[data-theme="dark"] .gallery-controls {
     padding: 15px 1.5rem; /* ✨ 패딩 조정 */
     margin-bottom: 20px; /* ✨ 마진 증가 */
 }
+
 
 
 /* 각 갤러리 아이템 (이미지 + 삭제 버튼 컨테이너) */
