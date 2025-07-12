@@ -481,34 +481,28 @@ footer {
   border-radius: 12px;
 }
 
+/* 각 갤러리 아이템 (이미지 + 삭제 버튼 컨테이너) */
+.gallery-item {
+    position: relative;
+    background: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 16px;
+    box-shadow: var(--shadow-medium);
+    transition: var(--transition-medium);
+    overflow: hidden; /* 자식 요소가 넘치지 않도록 */
+}
+
+.gallery-item:hover {
+    transform: scale(1.013);
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.12);
+}
+
 .gallery-grid img {
   width: 100%;
   height: 350px;
   object-fit: contain;
-  background: #ffffff;
-  border: 1px solid #e0e0e0;
-  border-radius: 16px;
-  box-shadow: var(--shadow-medium);
-  transition: var(--transition-medium);
   padding: 8px;
-}
-
-.gallery-grid img:hover {
-  transform: scale(1.013);
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.12);
-}
-
-.gallery-grid img::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.04);
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.gallery-grid img:hover::after {
-  opacity: 1;
+  display: block; /* 이미지 하단 여백 제거 */
 }
 
 /* 이미지 확대 오버레이 스타일 */
@@ -524,6 +518,8 @@ footer {
   align-items: center;
   z-index: 9999;
   cursor: zoom-out;
+  opacity: 0;
+  animation: fadeIn 0.3s forwards;
 }
 
 .image-overlay img {
@@ -531,11 +527,6 @@ footer {
   max-height: 90%;
   border-radius: 10px;
   box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
-}
-
-.image-overlay {
-  opacity: 0;
-  animation: fadeIn 0.3s forwards;
 }
 
 @keyframes fadeIn {
@@ -572,31 +563,31 @@ body[data-theme="dark"] {
 
 /* 네비게이션 바 다크 모드 스타일 */
 body[data-theme="dark"] .navbar {
-  background: rgba(0, 0, 0, 0.9); /* 검정색 배경으로 변경 */
-  box-shadow: 0 2px 8px rgba(255, 255, 255, 0.1); /* 흰색 계열 그림자 */
+  background: rgba(0, 0, 0, 0.9);
+  box-shadow: 0 2px 8px rgba(255, 255, 255, 0.1);
 }
 
 /* 네비게이션 로고와 메뉴 텍스트 색상 변경 */
 body[data-theme="dark"] .nav-logo,
 body[data-theme="dark"] .nav-menu a {
-  color: var(--white) !important; /* 흰색 글씨로 변경 */
+  color: var(--white) !important;
 }
 
 /* 햄버거 메뉴 아이콘 색상 변경 */
 body[data-theme="dark"] .hamburger span {
-  background: var(--white); /* 흰색 햄버거 아이콘 */
+  background: var(--white);
 }
 
 /* 모바일 메뉴 열렸을 때 배경색 변경 */
 body[data-theme="dark"] .nav-menu.active {
-  background: #333; /* 어두운 배경색 */
+  background: #333;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
 /* 네비게이션 메뉴 링크 호버/포커스 시 색상 */
 body[data-theme="dark"] .nav-menu a:hover,
 body[data-theme="dark"] .nav-menu a:focus {
-  color: var(--primary-color) !important; /* 강조 색상은 변수 사용 */
+  color: var(--primary-color) !important;
 }
 
 /* 네비게이션 메뉴 링크 밑줄 색상 */
@@ -606,13 +597,19 @@ body[data-theme="dark"] .nav-menu a::after {
 
 /* 갤러리 제목 색상 유지 (기존 설정) */
 body[data-theme="dark"] .section.gallery h2 {
-  color: #000 !important;
+  color: var(--text-dark); /* 다크 모드 텍스트 색상으로 변경 */
 }
 
 /* 갤러리 이미지 그림자 강조 (다크모드용) */
-body[data-theme="dark"] .gallery-img {
+body[data-theme="dark"] .gallery-item { /* gallery-img 대신 gallery-item */
   box-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
+  background-color: #2a2a2a; /* 다크모드 이미지 배경 */
 }
+
+body[data-theme="dark"] .gallery-item:hover {
+    box-shadow: 0 6px 14px rgba(255, 255, 255, 0.2);
+}
+
 
 /* 이미지 확대 시 배경 어둡게 처리 */
 body[data-theme="dark"] .image-overlay {
@@ -628,12 +625,12 @@ body[data-theme="dark"] #skills,
 body[data-theme="dark"] #contact,
 body[data-theme="dark"] #gallery {
   background: var(--section-box-background);
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4); /* 어두운 그림자로 변경 */
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
 }
 
 /* 프로젝트 카드 배경 및 그림자 */
 body[data-theme="dark"] .project-card {
-  background: #2a2a2a; /* 어두운 카드 배경 */
+  background: #2a2a2a;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 }
 
@@ -694,12 +691,10 @@ body[data-theme="dark"] footer {
   position: absolute;
   cursor: pointer;
   inset: 0;
-  background-color: #ccc; /* 기존 라이트 모드 트랙 색상 */
+  background-color: #ccc;
   transition: 0.4s;
   border-radius: 34px;
-  /* 살짝의 그림자 효과는 유지 */
   box-shadow: inset 0 0 4px rgba(0,0,0,0.2);
-  /* 이모지 중앙 정렬을 위해 flexbox 추가 */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -708,34 +703,304 @@ body[data-theme="dark"] footer {
 /* 슬라이더 동그라미 (핸들) */
 .slider::before {
   position: absolute;
-  content: "☀️"; /* 라이트 모드일 때 해 이모지 */
+  content: "☀️";
   height: 26px;
   width: 26px;
   left: 4px;
   bottom: 4px;
-  background-color: white; /* 기존 라이트 모드 핸들 색상 */
+  background-color: white;
   transition: 0.4s;
   border-radius: 50%;
-  /* 핸들에도 그림자 효과 유지 */
   box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-  /* 이모지 중앙 정렬을 위해 flexbox 추가 */
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 1.2em; /* 이모지 크기 */
-  color: #FFD700; /* 이모지 색상 (해) */
+  font-size: 1.2em;
+  color: #FFD700;
 }
 
 /* 체크되면 배경색 변경 (다크 모드 활성화) */
 .switch input:checked + .slider {
-  background-color: var(--primary-color); /* 다크 모드 트랙 색상은 변수 사용 */
-  box-shadow: inset 0 0 4px rgba(0,0,0,0.4); /* 기존 효과 유지 */
+  background-color: var(--primary-color);
+  box-shadow: inset 0 0 4px rgba(0,0,0,0.4);
 }
 
 /* 체크되면 동그라미 이동 및 이모지 변경 (다크 모드 활성화) */
 .switch input:checked + .slider::before {
   transform: translateX(26px);
-  background-color: #000; /* 다크 모드일 때 달 이모지 배경색을 검정색으로 변경 */
-  content: "🌙"; /* 다크 모드일 때 달 이모지 */
-  color: #F0E68C; /* 이모지 색상 (달) */
+  background-color: #000;
+  content: "🌙";
+  color: #F0E68C;
 }
+
+/* 업로드 플로팅 액션 버튼 (FAB) */
+.upload-fab {
+    position: fixed;
+    bottom: 40px;
+    right: 40px;
+    width: 60px;
+    height: 60px;
+    background-color: #ff9900; /* AWS 오렌지 */
+    color: white;
+    border: none;
+    border-radius: 50%;
+    font-size: 36px;
+    line-height: 55px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 1000;
+}
+
+.upload-fab:hover {
+    transform: scale(1.1) rotate(90deg);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+}
+
+/* 모달 스타일 */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.modal-overlay.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+.modal-content {
+    background-color: #fff;
+    padding: 2rem 2.5rem;
+    border-radius: 10px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+    width: 90%;
+    max-width: 500px;
+    position: relative;
+    transform: translateY(-50px);
+    transition: transform 0.3s ease;
+}
+
+.modal-overlay.show .modal-content {
+    transform: translateY(0);
+}
+
+.close-btn {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    background: none;
+    border: none;
+    font-size: 28px;
+    color: #aaa;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+.close-btn:hover {
+    color: #333;
+}
+
+/* 모달 내부 폼 스타일 (재사용) */
+.modal-content h2 {
+    color: #ff9900;
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+.admin-notice {
+    background-color: #fffbe6;
+    border: 1px solid #ffe58f;
+    color: #d46b08;
+    padding: 0.8rem;
+    border-radius: 5px;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    font-size: 0.9em;
+}
+#upload-form { display: flex; flex-direction: column; align-items: center; gap: 1.5rem; }
+.file-input-wrapper { position: relative; width: 100%; text-align: center; }
+#image-input { display: none; }
+.file-input-label {
+    background-color: #ecf0f1;
+    color: #34495e;
+    padding: 1rem 2rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-block;
+    font-weight: bold;
+    width: 100%;
+    box-sizing: border-box;
+    border: 2px solid transparent; /* 평소에는 투명한 테두리를 가짐 */
+}
+.file-input-label:hover { background-color: #bdc3c7; }
+.file-input-label span { margin-right: 0.5rem; }
+#upload-form button {
+    background: #ff9900;
+    color: white;
+    border: none;
+    padding: 0.8rem 2.5rem;
+    font-size: 1rem;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.2s ease;
+    width: 100%;
+}
+#upload-form button:hover { background: #e68a00; transform: translateY(-2px); }
+#upload-status { margin-top: 1rem; font-weight: bold; text-align: center; height: 20px; }
+
+/* 드래그앤드롭을 위한 스타일 추가 */
+.file-input-label.drag-over {
+    background-color: #e8f4fd; /* 배경색을 연한 하늘색으로 변경 */
+    border: 2px dashed #ff9900;  /* 테두리를 점선으로 강조 */
+    color: #ff9900;
+}
+
+/* ✨ 관리자 로그인 UI 스타일 */
+.admin-login-container {
+    position: fixed;
+    top: 80px; /* 네비게이션 바 아래 */
+    right: 20px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 10px 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    z-index: 101; /* 네비게이션 바 위, 모달 아래 */
+}
+body[data-theme="dark"] .admin-login-container {
+    background-color: rgba(0,0,0,0.8);
+    box-shadow: 0 2px 10px rgba(255,255,255,0.1);
+}
+.admin-login-container input {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 0.9em;
+    outline: none;
+}
+body[data-theme="dark"] .admin-login-container input {
+    background-color: #333;
+    border-color: #555;
+    color: var(--text-dark);
+}
+.admin-login-container button {
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--primary-color);
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    font-size: 0.9em;
+}
+.admin-login-container button:hover {
+    background-color: var(--secondary-color);
+}
+body[data-theme="dark"] .admin-login-container button {
+    background-color: #42a5f5; /* 다크모드에 어울리는 색상 */
+}
+body[data-theme="dark"] .admin-login-container button:hover {
+    background-color: #2196f3;
+}
+
+
+/* ✨ 삭제 버튼 스타일 */
+.delete-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: rgba(255, 0, 0, 0.7); /* 반투명 빨간색 */
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    font-size: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    opacity: 0; /* 기본적으로 숨김 */
+    transition: opacity 0.2s ease, background-color 0.2s ease, transform 0.2s ease;
+    z-index: 10; /* 이미지 위에 표시 */
+}
+
+.gallery-item:hover .delete-btn {
+    opacity: 1; /* 마우스 오버 시 표시 */
+    transform: scale(1.1);
+}
+
+.delete-btn:hover {
+    background-color: rgba(255, 0, 0, 1); /* 호버 시 불투명하게 */
+    transform: scale(1.2) rotate(5deg);
+}
+
+/* ✨ 커스텀 확인 모달 스타일 */
+.confirm-content {
+    background-color: #fff;
+    padding: 25px;
+    border-radius: 10px;
+    text-align: center;
+    max-width: 400px;
+}
+body[data-theme="dark"] .confirm-content {
+    background-color: #2a2a2a;
+    color: var(--text-dark);
+}
+.confirm-content p {
+    font-size: 1.1em;
+    margin-bottom: 20px;
+    color: var(--text-dark);
+}
+.confirm-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+.confirm-btn {
+    padding: 10px 25px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+.confirm-btn.yes {
+    background-color: #e74c3c; /* 빨간색 */
+    color: white;
+}
+.confirm-btn.yes:hover {
+    background-color: #c0392b;
+    transform: translateY(-1px);
+}
+.confirm-btn.no {
+    background-color: #bdc3c7; /* 회색 */
+    color: #333;
+}
+.confirm-btn.no:hover {
+    background-color: #95a5a6;
+    transform: translateY(-1px);
+}
+body[data-theme="dark"] .confirm-btn.no {
+    background-color: #555;
+    color: var(--text-dark);
+}
+body[data-theme="dark"] .confirm-btn.no:hover {
+    background-color: #777;
+}
+
