@@ -137,6 +137,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // 페이지 로드 시 배경 이미지 설정
     setRandomHeroBackground();
 
-    // * 선택 사항: 일정 시간마다 배경 이미지 변경 (예: 10초마다)
-    // setInterval(setRandomHeroBackground, 10000);
+    //배경 변환 시간 설정
+    setInterval(setRandomHeroBackground, 5000);
 });
