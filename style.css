@@ -614,7 +614,24 @@ footer {
     /* ✨ 그림자 추가 */
 }
 
+.section.gallery {
+    padding-top: 100px; /* ✨ 상단 내림 여백 추가 (필요에 따라 값 조정) */
+    /* 기존 스타일 유지 */
+    padding-bottom: 2rem; /* 하단 여백 */
+    /* background: var(--background); */ /* 필요시 배경색 지정 */
+    min-height: calc(100vh - var(--navbar-height)); /* 최소 높이 설정 */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* 내부 요소 중앙 정렬 */
+}
 
+/* 갤러리 섹션의 제목 스타일 */
+.section.gallery h2 {
+    margin-top: 0; /* 제목 자체에는 추가 마진을 주지 않음 */
+    margin-bottom: 20px; /* 제목 아래 여백 */
+    padding-top: 15px; /* 제목 자체의 상단 여백 (조절 가능) */
+    font-size: var(--fs-xl);
+}
 
 /* 갤러리 컨트롤 (다중 삭제 버튼) 컨테이너 */
 .gallery-controls {
@@ -626,6 +643,7 @@ footer {
     max-width: 1000px;
     margin-left: auto;
     margin-right: auto;
+    display: none;
 }
 
 /* 🌙 다크모드 시 갤러리 그리드 배경색 변경 */
