@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const selectedCountSpan = document.getElementById('selected-count');
 
     // --- 2. API 및 토큰 설정 ---
-    const API_BASE_URL = 'http://localhost:3000';
+    const API_BASE_URL = 'https://pwzai3882i.execute-api.ap-northeast-2.amazonaws.com/default/galleryback';
     const ADMIN_TOKEN = '123456';
     let isAdmin = false; // 관리자 로그인 상태
     let selectedImages = new Set(); // ✨ 선택된 이미지의 S3 키를 저장할 Set

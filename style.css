@@ -1205,10 +1205,10 @@ body[data-theme="dark"] .confirm-btn.no:hover {
 /* 체크박스 스타일 */
 .gallery-item .select-checkbox {
     position: absolute;
-    top: 12px; /* ✨ 위치 조정 */
-    left: 12px; /* ✨ 위치 조정 */
-    width: 28px; /* ✨ 크기 증가 */
-    height: 28px; /* ✨ 크기 증가 */
+    top: 12px; 
+    left: 12px; 
+    width: 28px;
+    height: 28px; 
     cursor: pointer;
     z-index: 10;
     opacity: 0;
