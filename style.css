@@ -188,7 +188,7 @@ body {
     /* 이미지 반복 방지 */
     background-attachment: fixed;
     /* 스크롤 시 배경 고정 */
-    transition: background-image 1s ease-in-out;
+    transition: background-image var(--transition-slow);
     /* ✨ 이미지 전환 효과 추가 */
     overflow: hidden;
 }
@@ -211,6 +211,10 @@ body {
     color: var(--white);
     text-shadow: 0 4px 8px rgba(0, 0, 0, 0.7);
     /* ✨ 텍스트 그림자 강화 */
+    box-shadow: var(--shadow-btn);
+    /* ✨ [수정]: 그림자 변수 사용 */
+    transition: background var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast);
+    /* ✨ [수정]: 전환 속도 변수 및 여러 속성에 적용 */
 }
 
 .hero h1 {
@@ -237,10 +241,11 @@ body {
 .hero a.btn:hover,
 .hero a.btn:focus {
     background: var(--secondary-color);
-    transform: translateY(-3px);
+    transform: translateY(-4px);
     /* ✨ 호버 시 이동량 증가 */
     box-shadow: var(--shadow-btn-hover);
 }
+
 
 /* ========================
  * 📦 섹션 제목 및 텍스트
@@ -507,46 +512,48 @@ footer {
 @media (max-width: 768px) {
     .nav-menu {
         position: absolute;
-        top: 65px;
-        /* ✨ 위치 조정 */
-        right: 15px;
-        /* ✨ 위치 조정 */
+        top: 70px;
+        /* ✨ [수정]: 네비바 높이와 일치하도록 조정 */
+        right: var(--spacing-md);
+        /* ✨ [수정]: 간격 변수 사용 */
         background: var(--white);
         flex-direction: column;
-        gap: 12px;
-        /* ✨ 간격 조정 */
-        padding: 15px;
-        /* ✨ 패딩 조정 */
-        border-radius: 8px;
-        /* ✨ 테두리 반경 조정 */
-        box-shadow: var(--shadow-medium);
-        /* ✨ 그림자 강화 */
+        gap: var(--spacing-md);
+        /* ✨ [수정]: 간격 변수 사용 */
+        padding: var(--spacing-md);
+        /* ✨ [수정]: 패딩 변수 사용 */
+        border-radius: var(--border-radius-md);
+        /* ✨ [수정]: 변수 사용 */
+        box-shadow: var(--shadow-md);
+        /* ✨ [수정]: 그림자 변수 사용 */
         display: flex;
         max-height: 0;
         opacity: 0;
         overflow: hidden;
         pointer-events: none;
-        transition: max-height 0.4s ease-out, opacity 0.4s ease-out, padding 0.4s ease-out;
+        transition: max-height var(--transition-base), opacity var(--transition-base), padding var(--transition-base);
+        /* ✨ [수정]: 전환 속도 변수 사용 */
     }
 
     .nav-menu.active {
         max-height: 300px;
         opacity: 1;
         pointer-events: auto;
-        padding: 15px;
+        padding: var(--spacing-md);
     }
 
     .hamburger {
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        width: 28px;
-        /* ✨ 크기 조정 */
-        height: 22px;
-        /* ✨ 크기 조정 */
+        width: 30px;
+        /* ✨ [수정]: 크기 약간 증가 */
+        height: 24px;
+        /* ✨ [수정]: 크기 약간 증가 */
         cursor: pointer;
         z-index: 101;
-        transition: all var(--transition-fast);
+        transition: transform var(--transition-fast);
+        /* ✨ [수정]: 전환 속도 변수 사용 */
     }
 
     .hamburger span {
@@ -555,20 +562,17 @@ footer {
         background: var(--text-dark);
         border-radius: 5px;
         transition: all var(--transition-fast);
+        /* ✨ [수정]: 전환 속도 변수 사용 */
     }
 
     .hamburger.active span:nth-child(1) {
-        transform: translateY(9px) rotate(45deg);
-        /* ✨ 위치 조정 */
-    }
-
-    .hamburger.active span:nth-child(2) {
-        opacity: 0;
+        transform: translateY(10px) rotate(45deg);
+        /* ✨ [수정]: 위치 조정 */
     }
 
     .hamburger.active span:nth-child(3) {
-        transform: translateY(-9px) rotate(-45deg);
-        /* ✨ 위치 조정 */
+        transform: translateY(-10px) rotate(-45deg);
+        /* ✨ [수정]: 위치 조정 */
     }
 
     .hero h1 {
@@ -580,21 +584,8 @@ footer {
     }
 
     .section {
-        padding: 3.75rem 1.25rem;
-    }
-}
-
-@media (max-width: 480px) {
-    .hero h1 {
-        font-size: 2rem;
-    }
-
-    .hero p {
-        font-size: 1rem;
-    }
-
-    .section {
-        padding: 2.5rem 1rem;
+        padding: var(--spacing-xxl) var(--spacing-md);
+        /* ✨ [수정]: 패딩 변수 사용 */
     }
 }
 
@@ -1000,10 +991,8 @@ body[data-theme="dark"] footer {
 }
 
 .upload-fab:hover {
-    transform: scale(1.15) rotate(90deg);
-    /* ✨ 확대율 및 회전 증가 */
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
-    /* ✨ 그림자 강화 */
+    transform: scale(1.1) rotate(90deg); /* ✨ [수정]: 확대율 및 회전 조정 */
+    box-shadow: var(--shadow-hover); /* ✨ [수정]: 그림자 변수 사용 */
 }
 
 body[data-theme="dark"] .upload-fab {
@@ -1024,7 +1013,7 @@ body[data-theme="dark"] .upload-fab:hover {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.7);
+    background-color: rgba(0, 0, 0, 0.8);
     /* ✨ 배경 투명도 증가 */
     display: flex;
     justify-content: center;
@@ -1041,21 +1030,15 @@ body[data-theme="dark"] .upload-fab:hover {
 }
 
 .modal-content {
-    background-color: #fff;
-    padding: 2.5rem 3rem;
-    /* ✨ 패딩 증가 */
-    border-radius: 15px;
-    /* ✨ 테두리 반경 증가 */
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
-    /* ✨ 그림자 강화 */
+    background-color: var(--white);
+    padding: var(--spacing-xxl) var(--spacing-xl); /* ✨ [수정]: 패딩 변수 사용 */
+    border-radius: var(--border-radius-lg); /* ✨ [수정]: 변수 사용 */
+    box-shadow: var(--shadow-lg); /* ✨ [수정]: 그림자 변수 사용 */
     width: 90%;
-    max-width: 550px;
-    /* ✨ 최대 너비 증가 */
+    max-width: 600px; /* ✨ [수정]: 최대 너비 증가 */
     position: relative;
-    transform: translateY(-80px);
-    /* ✨ 초기 이동량 증가 */
-    transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-    /* ✨ 부드러운 전환 */
+    transform: translateY(-50px); /* ✨ [수정]: 초기 이동량 조정 */
+    transition: transform var(--transition-slow) cubic-bezier(0.25, 0.8, 0.25, 1); /* ✨ [수정]: 전환 속도 변수 사용 */
 }
 
 .modal-overlay.show .modal-content {
@@ -1063,25 +1046,20 @@ body[data-theme="dark"] .upload-fab:hover {
 }
 
 body[data-theme="dark"] .modal-content {
-    background-color: var(--section-box-background);
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
+    background-color: var(--background-gray); /* ✨ [수정]: 변수 사용 */
+    box-shadow: var(--shadow-lg); /* ✨ [수정]: 그림자 변수 사용 */
 }
 
 .close-btn {
     position: absolute;
-    top: 18px;
-    /* ✨ 위치 조정 */
-    right: 22px;
-    /* ✨ 위치 조정 */
+    top: var(--spacing-md); /* ✨ [수정]: 위치 변수 사용 */
+    right: var(--spacing-lg); /* ✨ [수정]: 위치 변수 사용 */
     background: none;
     border: none;
-    font-size: 32px;
-    /* ✨ 폰트 크기 증가 */
-    color: #888;
-    /* ✨ 색상 조정 */
+    font-size: var(--fs-xl); /* ✨ [수정]: 폰트 크기 변수 사용 */
+    color: var(--text-light); /* ✨ [수정]: 색상 변수 사용 */
     cursor: pointer;
-    transition: color 0.2s, transform 0.2s;
-    /* ✨ 전환 추가 */
+    transition: color var(--transition-fast), transform var(--transition-fast);
 }
 
 .close-btn:hover {
