@@ -13,7 +13,8 @@
     <header>
         <nav class="navbar">
             <a href="#home" class="nav-logo">
-                <img src="images/homelogo.png" alt="Portfolio" class="logo-image" /> <span class="logo-text">RollerCoaster
+                <img src="images/homelogo.png" alt="Portfolio" class="logo-image" /> <span
+                    class="logo-text">RollerCoaster
                 </span> </a>
             <ul class="nav-menu">
                 <li><a href="#about">👤소개</a></li>
@@ -51,11 +52,11 @@
 
     <section id="certification" class="section certification">
         <h2>자격증</h2>
-        <p>
-            리눅스마스터 2급 <br>
-            네트워크관리사 2급 <br>
-            AWS Certified Solutions Architect - Associate
-        </p>
+        <div class="certification-list">
+            <p><span class="cert-item" data-cert-id="linux-master">리눅스마스터 2급</span></p>
+            <p><span class="cert-item" data-cert-id="network-admin">네트워크관리사 2급</span></p>
+            <p><span class="cert-item" data-cert-id="aws-saa">AWS Certified Solutions Architect - Associate</span></p>
+        </div>
     </section>
 
     <section id="projects" class="section projects">
@@ -75,9 +76,9 @@
             </div>
 
             <div class="project-card">
-                <img src="images/project3.png" alt="프로젝트3" />
-                <h3>메랜쌀먹</h3>
-                <p>3상 황갑, 일비 등등 쌀먹완료</p>
+                <img src="images/project3.jpg" alt="프로젝트3" />
+                <h3>롤러코스터</h3>
+                <p>포트폴리오 웹 앱</p>
             </div>
         </div>
     </section>
@@ -118,6 +119,14 @@
 
     <script src="common.js"></script>
     <script src="script.js"></script>
+
+    <div id="imageCertModal" class="modal-overlay">
+        <div class="modal-content">
+            <button class="close-btn">&times;</button>
+            <img id="certModalImage" src="" alt="Certificate"
+                style="max-width: 100%; height: auto; border-radius: 8px;">
+        </div>
+    </div>
 
 </body>
 
