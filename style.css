@@ -93,13 +93,13 @@ body {
     padding: 1.25rem;
     position: fixed;
     width: 100%;
-    background: rgba(255, 255, 255, 0.95);
+    background: rgba(255, 255, 255, 0.9);
     /* ✨ 배경 투명도 미세 조정 */
     top: 0;
     z-index: 100;
-    backdrop-filter: blur(8px);
+    backdrop-filter: blur(10px);
     /* ✨ 블러 강도 증가 */
-    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
     /* ✨ 그림자 개선 */
 }
 
@@ -122,7 +122,7 @@ body {
     color: var(--text-dark);
     text-decoration: none;
     font-weight: 500;
-    transition: var(--transition-fast);
+    transition: color var(--transition-fast);
     position: relative;
     padding-bottom: 5px;
 }
@@ -180,13 +180,16 @@ body {
     align-items: center;
     height: 100vh;
     text-align: center;
-    /* ⚠️ 이 줄은 script.js에서 동적으로 설정할 것이므로 제거하거나 주석 처리합니다. */
-    /* background: url("images/background1.jpg") no-repeat center center/cover fixed !important; */
-    background-size: cover; /* 이미지가 섹션을 꽉 채우도록 */
-    background-position: center center; /* 이미지가 중앙에 오도록 */
-    background-repeat: no-repeat; /* 이미지 반복 방지 */
-    background-attachment: fixed; /* 스크롤 시 배경 고정 */
-    transition: background-image 1s ease-in-out; /* ✨ 이미지 전환 효과 추가 */
+    background-size: cover;
+    /* 이미지가 섹션을 꽉 채우도록 */
+    background-position: center center;
+    /* 이미지가 중앙에 오도록 */
+    background-repeat: no-repeat;
+    /* 이미지 반복 방지 */
+    background-attachment: fixed;
+    /* 스크롤 시 배경 고정 */
+    transition: background-image 1s ease-in-out;
+    /* ✨ 이미지 전환 효과 추가 */
     overflow: hidden;
 }
 
@@ -365,7 +368,7 @@ body[data-theme="dark"] .cert-item:hover {
     /* ✨ 테두리 반경 증가 */
     box-shadow: var(--shadow-card);
     overflow: hidden;
-    transition: var(--transition-medium);
+    transition: transform 0.35s ease-out, box-shadow 0.35s ease-out;
 }
 
 .project-card:hover {
@@ -543,7 +546,7 @@ footer {
         /* ✨ 크기 조정 */
         cursor: pointer;
         z-index: 101;
-        transition: transform 0.3s ease;
+        transition: all var(--transition-fast);
     }
 
     .hamburger span {
@@ -551,7 +554,7 @@ footer {
         height: 3px;
         background: var(--text-dark);
         border-radius: 5px;
-        transition: all 0.3s ease-in-out;
+        transition: all var(--transition-fast);
     }
 
     .hamburger.active span:nth-child(1) {
@@ -615,21 +618,29 @@ footer {
 }
 
 .section.gallery {
-    padding-top: 100px; /* ✨ 상단 내림 여백 추가 (필요에 따라 값 조정) */
+    padding-top: 100px;
+    /* ✨ 상단 내림 여백 추가 (필요에 따라 값 조정) */
     /* 기존 스타일 유지 */
-    padding-bottom: 2rem; /* 하단 여백 */
-    /* background: var(--background); */ /* 필요시 배경색 지정 */
-    min-height: calc(100vh - var(--navbar-height)); /* 최소 높이 설정 */
+    padding-bottom: 2rem;
+    /* 하단 여백 */
+    /* background: var(--background); */
+    /* 필요시 배경색 지정 */
+    min-height: calc(100vh - var(--navbar-height));
+    /* 최소 높이 설정 */
     display: flex;
     flex-direction: column;
-    align-items: center; /* 내부 요소 중앙 정렬 */
+    align-items: center;
+    /* 내부 요소 중앙 정렬 */
 }
 
 /* 갤러리 섹션의 제목 스타일 */
 .section.gallery h2 {
-    margin-top: 0; /* 제목 자체에는 추가 마진을 주지 않음 */
-    margin-bottom: 20px; /* 제목 아래 여백 */
-    padding-top: 15px; /* 제목 자체의 상단 여백 (조절 가능) */
+    margin-top: 0;
+    /* 제목 자체에는 추가 마진을 주지 않음 */
+    margin-bottom: 20px;
+    /* 제목 아래 여백 */
+    padding-top: 15px;
+    /* 제목 자체의 상단 여백 (조절 가능) */
     font-size: var(--fs-xl);
 }
 
@@ -759,6 +770,9 @@ body[data-theme="dark"] {
 
     --primary-color-rgb: 144, 202, 249;
     /* 다크 모드용 RGB 값 */
+    --border-color-light: #333333;
+    --border-color-medium: #555555;
+
 }
 
 /* 공통 다크모드 설정 */
@@ -1654,4 +1668,59 @@ body[data-theme="dark"] .action-btn.delete-btn-multi:hover {
     box-shadow: none;
     transform: none;
     opacity: 0.7;
+}
+
+/* ========================
+ * 🎬 접근성 향상 (움직임 줄이기)
+ * ======================= */
+/* ✨ 이 코드를 CSS 파일의 가장 마지막에 추가하세요! ✨ */
+@media (prefers-reduced-motion: reduce) {
+
+    /* 모든 전환 효과를 비활성화하거나 대폭 줄입니다. */
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* ✨ [추가]: 웹킷(Chrome, Safari 등) 기반 브라우저용 스크롤바 */
+::-webkit-scrollbar {
+    width: 10px;
+    /* 스크롤바 너비 */
+    background-color: var(--background-gray);
+    /* 스크롤바 트랙 배경색 */
+    border-radius: 5px;
+    /* 스크롤바 모서리 둥글게 */
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--primary-color);
+    /* 스크롤바 핸들(움직이는 부분) 색상 */
+    border-radius: 5px;
+    /* 핸들 모서리 둥글게 */
+    border: 2px solid var(--background-gray);
+    /* 핸들 주위 여백 (배경색과 동일하게) */
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: var(--primary-dark);
+    /* 호버 시 핸들 색상 변경 */
+}
+
+/* ✨ [추가]: 다크 모드 스크롤바 */
+body[data-theme="dark"] ::-webkit-scrollbar {
+    background-color: var(--dark-background);
+}
+
+body[data-theme="dark"] ::-webkit-scrollbar-thumb {
+    background-color: var(--primary-color);
+    border: 2px solid var(--dark-background);
+}
+
+body[data-theme="dark"] ::-webkit-scrollbar-thumb:hover {
+    background-color: var(--primary-dark);
 }
