@@ -1,7 +1,17 @@
 const API_ENDPOINT = "https://0oliq70yca.execute-api.ap-northeast-2.amazonaws.com/prod/ContactEmail";
 
+// ⚠️ 사용할 배경 이미지 경로들을 배열에 추가 (실제 로컬경로)
+const HERO_BACKGROUND_IMAGES = [
+    'images/background.jpg',
+    'images/background1.jpg',
+    'images/background2.png',
+    'images/background3.webp'
+];
+
 document.addEventListener('DOMContentLoaded', () => {
-    // ✉️ 연락처 폼 제출 이벤트 (기존 코드 - 변경 없음)
+    /* ====================================
+     * ✉️ 연락처 폼 제출 기능
+     * ==================================== */
     const contactForm = document.getElementById('contact-form');
 
     if (contactForm) {
@@ -13,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const message = contactForm.querySelector('#message')?.value.trim();
 
             if (!name || !email || !message) {
-                alert('모든 필드를 채워주세요.');
+                alert('모든 필드를 채워주세요!');
                 return;
             }
 
@@ -51,35 +61,34 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 🎓 자격증 이미지 모달 기능 수정 ✨ (클릭 방식으로 변경)
+    /* ====================================
+     * 🎓 자격증 이미지 모달 기능
+     * ==================================== */
     const certItems = document.querySelectorAll('.cert-item');
     const imageCertModal = document.getElementById('imageCertModal');
     const certModalImage = document.getElementById('certModalImage');
     const certModalCloseBtn = imageCertModal?.querySelector('.close-btn');
 
     const certImages = {
-        'linux-master': 'images/linux.jpg', // ⚠️ 실제 이미지 경로로 변경하세요!
-        'network-admin': 'images/network.jpg', // ⚠️ 실제 이미지 경로로 변경하세요!
-        'aws-saa': 'images/SAA.jpg' // ⚠️ 실제 이미지 경로로 변경하세요!
+        'linux-master': 'images/linux.jpg',
+        'network-admin': 'images/network.jpg',
+        'aws-saa': 'images/SAA.jpg'
     };
 
     // 모달 닫기 로직을 함수로 캡슐화
     function closeCertModal() {
         imageCertModal.classList.remove('show');
         // 모달이 완전히 사라지는 애니메이션 시간(0.3s) 후에 스크롤바 되돌리기
+        // 이 타이밍은 .modal-overlay의 transition 시간과 일치해야 합니다.
         setTimeout(() => {
             document.body.style.overflow = '';
             certModalImage.src = '';
-        }, 300); // .modal-overlay의 transition 시간(0.3s)과 일치시켜야 부드럽습니다.
+        }, 300);
     }
 
     if (certItems.length > 0 && imageCertModal) {
         certItems.forEach(item => {
-            // ✨ 마우스 오버(hover) 관련 이벤트 제거
-            // item.addEventListener('mouseenter', ...);
-            // item.addEventListener('mouseleave', ...);
-
-            // ✨ 클릭 이벤트만 남김 (모바일/데스크톱 모두 작동)
+            // 클릭 이벤트만 남김 (모바일/데스크톱 모두 작동)
             item.addEventListener('click', () => {
                 const certId = item.dataset.certId;
                 const imageUrl = certImages[certId];
@@ -111,4 +120,23 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+
+    /* ====================================
+     * 🌟 히어로 섹션 배경 이미지 랜덤 변경 기능
+     * ==================================== */
+    const heroSection = document.getElementById('home');
+
+    function setRandomHeroBackground() {
+        if (heroSection && HERO_BACKGROUND_IMAGES.length > 0) {
+            const randomIndex = Math.floor(Math.random() * HERO_BACKGROUND_IMAGES.length);
+            const selectedImage = HERO_BACKGROUND_IMAGES[randomIndex];
+            heroSection.style.backgroundImage = `url("${selectedImage}")`;
+        }
+    }
+
+    // 페이지 로드 시 배경 이미지 설정
+    setRandomHeroBackground();
+
+    // * 선택 사항: 일정 시간마다 배경 이미지 변경 (예: 10초마다)
+    // setInterval(setRandomHeroBackground, 10000);
 });
