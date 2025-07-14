@@ -1,13 +1,18 @@
 document.addEventListener('DOMContentLoaded', function () {
     const options = {
         strings: [
-            '안녕하세요!',
-            '이준규의 포트폴리오 웹 페이지입니다!',
-            '궁금하신 점이 있으시다면',
-            '아래 버튼을 눌러 연락주세요!😊'
+            "부, 명성, 힘···.",
+            "한때 이 세상의 모든 것을 손에 넣은 사나이!",
+            "해적왕 골드 로저",
+            "그가 죽음을 앞두고 남긴 한마디는···",
+            "전세계 사람들을 바다로 향하게 만들었다.",
+            "내 보물 말이냐? 원한다면 주도록 하지···.",
+            "잘 찾아봐! 이 세상 전부를 거기에 두고 왔으니까!",
+            "세상은 대해적시대를 맞는다"
         ],
-        typeSpeed: 70 + Math.random() * 20,  
-        backSpeed: 20 + Math.random() * 10,  
+
+        typeSpeed: 50 + Math.random() * 20,
+        backSpeed: 18 + Math.random() * 10,
         backDelay: 3000,
         startDelay: 500,
         loop: true,
@@ -30,7 +35,10 @@ const HERO_BACKGROUND_IMAGES = [
     'images/background.jpg',
     'images/background1.jpg',
     'images/background2.png',
-    'images/background3.webp'
+    'images/background3.webp',
+    'images/background4.jpg',
+    'images/background5.jpg',
+    'images/background4.webp'
 ];
 
 document.addEventListener('DOMContentLoaded', () => {
