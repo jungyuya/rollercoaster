@@ -3,7 +3,8 @@ document.addEventListener('DOMContentLoaded', function () {
         strings: [
             '안녕하세요!',
             '이준규의 포트폴리오 웹 페이지입니다!',
-            '궁금하신 점이 있으시면 아래 버튼을 눌러 연락주세요!😊'
+            '궁금하신 점이 있으시다면',
+            '아래 버튼을 눌러 연락주세요!😊'
         ],
         typeSpeed: 80,  // 타이핑 속도 (ms)
         backSpeed: 35,  // 백스페이스 속도 (ms)
