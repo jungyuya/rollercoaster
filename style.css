@@ -90,7 +90,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1.25rem;
+    padding: 0.8rem 1.5rem;
     position: fixed;
     width: 100%;
     background: rgba(255, 255, 255, 0.9);
@@ -101,10 +101,11 @@ body {
     /* ✨ 블러 강도 증가 */
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
     /* ✨ 그림자 개선 */
+    height: 60px;
 }
 
 .nav-logo {
-    font-size: var(--fs-lg);
+    font-size: 1.6rem;
     font-weight: bold;
     color: var(--text-dark);
     text-decoration: none;
@@ -509,49 +510,67 @@ footer {
 /* ========================
  * 📦 반응형 디자인
  * ======================= */
+/* ========================
+ * 📦 반응형 디자인
+ * ======================= */
 @media (max-width: 768px) {
     .nav-menu {
         position: absolute;
-        /* absolute로 변경하여 특정 위치에 배치 */
-        top: 70px;
-        /* 네비바 높이와 일치하도록 조정 (Navbar 아래에 위치) */
-        right: var(--spacing-md);
-        /* 우측 정렬 */
+        top: 60px;
+        /* Navbar의 height: 60px에 맞춰 조정 */
+        right: 0;
+        /* 우측 여백을 0으로 설정하여 화면 끝에 붙도록 함 */
+
+        /* ✨ 메뉴 바 크기 조정 (더 작게) */
+        width: 100%;
+        max-width: 150px;
+        /* ✨ 수정: 최대 너비를 220px로 더 축소 */
+
+        /* ✨ 패딩 조정 (더 작게) */
+        padding: 1rem 1.2rem;
+        /* ✨ 수정: 상하 패딩 1rem, 좌우 패딩 1.2rem으로 축소 */
+
+        /* ✨ 텍스트 가운데 정렬 */
+        align-items: center;
+        gap: 0.7rem;
+        /* ✨ 수정: 메뉴 항목 간 세로 간격 0.7rem으로 미세 조정 */
+
         background: var(--white);
-        flex-direction: column;
-        gap: var(--spacing-md);
-        padding: var(--spacing-md);
-        border-radius: var(--border-radius-md);
-        box-shadow: var(--shadow-md);
+        /* ✨ 모서리 더 둥글게 */
+        border-radius: 15px;
+        /* ✨ 수정: var(--border-radius-md) 대신 15px로 더 둥글게 */
+
+        /* ✨ 그림자 강화 (이전과 동일하게 유지) */
+        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+
         display: flex;
+        flex-direction: column;
         max-height: 0;
         opacity: 0;
         overflow: hidden;
         pointer-events: none;
-        transition: max-height var(--transition-base), opacity var(--transition-base), padding var(--transition-base);
-        /* 메뉴가 부드럽게 열리고 닫히는 전환 효과 */
+        transition: max-height 0.4s ease-out, opacity 0.4s ease-out, padding 0.4s ease-out, box-shadow 0.4s ease-out, border-radius 0.4s ease-out;
+        /* ✨ transition에 border-radius 추가 */
     }
-
 
     .nav-menu.active {
-        max-height: 300px;
-        /* 메뉴가 열렸을 때 최대 높이 설정 */
+        max-height: 350px;
         opacity: 1;
         pointer-events: auto;
-        padding: var(--spacing-md);
+        padding: 1rem 1.2rem;
+        /* 활성화 시 위에서 설정한 패딩 적용 */
     }
 
+    /* 햄버거 아이콘 자체의 스타일은 이전과 동일하게 유지됩니다. */
     .hamburger {
         display: flex;
-        /* 햄버거 아이콘이 보이도록 설정 */
         flex-direction: column;
         justify-content: space-between;
         width: 30px;
         height: 24px;
         cursor: pointer;
         z-index: 101;
-        transition: transform var(--transition-fast);
-        /* 햄버거 아이콘 자체의 변형 전환 효과 */
+        transition: transform 0.4s ease;
     }
 
     .hamburger span {
@@ -559,23 +578,19 @@ footer {
         height: 3px;
         background: var(--text-dark);
         border-radius: 5px;
-        transition: all var(--transition-fast);
-        /* 각 막대의 변형 전환 효과 */
+        transition: all 0.4s ease;
     }
 
     .hamburger.active span:nth-child(1) {
         transform: translateY(10px) rotate(45deg);
-        /* 첫 번째 막대가 아래로 이동하고 45도 회전하여 X자 상단 형성 */
     }
 
     .hamburger.active span:nth-child(2) {
         opacity: 0;
-        /* 가운데 막대 숨기기 */
     }
 
-        .hamburger.active span:nth-child(3) {
+    .hamburger.active span:nth-child(3) {
         transform: translateY(-10px) rotate(-45deg);
-        /* 세 번째 막대가 위로 이동하고 -45도 회전하여 X자 하단 형성 */
     }
 
     .hero h1 {
@@ -1668,7 +1683,6 @@ body[data-theme="dark"] .action-btn.delete-btn-multi:hover {
 /* ========================
  * 🎬 접근성 향상 (움직임 줄이기)
  * ======================= */
-/* ✨ 이 코드를 CSS 파일의 가장 마지막에 추가하세요! ✨ */
 @media (prefers-reduced-motion: reduce) {
 
     /* 모든 전환 효과를 비활성화하거나 대폭 줄입니다. */
@@ -1685,20 +1699,14 @@ body[data-theme="dark"] .action-btn.delete-btn-multi:hover {
 /* ✨ [추가]: 웹킷(Chrome, Safari 등) 기반 브라우저용 스크롤바 */
 ::-webkit-scrollbar {
     width: 10px;
-    /* 스크롤바 너비 */
     background-color: var(--background-gray);
-    /* 스크롤바 트랙 배경색 */
     border-radius: 5px;
-    /* 스크롤바 모서리 둥글게 */
 }
 
 ::-webkit-scrollbar-thumb {
     background-color: var(--primary-color);
-    /* 스크롤바 핸들(움직이는 부분) 색상 */
     border-radius: 5px;
-    /* 핸들 모서리 둥글게 */
     border: 2px solid var(--background-gray);
-    /* 핸들 주위 여백 (배경색과 동일하게) */
 }
 
 ::-webkit-scrollbar-thumb:hover {
