@@ -111,6 +111,7 @@ body {
     text-decoration: none;
     display: flex;
     align-items: center;
+    padding-left: 0.1px;
 }
 
 .nav-menu {
@@ -517,30 +518,14 @@ footer {
     .nav-menu {
         position: absolute;
         top: 60px;
-        /* Navbar의 height: 60px에 맞춰 조정 */
         right: 0;
-        /* 우측 여백을 0으로 설정하여 화면 끝에 붙도록 함 */
-
-        /* ✨ 메뉴 바 크기 조정 (더 작게) */
         width: 100%;
         max-width: 150px;
-        /* ✨ 수정: 최대 너비를 220px로 더 축소 */
-
-        /* ✨ 패딩 조정 (더 작게) */
         padding: 1rem 1.2rem;
-        /* ✨ 수정: 상하 패딩 1rem, 좌우 패딩 1.2rem으로 축소 */
-
-        /* ✨ 텍스트 가운데 정렬 */
         align-items: center;
         gap: 0.7rem;
-        /* ✨ 수정: 메뉴 항목 간 세로 간격 0.7rem으로 미세 조정 */
-
         background: var(--white);
-        /* ✨ 모서리 더 둥글게 */
         border-radius: 15px;
-        /* ✨ 수정: var(--border-radius-md) 대신 15px로 더 둥글게 */
-
-        /* ✨ 그림자 강화 (이전과 동일하게 유지) */
         box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
 
         display: flex;
