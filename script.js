@@ -6,13 +6,16 @@ document.addEventListener('DOMContentLoaded', function () {
             '궁금하신 점이 있으시다면',
             '아래 버튼을 눌러 연락주세요!😊'
         ],
-        typeSpeed: 80,  // 타이핑 속도 (ms)
-        backSpeed: 35,  // 백스페이스 속도 (ms)
-        backDelay: 3500, // 첫 번째 문자열 타이핑 후, 백스페이스 전 딜레이 (ms)
-        loop: true,     // 무한 반복
-        showCursor: true, // 커서 보이기
-        cursorChar: '|',  // 커서 모양
-        smartBackspace: true // 지울 때 반복되는 부분을 효과적으로 지움
+        typeSpeed: 70 + Math.random() * 20,  
+        backSpeed: 20 + Math.random() * 10,  
+        backDelay: 3000,
+        startDelay: 500,
+        loop: true,
+        showCursor: true,
+        cursorChar: '|',
+        smartBackspace: true,
+        fadeOut: true,
+        fadeOutDelay: 500
     };
 
     const typed = new Typed('#typing-effect', options);
