@@ -1,3 +1,24 @@
+document.addEventListener('DOMContentLoaded', function () {
+    const options = {
+        strings: [
+            '안녕하세요!',
+            '이준규의 포트폴리오 웹 페이지입니다!',
+            '궁금하신 점이 있으시면 아래 버튼을 눌러 연락주세요!😊'
+        ],
+        typeSpeed: 80,  // 타이핑 속도 (ms)
+        backSpeed: 35,  // 백스페이스 속도 (ms)
+        backDelay: 3500, // 첫 번째 문자열 타이핑 후, 백스페이스 전 딜레이 (ms)
+        loop: true,     // 무한 반복
+        showCursor: true, // 커서 보이기
+        cursorChar: '|',  // 커서 모양
+        smartBackspace: true // 지울 때 반복되는 부분을 효과적으로 지움
+    };
+
+    const typed = new Typed('#typing-effect', options);
+});
+
+
+
 const API_ENDPOINT = "https://0oliq70yca.execute-api.ap-northeast-2.amazonaws.com/prod/ContactEmail";
 
 // ⚠️ 사용할 배경 이미지 경로들을 배열에 추가 (실제 로컬경로)
