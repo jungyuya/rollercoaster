@@ -41,15 +41,9 @@
     --transition-underline: width 0.3s ease;
 
     --transition-ease-out-quad: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    /* 느리게 시작해서 빠르게 끝남 */
     --transition-ease-in-out-quad: all 0.3s cubic-bezier(0.45, 0, 0.55, 1);
-    /* 부드럽게 시작하고 끝남 */
     --transition-springy: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    /* 살짝 튀는 듯한 효과 */
 
-
-
-    /* RGB 값 (rgba() 함수 사용을 위해 추가, 필요시 사용) */
     --primary-color-rgb: 38, 108, 178;
 }
 
@@ -94,13 +88,10 @@ body {
     position: fixed;
     width: 100%;
     background: rgba(255, 255, 255, 0.9);
-    /* ✨ 배경 투명도 미세 조정 */
     top: 0;
     z-index: 100;
     backdrop-filter: blur(10px);
-    /* ✨ 블러 강도 증가 */
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-    /* ✨ 그림자 개선 */
     height: 60px;
 }
 
