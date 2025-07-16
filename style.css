@@ -16,24 +16,15 @@
     /* 섹션 박스 스타일을 위한 변수 */
     --section-box-background: #fbfbfc;
     --section-box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
-    /* ✨ 그림자 개선 */
     --section-box-border-radius: 20px;
-    /* ✨ 테두리 반경 증가 */
 
     /* 그림자 */
     --shadow-light: rgba(0, 0, 0, 0.08);
-    /* ✨ 그림자 개선 */
     --shadow-medium: rgba(0, 0, 0, 0.15);
-    /* ✨ 그림자 개선 */
     --shadow-dark: rgba(0, 0, 0, 0.25);
-    /* ✨ 그림자 개선 */
     --shadow-card: 0 4px 15px rgba(0, 0, 0, 0.08);
-    /* ✨ 그림자 개선 */
     --shadow-btn: 0 6px 12px rgba(0, 0, 0, 0.15);
-    /* ✨ 그림자 개선 */
     --shadow-btn-hover: 0 10px 25px rgba(0, 0, 0, 0.25);
-    /* ✨ 그림자 개선 */
-
     /* 폰트 크기 */
     --fs-sm: 0.9rem;
     --fs-base: 1rem;
@@ -48,6 +39,15 @@
     --transition-medium: all 0.35s ease-out;
     /* ✨ 전환 속도 미세 조정 */
     --transition-underline: width 0.3s ease;
+
+    --transition-ease-out-quad: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    /* 느리게 시작해서 빠르게 끝남 */
+    --transition-ease-in-out-quad: all 0.3s cubic-bezier(0.45, 0, 0.55, 1);
+    /* 부드럽게 시작하고 끝남 */
+    --transition-springy: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    /* 살짝 튀는 듯한 효과 */
+
+
 
     /* RGB 값 (rgba() 함수 사용을 위해 추가, 필요시 사용) */
     --primary-color-rgb: 38, 108, 178;
@@ -215,8 +215,8 @@ body {
     /* ✨ 텍스트 그림자 강화 */
     box-shadow: var(--shadow-btn);
     /* ✨ [수정]: 그림자 변수 사용 */
-    transition: background var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast);
-    /* ✨ [수정]: 전환 속도 변수 및 여러 속성에 적용 */
+    transition: background var(--transition-medium), transform var(--transition-springy), box-shadow var(--transition-springy); /* ✨ 이 변수 사용 */
+    text-decoration: none;
 }
 
 .hero h1 {
@@ -302,21 +302,13 @@ body {
 
 .cert-item {
     display: inline-block;
-    /* span이 너비/높이를 가질 수 있도록 */
     cursor: pointer;
-    /* 마우스 오버 시 손가락 모양으로 변경 */
     font-weight: 600;
-    /* 글씨를 더 두껍게 */
     color: var(--primary-color);
-    /* 기본 색상 설정 (Primary Color) */
     text-decoration: none;
-    /* 밑줄 제거 */
     position: relative;
-    /* 밑줄 애니메이션을 위해 필요 */
     padding-bottom: 2px;
-    /* 밑줄과 텍스트 간격 */
     transition: all 0.3s ease;
-    /* 부드러운 전환 효과 */
 }
 
 .cert-item::after {
@@ -325,21 +317,16 @@ body {
     left: 0;
     bottom: 0;
     width: 0;
-    /* 초기 너비 0 */
     height: 2px;
     background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
-    /* 그라데이션 밑줄 */
     transition: width 0.3s ease;
-    /* 너비에만 전환 효과 */
 }
 
 .cert-item:hover {
     color: var(--secondary-color);
     /* 호버 시 색상 변경 */
     transform: translateY(-2px);
-    /* 살짝 위로 뜨는 효과 */
     text-shadow: 0 2px 5px rgba(var(--primary-color-rgb, 38, 108, 178), 0.2);
-    /* 은은한 그림자 */
 }
 
 .cert-item:hover::after {
@@ -410,15 +397,18 @@ body[data-theme="dark"] .cert-item:hover {
 .skills-list {
     display: flex;
     flex-wrap: wrap;
-    gap: 0.75rem;  /* ✨ 간격 증가 */
+    gap: 0.75rem;
+    /* ✨ 간격 증가 */
     justify-content: center;
     list-style: none;
 }
 
 .skills-list li {
     background: var(--background-gray);
-    padding: 0.6rem 1rem; /* ✨ 패딩 증가 */
-    border-radius: 25px;  /* ✨ 더 둥글게 */
+    padding: 0.6rem 1rem;
+    /* ✨ 패딩 증가 */
+    border-radius: 25px;
+    /* ✨ 더 둥글게 */
     font-size: var(--fs-sm);
     transition: var(--transition-fast);
 }
@@ -468,9 +458,7 @@ body[data-theme="dark"] .cert-item:hover {
     background: var(--primary-color);
     color: var(--white);
     padding: 0.8rem;
-    /* ✨ 패딩 증가 */
     border-radius: 8px;
-    /* ✨ 테두리 반경 증가 */
     box-shadow: var(--shadow-btn);
     transition: var(--transition-medium);
     border: none;

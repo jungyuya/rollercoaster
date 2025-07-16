@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>챗라스틱 V2</title>
+
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+        xintegrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+    <main>
+        <div id="intro" class="intro-container">
+            <div class="intro-box">
+                <h1>챗라스틱</h1>
+                <h1>고민을 함께 나누는 따뜻한 상담</h1>
+                <img src="rastic.png" alt="챗라스틱 대표 이미지">
+
+                <div class="quote-box">
+                    <div class="quote">
+                        <p>"모든 어둠은 빛을 만들어냅니다."</p>
+                        <p>-마더 테레사-</p>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="date"><i class="fas fa-calendar-alt"></i> 생년월일</label>
+                        <input id="date" type="date" class="stylish-input">
+                    </div>
+
+                    <div class="input-group">
+                        <label for="text"><i class="fas fa-user"></i> 이름(닉네임)</label>
+                        <input id="text" name="text" placeholder="입력 시 이름을 불러드려요!" class="stylish-input">
+                    </div>
+
+                    <button id="startButton" class="start-button">지금 상담실 들어가기</button>
+
+                    <div class="privacy-notice">
+                        <p class="white-text">※ 개인정보는 안전하게 취급되며, 어떤 목적으로도 악용되지 않습니다. ※</p>
+                    </div>
+
+                    <!-- Custom Message Box (chatlastic/index.html 파일의 body 태그 안에 추가) -->
+                    <div id="customMessageBox"
+                        class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+                        <div class="bg-white p-6 rounded-lg shadow-xl text-center max-w-sm w-full">
+                            <p id="messageBoxText" class="text-lg font-semibold mb-4 text-gray-800"></p>
+                            <button id="messageBoxConfirmBtn"
+                                class="bg-blue-600 text-white px-5 py-2 rounded-lg hover:bg-blue-700 transition-colors mr-2">확인</button>
+                            <button id="messageBoxCancelBtn"
+                                class="bg-gray-300 text-gray-800 px-5 py-2 rounded-lg hover:bg-gray-400 transition-colors hidden">취소</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="chat" class="chat-container">
+            <div class="chat-header">
+                <button id="homeButton" class="home-button" onclick="window.location.href='/'"><i
+                        class="fa fa-home"></i> 홈으로</button>
+            </div>
+            <div class="chat-wrapper">
+                <div class="chat-box">
+                    <div class="chat-message assistant-message">
+                        <p>마음을 편히 열고 고민을 털어놓아주세요. 챗라스틱이 당신을 위로하고, 함께 고민을 나누며 해결해 나갈 거예요.</p>
+                    </div>
+                </div>
+                <div id="loader" class="loader" style="display: none;"> <i class="fa fa-spinner fa-spin"></i>
+                </div>
+                <div class="chat-input">
+                    <input type="text" placeholder="고민을 입력하세요...">
+                    <button id="sendButton" class="send-button">보내기</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 LEE JUNGYU. All rights reserved.</p>
+    </footer>
+
+    <script src="script.js" defer></script>
+</body>
+
+</html>
