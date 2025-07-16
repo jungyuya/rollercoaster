@@ -8,19 +8,19 @@ document.addEventListener('DOMContentLoaded', function () {
             "전세계 사람들을 바다로 향하게 만들었다.",
             "내 보물 말이냐? 원한다면 주도록 하지···!",
             "잘 찾아봐라! 이 세상 전부를 거기에 두고 왔으니까!",
-            "이윽고 세상은 대해적시대를 맞는다!"
+            "이윽고 세상은 대해적시대를 맞는다!!!"
         ],
 
         typeSpeed: 50 + Math.random() * 20,
         backSpeed: 18 + Math.random() * 10,
-        backDelay: 3000,
-        startDelay: 500,
+        backDelay: 2000,
+        startDelay: 100,
         loop: true,
         showCursor: true,
         cursorChar: '|',
         smartBackspace: true,
         fadeOut: true,
-        fadeOutDelay: 500
+        fadeOutDelay: 400
     };
 
     const typed = new Typed('#typing-effect', options);
@@ -38,7 +38,8 @@ const HERO_BACKGROUND_IMAGES = [
     'images/background3.webp',
     'images/background4.jpg',
     'images/background5.jpg',
-    'images/background4.webp'
+    'images/background4.webp',
+    'images/background7.jpg'
 ];
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -171,5 +172,5 @@ document.addEventListener('DOMContentLoaded', () => {
     setRandomHeroBackground();
 
     //배경 변환 시간 설정
-    setInterval(setRandomHeroBackground, 5000);
+    setInterval(setRandomHeroBackground, 4000);
 });

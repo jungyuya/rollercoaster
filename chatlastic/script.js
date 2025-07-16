@@ -82,8 +82,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     /** 인트로 화면에서 채팅 화면으로 전환하는 함수 */
     function startChat() {
-        const name = nameInput.value.trim(); // 공백 제거
-        const date = dateInput.value.trim(); // 공백 제거
+        const name = nameInput.value.trim(); // 이름 값 가져오기
+        const date = dateInput.value.trim(); // 날짜 값 가져오기
 
         if (date === '') {
             showMessageBox('생년월일을 입력해주세요.', 'alert', () => dateInput.focus());
@@ -121,45 +121,46 @@ document.addEventListener('DOMContentLoaded', () => {
         const messageText = chatInput.value.trim();
         if (messageText === '') return;
 
-        appendMessage(messageText, 'user'); // 사용자 메시지 추가 (링크 없음)
+        appendMessage(messageText, 'user');
         userMessages.push(messageText);
-        chatInput.value = ''; // 입력창 비우기
-        loader.style.display = 'block'; // 로더 표시
-        sendButton.disabled = true; // 전송 버튼 비활성화
-        chatInput.disabled = true; // 입력창 비활성화 (로딩 중)
+        chatInput.value = '';
+        loader.style.display = 'block';
+        sendButton.disabled = true;
+        chatInput.disabled = true;
 
         try {
-            const response = await fetch(API_ENDPOINT, { // API_ENDPOINT 변수 사용
+            // 이름을 가져와서 서버로 함께 전송
+            const userNameToSend = nameInput.value.trim(); // 이름 입력 필드의 현재 값을 가져옴
+
+            const response = await fetch(API_ENDPOINT, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({
-                    userId: currentUserId, // userId 추가
-                    myDateTime: myDateTime,
+                    userId: currentUserId,
+                    userName: userNameToSend, // <--- 이 부분 추가: 클라이언트에서 입력된 이름 전송
+                    myDateTime: myDateTime, // 이미 startChat에서 설정된 값
                     userMessages: userMessages,
                     assistantMessages: assistantMessages,
                 })
             });
 
             if (!response.ok) {
-                // HTTP 오류 시 특정 상태 코드에 대한 처리 추가 가능 (예: 400, 500)
                 throw new Error(`서버 응답 오류: ${response.status}`);
             }
 
             const data = await response.json();
             assistantMessages.push(data.assistant);
-            appendMessage(data.assistant, 'assistant', true); // 챗봇 메시지 추가 (링크 포함)
+            appendMessage(data.assistant, 'assistant', true);
 
         } catch (error) {
             console.error("메시지 전송 중 오류 발생:", error);
-            // 오류 메시지는 링크 없이
             appendMessage("죄송합니다. 메시지를 보내는 중 오류가 발생했습니다. 잠시 후 다시 시도해 주세요.", 'assistant', false);
-            // 사용자에게 오류 메시지 표시
             showMessageBox("메시지 전송 중 오류가 발생했습니다. 콘솔을 확인해주세요.", 'alert');
         } finally {
-            loader.style.display = 'none'; // 로더 숨김
-            sendButton.disabled = false; // 전송 버튼 활성화
-            chatInput.disabled = false; // 입력창 활성화
-            chatInput.focus(); // 입력창에 다시 포커스
+            loader.style.display = 'none';
+            sendButton.disabled = false;
+            chatInput.disabled = false;
+            chatInput.focus();
         }
     }
 
@@ -180,7 +181,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (sender === 'assistant' && addLink) {
             const tossLink = document.createElement('a');
             tossLink.href = 'https://toss.me/chatlastic';
-            tossLink.textContent = '🥕 당근 주기';
+            //tossLink.textContent = '🥕 당근 주기';
             tossLink.target = '_blank'; // 새 탭에서 열기
             tossLink.style.marginLeft = '10px';
             tossLink.style.textDecoration = 'none';
