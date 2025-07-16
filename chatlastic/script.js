@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- DOM 요소 선택 ---
     const introSection = document.getElementById('intro');
     const chatSection = document.getElementById('chat');
-    const dateInput = document.getElementById('date');
+    const dateInput = document.getElementById('date'); // Keep the same ID
     const nameInput = document.getElementById('text');
     const startButton = document.getElementById('startButton');
     const homeButton = document.getElementById('homeButton');
@@ -85,6 +85,14 @@ document.addEventListener('DOMContentLoaded', () => {
         const name = nameInput.value.trim(); // 이름 값 가져오기
         const date = dateInput.value.trim(); // 날짜 값 가져오기
 
+        // --- 날짜 형식 유효성 검사 추가 ---
+        const datePattern = /^\d{4}-\d{2}-\d{2}$/; // YYYY-MM-DD 형식
+        if (!datePattern.test(date)) {
+            showMessageBox('생년월일을 YYYY-MM-DD 형식으로 입력해주세요. (예: 2000-01-01)', 'alert', () => dateInput.focus());
+            return;
+        }
+        // --- 날짜 형식 유효성 검사 끝 ---
+
         if (date === '') {
             showMessageBox('생년월일을 입력해주세요.', 'alert', () => dateInput.focus());
             return;
@@ -92,8 +100,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // 이름도 필수로 받고 싶다면 아래 주석 해제
         // if (name === '') {
-        //     showMessageBox('이름(닉네임)을 입력해주세요.', 'alert', () => nameInput.focus());
-        //     return;
+        //     showMessageBox('이름(닉네임)을 입력해주세요.', 'alert', () => nameInput.focus());
+        //     return;
         // }
 
         myDateTime = date + (name || ''); // 이름이 비어있으면 빈 문자열로 처리
