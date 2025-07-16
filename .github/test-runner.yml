@@ -1,0 +1,25 @@
+# test-runner.yml
+name: Runner Test Workflow
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      # 이 워크플로우 파일 자체의 변경이 있을 때 트리거
+      - 'test-runner.yml'
+      # 또는 이 더미 파일의 변경이 있을 때 트리거
+      - 'temp-test-file.txt' 
+
+jobs:
+  test:
+    runs-on: ubuntu-latest # GitHub 호스팅 러너 사용
+
+    steps:
+      - name: Checkout code # 리포지토리 코드 가져오기
+        uses: actions/checkout@v3
+
+      - name: Run a simple command # 간단한 명령어 실행 (러너가 작동하는지 확인)
+        run: |
+          echo "Hello from GitHub Actions Runner!"
+          ls -la # 현재 디렉토리 파일 목록 출력
