@@ -155,7 +155,7 @@ GEMINI_API_KEY=my_google_gen_api_key
 
 * 갤러리 이미지 모달 + 댓글/좋아요 기능 추가
 * 관리자 인증 기반 업로드 인터페이스 구축
-* 챗봇 UI/UX 추가 개선
+* Gemini API를 이용하여 국내/해외 IT 뉴스 요약 기능 구현
 * CloudWatch 기반 로깅 및 운영 모니터링 도입
 * 인프라 고도화 및 전체 아키텍처 IaC 구성
 
