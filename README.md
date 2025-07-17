@@ -42,7 +42,7 @@ AWS 클라우드 환경에서 최적의 비용과 합리적인 인프라 구성�
 
 ## 프로젝트 구조
 
-```
+<프론트엔드>
 📁 RollerCoaster
 ├── 📁 .github
 ├── 📁 .vscode
@@ -60,8 +60,19 @@ AWS 클라우드 환경에서 최적의 비용과 합리적인 인프라 구성�
 ├── 📄 script.js            
 ├── 📄 style.css            
 
-
-````
+<백엔드>
+📁contactlambda (이메일 전송기능)
+├── 📄 index.js                  
+├── 📄 package.json   
+├── ...       
+📁gallery-uploader(갤러리 업로드)
+├── 📄 app.js                  
+├── 📄 package.json   
+├── ...          
+📁chatlastcBE (챗라스틱)
+├── 📄 index.js                  
+├── 📄 package.json   
+├── ... 
 
 ---
 
@@ -77,7 +88,7 @@ AWS 클라우드 환경에서 최적의 비용과 합리적인 인프라 구성�
 {
   "userId": "user123",
   "myDateTime": "1990-07-01T08:00",
-  "userMessages": ["요즘 너무 우울해요..."],
+  "userMessages": ["오늘은 기분이 다운되는 군요"],
   "assistantMessages": []
 }
 ````
@@ -86,7 +97,7 @@ AWS 클라우드 환경에서 최적의 비용과 합리적인 인프라 구성�
 
 ```json
 {
-  "assistant": "당신의 이야기를 들어줘서 고마워요. 힘든 시간을 함께 이겨낼 수 있어요."
+  "assistant": "홍길동님, 오늘 기분이 다운되신다고 하니 챗라스틱도 마음이 무겁네요. 마음이 답답하고 힘드실 텐데, 혼자 앓지 마시고 저에게 편하게 털어놓으세요. 무슨 일이 있었는지, 어떤 점이 힘든지 이야기해 주시면 제가 홍길동님의 이야기를 경청하고 함께 해결책을 찾아보도록 할게요."
 }
 ```
 
@@ -95,30 +106,45 @@ AWS 클라우드 환경에서 최적의 비용과 합리적인 인프라 구성�
 ## .env 예시
 
 ```
-GEMINI_API_KEY=your_google_gen_api_key
+GEMINI_API_KEY=my_google_gen_api_key
 ```
 
 ---
 
 ## 아키텍처 구성도
 
-```
-사용자 브라우저
-    |
-    |-- CloudFront → S3 (정적 웹페이지)
-    |
-    |-- API Gateway → Lambda (chat) → Gemini API
-                        └──────→ DynamoDB
-    |
-    |-- API Gateway → Lambda (upload) → S3 (이미지 저장)
-```
+📱 사용자 브라우저
+     │
+     ▼
+🟦 CloudFront (jungyu.store 도메인)
+     │
+     ▼
+🟦 S3 (정적 웹 호스팅)
+  └── index.html / gallery.html / chat.html
+     │
+     └──── JS 요청 (Fetch/Axios)
+            │
+            ├────────────→ [📧 이메일 API]
+            │                └─ API Gateway → Lambda → SES
+            │
+            ├────────────→ [🖼 이미지 업로드 API]
+            │                └─ API Gateway → Lambda → S3 업로드
+            │
+            └────────────→ [💬 챗라스틱 상담 API]
+                             └─ API Gateway → Lambda
+                                   ├─ Google Gemini API
+                                   └─ DynamoDB (대화 저장)
+
+🛠 개발 자동화
+├─ Serverless Framework (IaC)
+└─ GitHub Actions (CI/CD)
 
 ---
 
 ## 배포 및 운영
 
-* AWS 리소스는 Serverless Framework를 사용하여 IaC 기반으로 관리
-* GitHub Actions를 통한 CI/CD 구성 예정
+* 챗라스틱의 AWS 리소스는 Serverless Framework를 사용하여 IaC 기반으로 관리
+* 웹페이지의 프론트엔드를 GitHub Actions를 통한 CI/CD 구성
 * 정적 웹사이트는 S3 + CloudFront + Route 53 기반으로 배포
 * 모든 API는 API Gateway를 통해 Lambda로 연결됨
 
@@ -128,10 +154,9 @@ GEMINI_API_KEY=your_google_gen_api_key
 
 * 갤러리 이미지 모달 + 댓글/좋아요 기능 추가
 * 관리자 인증 기반 업로드 인터페이스 구축
-* 챗봇 UI/UX 개선
+* 챗봇 UI/UX 추가 개선
 * CloudWatch 기반 로깅 및 운영 모니터링 도입
-* CI/CD 자동화 완성 (브랜치 기반 배포 환경 포함)
-
+* 인프라 고도화 및 전체 아키텍처 IaC 구성
 ---
 
 ## 개발자 정보
@@ -140,10 +165,7 @@ GEMINI_API_KEY=your_google_gen_api_key
 * 포트폴리오 주소: [https://jungyu.store](https://jungyu.store)
 * AWS Region: ap-northeast-2 (서울)
 
-```
-
 ---
 
-위 내용을 `chatlastic/README.md` 파일로 저장하면 GitHub에서도 자동 인식되는 문서 포맷입니다.  
-필요 시 PDF나 .md 다운로드 파일로도 제공 가능하니 원하시면 알려주세요.
-```
+
+
