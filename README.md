@@ -144,7 +144,7 @@ GEMINI_API_KEY=my_google_gen_api_key
 
 ## 배포 및 운영
 
-* 챗라스틱의 AWS 리소스는 Serverless Framework를 사용하여 IaC 기반으로 관리
+* 챗라스틱의 AWS 백엔드 리소스는 Serverless Framework를 사용하여 IaC 기반으로 관리
 * 웹페이지의 프론트엔드를 GitHub Actions를 통한 CI/CD 구성
 * 정적 웹사이트는 S3 + CloudFront + Route 53 기반으로 배포
 * 모든 API는 API Gateway를 통해 Lambda로 연결됨
