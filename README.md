@@ -1,5 +1,6 @@
 이준규's 포트폴리오 웹 페이지 프로젝트 <Br>
 프로젝트 명 : RollerCoaster (가제)
+http://jungyu.store/
 
 ## 프로젝트 개요
 
