@@ -6,10 +6,36 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- DOM 요소 선택 ---
     const introSection = document.getElementById('intro');
     const chatSection = document.getElementById('chat');
+
     const dateInput = document.getElementById('date'); // Keep the same ID
+
+    // flatpickr 적용
+    flatpickr("#date", {
+        dateFormat: "Y-m-d",               // 실제 값 (서버 전송용)
+        altInput: true,                    // 사용자가 보는 입력창
+        altFormat: "Y년 m월 d일",          // 보기 좋게
+        minDate: "1950-01-01",
+        maxDate: "today",
+        disableMobile: true
+    });
+
+
+    // 날짜 선택 범위 제한 추가
+    const today = new Date();
+    const yyyy = today.getFullYear();
+    const mm = String(today.getMonth() + 1).padStart(2, '0');
+    const dd = String(today.getDate()).padStart(2, '0');
+    const maxDate = `${yyyy}-${mm}-${dd}`;
+
+    dateInput.min = '1950-01-01';
+    dateInput.max = maxDate;
+
+    dateInput.min = '1950-01-01';
+    dateInput.max = maxDate;
     const nameInput = document.getElementById('text');
     const startButton = document.getElementById('startButton');
     const homeButton = document.getElementById('homeButton');
+    const backButton = document.getElementById('backButton');
 
     const chatBox = document.querySelector('.chat-box');
     const chatInput = document.querySelector('.chat-input input');
@@ -217,6 +243,12 @@ document.addEventListener('DOMContentLoaded', () => {
     homeButton.addEventListener('click', goHome);
     sendButton.addEventListener('click', sendMessage);
     chatInput.addEventListener('keypress', handleKeyPress);
+    backButton.addEventListener('click', () => {
+        introSection.style.display = 'flex';
+        chatSection.style.display = 'none';
+        initializeChat();
+        nameInput.focus();
+    });
 
     // 이름 및 생년월일 입력창에서 Enter 키 입력 시 시작 버튼 클릭 효과
     nameInput.addEventListener('keypress', (e) => {

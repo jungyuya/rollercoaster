@@ -48,11 +48,8 @@ body {
 main {
     flex-grow: 1;
     display: flex;
-    /* main도 flex로 설정하여 내부 요소를 정렬할 수 있도록 */
     justify-content: center;
-    /* 수평 중앙 정렬 */
     align-items: center;
-    /* 수직 중앙 정렬 (intro-container가 100vh일 때 유효) */
 }
 
 /* -------------------- */
@@ -62,14 +59,11 @@ main {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    /* intro-container 내부 콘텐츠 수직 중앙 정렬 */
     align-items: center;
-    /* intro-container 내부 콘텐츠 수평 중앙 정렬 */
     min-height: 100vh;
     padding: 20px;
     box-sizing: border-box;
     width: 100%;
-    /* 너비를 100%로 설정하여 main 안에서 유연하게 중앙 정렬 */
 }
 
 .intro-box {
@@ -111,8 +105,10 @@ main {
 
 .chat-header {
     margin-bottom: 15px;
-    text-align: right;
     width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 /* --- 채팅 UI 핵심 스타일 --- */
@@ -141,7 +137,6 @@ main {
 
 .chat-box::-webkit-scrollbar-thumb {
     background: #c7d2d8;
-    /* 스크롤바 색상 */
     border-radius: 10px;
 }
 
@@ -161,7 +156,6 @@ main {
 /* -------------------- */
 #intro h1 {
     font-size: 2.2em;
-    /* 폰트 크기 키움 */
     color: var(--text-dark);
     margin-bottom: 8px;
     font-weight: 700;
@@ -169,7 +163,6 @@ main {
 
 #intro h1:last-of-type {
     font-size: 1.3em;
-    /* 부제목 크기 조정 */
     font-weight: 500;
     color: var(--text-dark);
     margin-top: 0;
@@ -179,15 +172,11 @@ main {
 
 .intro-box img {
     width: 70%;
-    /* 이미지 크기 미세 조정 */
     max-width: 260px;
     height: auto;
     margin-bottom: 40px;
-    /* 아래 간격 증가 */
     border-radius: 12px;
-    /* 이미지 모서리 둥글게 */
     box-shadow: 0 6px 15px var(--shadow-color-light);
-    /* 이미지 그림자 추가 */
 }
 
 .quote-box {
@@ -200,30 +189,24 @@ main {
     box-shadow: 0 4px 10px var(--shadow-color-light);
     border: 1px solid var(--border-color);
 
-    /* 이 부분이 중요: quote-box 내의 자식 요소들을 중앙 정렬 */
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* 자식 요소(input-group, button 등) 수평 중앙 정렬 */
     text-align: center;
-    /* 텍스트 자체를 중앙 정렬 */
 }
 
 .quote {
     color: var(--text-dark);
     margin-bottom: 25px;
-    /* 인용구와 입력 필드 사이 간격 */
     font-size: 1em;
     line-height: 1.6;
     max-width: 100%;
-    /* 부모에 따라 너비 꽉 채우기 */
 }
 
 .quote p {
     margin: 5px 0;
     font-style: italic;
     color: #555;
-    /* 인용구 텍스트 색상 */
 }
 
 /* Input Group 스타일 */
@@ -272,22 +255,16 @@ input[type="text"].stylish-input {
     font-size: 1.05em;
     color: var(--text-dark);
     background-color: var(--chat-input-bg);
-    /* 배경색 통일 (흰색) */
     transition: all 0.3s ease;
-    /* 부드러운 전환 효과 */
     box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.03);
-    /* 미묘한 내부 그림자 */
     text-align: center;
-    /* 플레이스홀더와 입력 텍스트 중앙 정렬 */
 }
 
 /* 입력 필드 포커스 시 효과 */
 input[type="date"].stylish-input:focus,
 input[type="text"].stylish-input:focus {
     border-color: var(--input-focus-border);
-    /* 포커스 시 테두리 색상 변수 사용 */
     box-shadow: 0 0 0 4px var(--input-focus-shadow);
-    /* 포커스 시 외부 그림자 색상 변수 사용 */
     outline: none;
     background-color: #fcfdff;
 }
@@ -295,14 +272,10 @@ input[type="text"].stylish-input:focus {
 /* 플레이스홀더 텍스트 스타일 */
 input::placeholder {
     color: var(--placeholder-color);
-    /* 변수 사용 */
     font-style: italic;
     opacity: 1;
-    /* 파이어폭스에서 흐리게 보이는 문제 해결 */
     font-size: 0.95em;
-    /* 플레이스홀더 글씨 크기 미세 조정 */
     letter-spacing: 0.5px;
-    /* 플레이스홀더 자간 추가 */
 }
 
 .privacy-notice {
@@ -314,7 +287,6 @@ input::placeholder {
 }
 
 .privacy-notice .white-text {
-    /* 클래스명 유지 */
     color: var(--text-notice);
     font-weight: 500;
 }
@@ -324,12 +296,9 @@ input::placeholder {
     flex: 1;
     background-color: var(--chat-input-bg);
     margin-right: 12px;
-    /* 간격 미세 조정 */
     border: 1px solid var(--border-color);
     border-radius: 28px;
-    /* 더 둥근 알약 모양 */
     padding: 14px 20px;
-    /* 패딩 증가 */
     font-size: 1em;
     box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
 }
@@ -344,31 +313,25 @@ button {
     color: var(--text-light);
     border: none;
     border-radius: 10px;
-    /* 버튼 모서리 더 둥글게 */
     padding: 14px 28px;
-    /* 패딩 증가 */
     cursor: pointer;
     margin-top: 0;
     transition: all 0.3s ease;
     font-weight: 600;
     letter-spacing: 0.5px;
-    /* 자간 추가 */
 }
 
 button:hover {
     transform: translateY(-3px);
     box-shadow: 0 8px 18px var(--shadow-color-light);
-    /* 그림자 강도 증가 */
 }
 
 .start-button {
     background-color: var(--button-secondary-bg);
     font-size: 1.4em;
     padding: 20px 35px;
-    /* 패딩 증가 */
     width: 100%;
     border-radius: 12px;
-    /* 시작 버튼 모서리 더 둥글게 */
     font-weight: 700;
 }
 
@@ -384,7 +347,6 @@ button:hover {
     padding: 14px 25px;
     font-size: 1.05em;
     border-radius: 28px;
-    /* Send 버튼은 알약 모양 */
     min-width: 90px;
 }
 
@@ -394,13 +356,11 @@ button:hover {
 
 .home-button {
     background-color: #f5f5f5;
-    /* 홈 버튼 배경색 */
     color: var(--text-dark);
     border: 1px solid var(--border-color);
     padding: 10px 18px;
     font-size: 0.9em;
     border-radius: 25px;
-    /* 둥근 모서리 */
     box-shadow: 0 2px 5px var(--shadow-color-light);
 }
 
@@ -413,15 +373,11 @@ button:hover {
 /* --- 말풍선 UI 핵심 스타일 --- */
 .chat-message {
     padding: 14px 20px;
-    /* 패딩 미세 조정 */
     border-radius: 22px;
-    /* 더 둥근 모서리 */
     max-width: 78%;
-    /* 최대 너비 미세 조정 */
     animation: fadeIn 0.5s ease-in-out;
     word-break: break-word;
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
-    /* 말풍선 그림자 추가 */
 }
 
 .chat-message p {
@@ -433,7 +389,6 @@ button:hover {
     align-self: flex-start;
     background-color: #fdfaf3;
     border-bottom-left-radius: 8px;
-    /* 모서리 조정 */
     color: var(--text-dark);
 }
 
@@ -441,7 +396,6 @@ button:hover {
     align-self: flex-end;
     background-color: #d0ebff;
     border-bottom-right-radius: 8px;
-    /* 모서리 조정 */
     color: var(--text-user-bubble);
 }
 
@@ -466,7 +420,6 @@ footer {
     .intro-box,
     .chat-container {
         margin: 15px;
-        /* 모바일에서 마진 조정 */
         padding: 20px;
         border-radius: 12px;
     }
@@ -601,7 +554,6 @@ footer {
     align-items: center;
     justify-content: center;
     z-index: 9999;
-    /* 다른 요소 위에 표시되도록 높은 z-index 설정 */
 }
 
 #customMessageBox>div {
@@ -674,3 +626,30 @@ footer {
     box-shadow: 0 0 0 3px rgba(102, 175, 233, 0.2);
 }
 
+.back-button {
+    background: none;
+    border: none;
+    font-size: 0.95rem;
+    color: var(--text-dark);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+
+    padding: 8px 14px;
+    border-radius: 25px;
+    box-shadow: 0 2px 5px var(--shadow-color-light);
+    background-color: #f5f5f5;
+
+    /* 위치 고정 */
+    margin-left: 0;
+    margin-right: auto;
+    /* 왼쪽 정렬 */
+}
+
+.back-button:hover {
+    background-color: #e8e8e8;
+    transform: translateY(-2px);
+    color: var(--text-dark);
+    box-shadow: 0 4px 8px var(--shadow-color-light);
+}
