@@ -11,7 +11,7 @@
     --shadow-light: rgba(0, 0, 0, 0.08);
     --shadow-medium: rgba(0, 0, 0, 0.12);
 
-    /* 새로 추가된 버튼 색상 변수 */
+    /* 버튼 색상 변수 */
     --naver-green: #03c75a;
     --google-blue: #4285F4;
     --gemini-purple: #5b21b6;
@@ -101,72 +101,92 @@ main {
     max-width: 700px;
     margin-left: auto;
     margin-right: auto;
-    /* chatbot-container는 이제 position: relative;가 필요 없습니다. */
 }
 
-/* 새로 추가: textarea를 감싸는 wrapper div 스타일 */
 .textarea-wrapper {
-    position: relative; /* **중요**: 이 div가 input-send-wrapper의 기준점 */
-    width: 100%; /* 부모(chatbot-container)의 패딩을 제외한 공간을 사용 */
-    margin-bottom: 1rem; /* #newsInput의 기존 margin-bottom 이동 */
-    box-sizing: border-box; /* 패딩이 width에 포함되도록 설정 */
+    display: flex;
+    /* Flexbox 레이아웃으로 변경 */
+    align-items: flex-end;
+    /* 텍스트 영역이 늘어나도 버튼은 항상 하단에 위치 */
+    width: 100%;
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    /* 디자인 통일성을 위해 radius 조정 */
+    background-color: var(--card-bg);
+    padding: 0.3rem 0.3rem 0.3rem 1rem;
+    /* 내부 여백 미세 조정 */
+    box-sizing: border-box;
+    margin-bottom: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.textarea-wrapper:focus-within {
+    border-color: var(--primary-color);
+    /* 입력창 활성화 시 테두리 색상 변경 */
 }
 
 #newsInput {
-    width: 100%; /* 부모 .textarea-wrapper의 100% 너비를 사용 */
-    padding: 0.8rem;
+    flex-grow: 1;
+    /* 사용 가능한 모든 공간을 차지 */
+    border: none;
+    /* 테두리는 부모 요소(.textarea-wrapper)에서 처리 */
+    background-color: transparent;
     font-size: 1rem;
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
-    margin: 0; /* 부모 .textarea-wrapper가 마진을 가지므로 여기는 0으로 설정 */
+    font-family: 'Noto Sans KR', sans-serif;
     resize: vertical;
-    padding-right: 45px; /* 아이콘 버튼 공간 확보를 위해 오른쪽 패딩 추가 */
-    /* position: relative; // 이제 이 속성은 .textarea-wrapper로 이동했습니다. */
-    box-sizing: border-box; /* 패딩이 width에 포함되도록 설정 */
+    /* 세로 크기 조절 기능 유지 */
+    outline: none;
+    /* 포커스 시 외곽선 제거 */
+    padding: 0.6rem 0;
+    /* 상하 여백만 지정 */
+    min-height: 40px;
+    /* 최소 높이 지정 */
+    color: var(--text-color);
+    /* 기존의 width, padding-right 등은 더 이상 필요 없음 */
 }
 
 /* 입력창 내 전송 버튼 래퍼 */
 .input-send-wrapper {
-    position: absolute; /* **중요**: .textarea-wrapper를 기준으로 절대 위치 */
-    bottom: 8px; /* textarea의 padding-bottom(0.8rem = 약 12.8px)과 버튼 높이를 고려하여 조절 */
-    right: 8px; /* textarea의 padding-right(45px)를 고려하여 조절. 버튼 크기(38px) + 약간의 여백 */
-    z-index: 10; /* 입력창 텍스트 위로 오도록 */
+    flex-shrink: 0;
+    /* 버튼이 찌그러지는 것을 방지 */
+    margin-left: 0.5rem;
+    /* 텍스트 입력창과 버튼 사이 간격 */
 }
 
 /* Gemini 전송 버튼 스타일 */
 .gemini-send-button {
-    background-color: var(--gemini-purple); 
+    background-color: var(--gemini-purple);
     color: white;
     border: none;
-    border-radius: 50%; /* 원형 버튼 */
-    width: 38px; /* 너비 */
-    height: 38px; /* 높이 */
+    border-radius: 50%;
+    width: 38px;
+    height: 38px;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* 그림자 추가 */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     transition: background-color 0.3s ease, transform 0.1s ease;
-    padding: 0; /* 내부 패딩 제거 */
-    font-size: 1.1rem; /* 아이콘 크기 */
+    padding: 0;
+    font-size: 1.1rem;
 }
 
 .gemini-send-button:hover {
-    background-color: #4c1d95; /* 호버 시 색상 */
-    transform: scale(1.05); /* 약간 확대 효과 */
+    background-color: #4c1d95;
+    transform: scale(1.05);
 }
 
 .gemini-send-button i {
-    margin: 0; /* 아이콘 내부 여백 제거 */
-    color: white; /* 아이콘 색상 */
+    margin: 0;
+    color: white;
 }
 
 .button-group {
     display: flex;
-    gap: 1rem; /* 기존 1rem 유지 */
+    gap: 1rem;
     justify-content: center;
     margin-bottom: 1.5rem;
-    flex-wrap: wrap; /* 반응형을 위해 추가: 버튼이 줄바꿈 되도록 */
+    flex-wrap: wrap;
 }
 
 .button-group button {
@@ -177,73 +197,80 @@ main {
     font-weight: 500;
     border-radius: 8px;
     cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.1s ease; /* transform 트랜지션 추가 */
-    flex-grow: 1; /* 버튼이 컨테이너 내에서 공간을 채우도록 */
-    max-width: 200px; /* 버튼의 최대 너비 설정 (조절 가능) */
+    transition: background-color 0.3s ease, transform 0.1s ease;
+    flex-grow: 1;
+    max-width: 200px;
 }
 
 /* --- 각 버튼별 테마 색상 및 스타일 --- */
 
 /* 네이버 버튼 스타일 */
 .naver-button {
-    background-color: var(--naver-green); /* 네이버 그린 */
+    background-color: var(--naver-green);
 }
 
 .naver-button:hover {
-    background-color: #02b251; /* 약간 어둡게 */
-    transform: translateY(-2px); /* 호버 시 약간 위로 이동 */
+    background-color: #02b251;
+    transform: translateY(-2px);
 }
 
 /* 구글 버튼 스타일 */
 .google-button {
-    background-color: var(--google-blue); /* 구글 블루 */
+    background-color: var(--google-blue);
 }
 
 .google-button:hover {
-    background-color: #357ae8; /* 약간 어둡게 */
+    background-color: #357ae8;
     transform: translateY(-2px);
 }
 
 /* 요약 결과 박스 */
 .summary-result-box {
     text-align: left;
-    background-color: var(--bg-color); /* 기존 배경색 유지 */
-    padding: 1.5rem; /* 여백 약간 늘림 */
+    background-color: var(--bg-color);
+    padding: 1.5rem;
     border-radius: 8px;
-    min-height: 100px; /* 최소 높이 늘림 */
+    min-height: 100px;
     line-height: 1.7;
-    color: var(--text-color); /* 텍스트 색상 유지 */
-    white-space: pre-wrap; /* 공백 및 줄바꿈 유지 */
-    word-wrap: break-word; /* 긴 단어 줄바꿈 */
-    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05); /* 박스 내부 그림자 추가 */
+    color: var(--text-color);
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
 }
 
 /* News Container (Flexbox for Domestic/Global lists) */
 .news-container {
     display: flex;
     flex-wrap: wrap;
+    /* 카드가 한 줄에 다 들어가지 않으면 다음 줄로 넘김 */
     gap: 2.5rem;
     justify-content: center;
-    align-items: flex-start;
+    align-items: stretch;
+    /* 모든 카드의 높이를 동일하게 맞춤 */
 }
 
 /* Common News List Card Style */
 .news-list {
-    width: 400px;
-    height: 410px;
-    overflow: hidden;
+    /* 고정 width 대신 flex 속성으로 유연한 너비 설정 */
+    flex: 1 1 380px;
+    /* grow(팽창), shrink(수축), basis(기본 너비) */
+    max-width: 420px;
+    /* 카드가 너무 커지는 것을 방지 */
+    min-width: 320px;
+    /* 카드가 너무 작아지는 것을 방지 */
     background-color: var(--card-bg);
     border: 1px solid var(--border-color);
     border-radius: 16px;
     display: flex;
+    /* 내부 요소 정렬을 위해 flex 사용 */
+    flex-direction: column;
+    /* 내부 요소를 세로로 쌓음 */
     padding: 2rem;
     text-align: left;
     box-shadow: 0 6px 16px var(--shadow-light);
     transition:
         transform 0.3s ease,
         box-shadow 0.3s ease;
-    flex-shrink: 0;
-    flex-direction: column;
 }
 
 .news-list:hover {
@@ -258,27 +285,46 @@ main {
     margin-bottom: 1.5rem;
     font-size: 1.6rem;
     font-weight: 600;
+    flex-shrink: 0;
+    /* 제목은 높이가 줄어들지 않도록 고정 */
 }
 
 .news-list ul {
+
     overflow-y: auto;
-    flex: 1;
-    min-height: 0;
+    /* 내용이 많아지면 스크롤 생성 */
+    flex-grow: 1;
+    /* 제목을 제외한 나머지 공간을 모두 차지 */
+    min-height: 200px;
+    /* 리스트의 최소 높이를 지정해 카드가 너무 작아지는 것 방지 */
     padding: 0;
+    margin: 0;
     list-style-type: none;
 }
 
+/* 뉴스 목록 항목 (<li>) 스타일 */
 .news-list li {
+    display: flex;
+    align-items: center;
     margin: 1.2rem 0;
 }
 
-.news-list a {
+/* 뉴스 링크 (<a>) 스타일 */
+.news-list li a {
+    flex-grow: 1;
+    /* 아이콘을 제외한 모든 공간을 차지 */
+    min-width: 0;
+    /* 중요! flex 아이템이 내용보다 작아질 수 있게 허용하여 ellipsis가 동작하게 함 */
     text-decoration: none;
     color: var(--text-color);
     font-weight: 500;
     transition: color 0.3s ease;
-    display: block;
-    padding: 0.2rem 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-right: 8px;
+    /* 오른쪽 아이콘과의 간격 */
+    vertical-align: middle;
 }
 
 .news-list a:hover {
@@ -286,69 +332,95 @@ main {
     text-decoration: underline;
 }
 
+/* 뉴스 출처 아이콘 (N, G) 스타일 */
+.news-source-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+    font-size: 0.75em;
+    font-weight: bold;
+    color: white;
+    margin-right: 8px;
+    flex-shrink: 0;
+    /* 아이콘 크기가 줄어들지 않도록 고정 */
+    vertical-align: middle;
+}
+
+/* 새 탭 열기 아이콘 스타일 */
+.open-new-tab-icon {
+    font-size: 0.8em;
+    color: var(--light-text-color);
+    /* margin-left: auto; <<< 제거해도 flex-grow 때문에 동일하게 동작합니다. */
+    cursor: pointer;
+    flex-shrink: 0;
+    /* 아이콘 크기가 줄어들지 않도록 고정 */
+    transition: color 0.3s ease;
+    vertical-align: middle;
+}
+
+.open-new-tab-icon:hover {
+    color: var(--primary-color);
+}
+
+/* G 글로벌 IT 뉴스 헤더 아이콘 스타일 (itscript.js에서 <span> 추가 시) */
+.google-h3-icon {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    line-height: 24px;
+    text-align: center;
+    border-radius: 4px;
+    background-color: var(--google-blue);
+    color: white;
+    font-size: 0.8em;
+    font-weight: bold;
+    margin-right: 8px;
+    vertical-align: middle;
+}
+
 /* koreanNewsStyle.css (Naver Theme) */
 .news-list.korean-naver-theme {
-    border: 1px solid var(--naver-green); /* 변수 사용 */
+    border: 1px solid var(--naver-green);
     box-shadow: 0 6px 16px rgba(3, 199, 90, 0.15);
     background-color: #f7fcf9;
 }
 
 .news-list.korean-naver-theme h3 {
-    color: var(--naver-green); /* 변수 사용 */
-    border-bottom-color: var(--naver-green); /* 변수 사용 */
+    color: var(--naver-green);
+    border-bottom-color: var(--naver-green);
 }
 
 .news-list.korean-naver-theme a:hover {
-    color: var(--naver-green); /* 변수 사용 */
+    color: var(--naver-green);
 }
 
 /* globalNewsStyle.css (Google Theme) */
 .news-list.global-google-theme {
-    border: 1px solid var(--google-blue); /* 변수 사용 */
+    border: 1px solid var(--google-blue);
     box-shadow: 0 6px 16px rgba(66, 133, 244, 0.15);
     background-color: #f8faff;
 }
 
 .news-list.global-google-theme h3 {
-    /* 기존 그라데이션 유지 */
     background: linear-gradient(to right, #4285f4, #ea4335, #fbbc05, #34a853);
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    border-bottom-color: var(--google-blue); /* 변수 사용 */
+    border-bottom-color: var(--google-blue);
 }
 
 .news-list.global-google-theme a:hover {
-    color: var(--google-blue); /* 변수 사용 */
+    color: var(--google-blue);
 }
 
 /* Responsive Design */
 @media (max-width: 900px) {
-    .news-container {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .news-list {
-        width: 90%;
-        max-width: 450px;
-    }
 
     main {
         padding: 2rem 1rem;
-    }
-
-    header .wrapper {
-        padding: 1rem 1rem;
-    }
-
-    .news-page h2 {
-        font-size: 2rem;
-    }
-
-    .news-page p {
-        font-size: 1rem;
-        margin-bottom: 2rem;
     }
 }
 
@@ -369,29 +441,48 @@ main {
 
     .news-list {
         padding: 1.5rem;
+        /* 모바일에서 내부 여백 축소 */
     }
 
     .news-list h3 {
         font-size: 1.3rem;
+        /* 모바일에서 제목 폰트 크기 축소 */
     }
 
-    .news-list li {
-        margin: 1rem 0;
-    }
-
-    /* 작은 화면에서 버튼 그룹 재정렬 */
+    /* Small screen button group adjustments */
     .button-group {
-        flex-direction: column; /* 세로로 정렬 */
-        align-items: center; /* 가운데 정렬 */
+        gap: 0.8rem;
+        /* 모바일에서 버튼 간격 살짝 줄임 */
     }
 
     .button-group button {
-        max-width: 90%; /* 작은 화면에서 버튼 너비 조정 */
+        flex-grow: 1; /* 버튼들이 가용 공간을 균등하게 차지하도록 설정 */
+        flex-basis: 0; /* 모든 버튼이 동일한 너비에서 시작하도록 초기화 */
+        max-width: 100%; /* 기존의 90% 제한 제거 */
     }
 
-    /* 작은 화면에서 전송 버튼 위치 조정 */
+    /* Small screen chatbot input adjustments */
     .input-send-wrapper {
-        bottom: 8px; /* textarea 내부의 상대적 위치 (조정) */
-        right: 8px; /* textarea 내부의 상대적 위치 (조정) */
+        bottom: 8px;
+        right: 8px;
     }
+}
+
+/* Custom Scrollbar Styles (WebKit browsers like Chrome, Safari) */
+.news-list ul::-webkit-scrollbar {
+    width: 8px;
+}
+
+.news-list ul::-webkit-scrollbar-track {
+    background: var(--bg-color);
+    border-radius: 10px;
+}
+
+.news-list ul::-webkit-scrollbar-thumb {
+    background: var(--light-text-color);
+    border-radius: 10px;
+}
+
+.news-list ul::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-color);
 }

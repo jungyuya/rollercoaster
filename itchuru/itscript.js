@@ -11,7 +11,14 @@ function renderNewsList(containerId, titleText, items, themeClass) {
     newsListDiv.className = `news-list ${themeClass}`;
 
     const h3 = document.createElement('h3');
-    h3.textContent = titleText;
+    // 국내/글로벌 뉴스 헤더에 아이콘 추가 (CSS로도 가능하지만 HTML에서 직접 제어)
+    if (containerId === 'korean-news-list-container') {
+        h3.innerHTML = '🇰🇷 국내 IT 뉴스';
+    } else if (containerId === 'global-news-list-container') {
+        h3.innerHTML = '<span class="google-h3-icon">G</span> 글로벌 IT 뉴스';
+    } else {
+        h3.textContent = titleText; // 기타 경우
+    }
     newsListDiv.appendChild(h3);
 
     const ul = document.createElement('ul');
@@ -23,12 +30,37 @@ function renderNewsList(containerId, titleText, items, themeClass) {
     } else {
         items.forEach(item => {
             const li = document.createElement('li');
+
+            // 1. 뉴스 출처 아이콘 (<span>) 추가
+            const sourceIcon = document.createElement('span');
+            sourceIcon.classList.add('news-source-icon');
+            if (containerId === 'korean-news-list-container') {
+                sourceIcon.textContent = 'N'; // 네이버 아이콘 텍스트
+                sourceIcon.classList.add('naver-icon');
+            } else {
+                sourceIcon.textContent = 'G'; // 구글 아이콘 텍스트
+                sourceIcon.classList.add('google-icon');
+            }
+            li.appendChild(sourceIcon);
+
+            // 2. 뉴스 링크 (<a>) 추가
             const a = document.createElement('a');
             a.href = item.link;
             a.target = '_blank';
             a.rel = 'noopener noreferrer';
             a.textContent = item.title;
             li.appendChild(a);
+
+            // 3. '새 탭으로 열기' 아이콘 (<i>) 추가
+            const openNewTabIcon = document.createElement('i');
+            openNewTabIcon.classList.add('fas', 'fa-external-link-alt', 'open-new-tab-icon');
+            openNewTabIcon.setAttribute('title', '새 탭에서 열기');
+            openNewTabIcon.addEventListener('click', (e) => {
+                e.preventDefault(); // 기본 링크 동작 방지
+                window.open(item.link, '_blank'); // 새 탭으로 열기
+            });
+            li.appendChild(openNewTabIcon);
+
             ul.appendChild(li);
         });
     }
@@ -37,7 +69,7 @@ function renderNewsList(containerId, titleText, items, themeClass) {
     container.appendChild(newsListDiv);
 }
 
-// 네이버 뉴스를 요약하여 표시하는 함수
+// 네이버 뉴스를 요약하여 표시
 async function requestNaverNewsSummary() {
     const summaryResultDiv = document.getElementById('summaryResult');
     summaryResultDiv.innerText = '국내 IT 뉴스를 요약하는 중... 🤖';
@@ -55,7 +87,7 @@ async function requestNaverNewsSummary() {
     }
 }
 
-// 구글 뉴스를 요약하여 표시하는 함수
+// 구글 뉴스를 요약하여 표시
 async function requestGoogleNewsSummary() {
     const summaryResultDiv = document.getElementById('summaryResult');
     summaryResultDiv.innerText = '글로벌 IT 뉴스를 요약하는 중... 🤖';
@@ -73,10 +105,10 @@ async function requestGoogleNewsSummary() {
     }
 }
 
-// 사용자 입력을 받아 Gemini와 대화하는 함수 (챗봇 기능)
+// 사용자 입력을 받아 Gemini와 대화하는 챗봇 기능
 async function chatWithGemini(message) {
     const summaryResultDiv = document.getElementById('summaryResult');
-    summaryResultDiv.innerText = 'Gemini와 대화 중... 🤖'; // 로딩 메시지
+    summaryResultDiv.innerText = 'Gemini와 대화 중... 🤖';
 
     try {
         const response = await fetch('http://127.0.0.1:5000/api/chat', {
@@ -97,7 +129,7 @@ async function chatWithGemini(message) {
     }
 }
 
-// 페이지 로드 시 백엔드에서 모든 뉴스 목록을 가져와 렌더링하는 함수
+// 페이지 로드 시 모든 뉴스 목록을 가져와 렌더링
 async function fetchAndRenderAllNews() {
     try {
         const response = await fetch('http://127.0.0.1:5000/api/news');
@@ -106,37 +138,38 @@ async function fetchAndRenderAllNews() {
         }
         const data = await response.json();
 
-        renderNewsList('korean-news-list-container', '🇰🇷 국내 IT 뉴스', data.korean_news, 'korean-naver-theme');
-        renderNewsList('global-news-list-container', '🅶 글로벌 IT 뉴스', data.global_news, 'global-google-theme');
+        renderNewsList('korean-news-list-container', '국내 IT 뉴스', data.korean_news, 'korean-naver-theme');
+        renderNewsList('global-news-list-container', '글로벌 IT 뉴스', data.global_news, 'global-google-theme');
 
     } catch (error) {
         console.error('뉴스 로딩 실패:', error);
-        renderNewsList('korean-news-list-container', '🇰🇷 국내 IT 뉴스', [], 'korean-naver-theme');
-        renderNewsList('global-news-list-container', '🅶 글로벌 IT 뉴스', [], 'global-google-theme');
+        renderNewsList('korean-news-list-container', '국내 IT 뉴스', [], 'korean-naver-theme');
+        renderNewsList('global-news-list-container', '글로벌 IT 뉴스', [], 'global-google-theme');
     }
 }
 
-// --- DOMContentLoaded 이벤트 리스너 ---
+// DOM 로드 완료 시 이벤트 리스너 설정
 document.addEventListener('DOMContentLoaded', () => {
-    // 1. 페이지 로드 시 뉴스 목록 불러오기
+    // 페이지 로드 시 뉴스 목록 불러오기
     fetchAndRenderAllNews();
 
-    // 2. 버튼 클릭 이벤트 리스너 설정
-    const requestSummaryBtn = document.getElementById('requestSummaryBtn'); // "국내 IT 요약" 버튼
+    // "국내 IT 요약" 버튼 클릭 이벤트
+    const requestSummaryBtn = document.getElementById('requestSummaryBtn');
     if (requestSummaryBtn) {
         requestSummaryBtn.addEventListener('click', requestNaverNewsSummary);
     }
     
-    const requestTodayNewsBtn = document.getElementById('requestTodayNewsBtn'); // "해외 IT 한입" 버튼
+    // "해외 IT 한입" 버튼 클릭 이벤트
+    const requestTodayNewsBtn = document.getElementById('requestTodayNewsBtn');
     if (requestTodayNewsBtn) {
         requestTodayNewsBtn.addEventListener('click', requestGoogleNewsSummary);
     }
 
-    // 3. newsInput 텍스트 영역에 엔터 키 입력 시 챗봇 기능 호출
+    // newsInput 텍스트 영역에 Enter 키 입력 시 챗봇 기능 호출
     const newsInput = document.getElementById('newsInput');
     if (newsInput) {
         newsInput.addEventListener('keypress', (event) => {
-            if (event.key === 'Enter' && !event.shiftKey) { // Shift+Enter는 줄바꿈, Enter는 전송
+            if (event.key === 'Enter' && !event.shiftKey) {
                 event.preventDefault(); // 기본 Enter 동작(줄바꿈) 방지
                 const message = newsInput.value.trim();
                 if (message) {
@@ -147,7 +180,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // 4. "질문하기 (챗봇)" 버튼 클릭 시 챗봇 기능 호출
+    // "질문하기 (챗봇)" 버튼 클릭 시 챗봇 기능 호출
     const sendChatMessageBtn = document.getElementById('sendChatMessageBtn');
     if (sendChatMessageBtn) {
         sendChatMessageBtn.addEventListener('click', () => {
