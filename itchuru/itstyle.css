@@ -1,0 +1,305 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap');
+
+:root {
+    --primary-color: #4CAF50;
+    --text-color: #333333;
+    --light-text-color: #666666;
+    --bg-color: #f8f9fa;
+    --header-bg: #ffffff;
+    --card-bg: #ffffff;
+    --border-color: #e0e0e0;
+    --shadow-light: rgba(0, 0, 0, 0.08);
+    --shadow-medium: rgba(0, 0, 0, 0.12);
+}
+
+body {
+    margin: 0;
+    font-family: 'Noto Sans KR', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+#newsPage {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0;
+    font-weight: normal;
+}
+
+/* Header Styles */
+header {
+    background-color: var(--header-bg);
+    box-shadow: 0 4px 8px var(--shadow-light);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    padding: 1rem 2rem;
+}
+
+header .wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1280px;
+    margin: 0 auto;
+}
+
+h1 {
+    font-weight: 700;
+    color: var(--text-color);
+    margin: 0;
+    font-size: 1.8rem;
+}
+
+nav a {
+    margin-left: 1.5rem;
+    text-decoration: none;
+    font-weight: 500;
+    color: var(--light-text-color);
+    transition: color 0.3s ease;
+}
+
+nav a:hover {
+    color: var(--primary-color);
+}
+
+/* Main Content Area */
+main {
+    padding: 3rem 2rem;
+}
+
+.news-page {
+    text-align: center;
+}
+
+.news-page h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 0.8rem;
+    color: var(--text-color);
+}
+
+.news-page p {
+    color: var(--light-text-color);
+    margin-bottom: 2rem;
+    /* 뉴스 컨테이너와의 간격 조정 */
+    font-size: 1.1rem;
+}
+
+/* Chatbot UI Styles (향후 수정을 위해 일부 추가) */
+.chatbot-container {
+    background-color: var(--card-bg);
+    padding: 2rem;
+    border-radius: 16px;
+    box-shadow: 0 6px 16px var(--shadow-light);
+    margin-bottom: 4rem;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#newsInput {
+    width: 95%;
+    padding: 0.8rem;
+    font-size: 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    resize: vertical;
+    /* 세로 크기만 조절 가능하도록 설정 */
+}
+
+.button-group {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+}
+
+.button-group button {
+    padding: 0.8rem 1.5rem;
+    border: none;
+    background-color: var(--primary-color);
+    color: white;
+    font-size: 1rem;
+    font-weight: 500;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.button-group button:hover {
+    background-color: #45a049;
+}
+
+.summary-result-box {
+    text-align: left;
+    background-color: var(--bg-color);
+    padding: 1rem;
+    border-radius: 8px;
+    min-height: 50px;
+    line-height: 1.7;
+}
+
+/* News Container (Flexbox for Domestic/Global lists) */
+.news-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2.5rem;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+/* Common News List Card Style */
+.news-list {
+    width: 400px;
+    height: 410px;
+    overflow: hidden;
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    display: flex;
+    padding: 2rem;
+    text-align: left;
+    box-shadow: 0 6px 16px var(--shadow-light);
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease;
+    flex-shrink: 0;
+    flex-direction: column;
+}
+
+.news-list:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 24px var(--shadow-medium);
+}
+
+.news-list h3 {
+    margin-top: 0;
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 1.2rem;
+    margin-bottom: 1.5rem;
+    font-size: 1.6rem;
+    font-weight: 600;
+}
+
+.news-list ul {
+    overflow-y: auto;
+    flex: 1;
+    min-height: 0;
+    padding: 0;
+    list-style-type: none;
+    /* 리스트 앞 점 제거 */
+}
+
+.news-list li {
+    margin: 1.2rem 0;
+}
+
+.news-list a {
+    text-decoration: none;
+    color: var(--text-color);
+    font-weight: 500;
+    transition: color 0.3s ease;
+    display: block;
+    padding: 0.2rem 0;
+}
+
+.news-list a:hover {
+    color: var(--primary-color);
+    text-decoration: underline;
+}
+
+/* koreanNewsStyle.css (Naver Theme) */
+.news-list.korean-naver-theme {
+    border: 1px solid #03c75a;
+    box-shadow: 0 6px 16px rgba(3, 199, 90, 0.15);
+    background-color: #f7fcf9;
+}
+
+.news-list.korean-naver-theme h3 {
+    color: #03c75a;
+    border-bottom-color: #03c75a;
+}
+
+.news-list.korean-naver-theme a:hover {
+    color: #03c75a;
+}
+
+/* globalNewsStyle.css (Google Theme) */
+.news-list.global-google-theme {
+    border: 1px solid #4285f4;
+    box-shadow: 0 6px 16px rgba(66, 133, 244, 0.15);
+    background-color: #f8faff;
+}
+
+.news-list.global-google-theme h3 {
+    background: linear-gradient(to right, #4285f4, #ea4335, #fbbc05, #34a853);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    border-bottom-color: #4285f4;
+}
+
+.news-list.global-google-theme a:hover {
+    color: #4285f4;
+}
+
+/* Responsive Design */
+@media (max-width: 900px) {
+    .news-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .news-list {
+        width: 90%;
+        max-width: 450px;
+    }
+
+    main {
+        padding: 2rem 1rem;
+    }
+
+    header .wrapper {
+        padding: 1rem 1rem;
+    }
+
+    .news-page h2 {
+        font-size: 2rem;
+    }
+
+    .news-page p {
+        font-size: 1rem;
+        margin-bottom: 2rem;
+    }
+}
+
+@media (max-width: 600px) {
+    header .wrapper {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    nav a {
+        margin: 0 0.5rem;
+        font-size: 0.9rem;
+    }
+
+    .news-list {
+        padding: 1.5rem;
+    }
+
+    .news-list h3 {
+        font-size: 1.3rem;
+    }
+
+    .news-list li {
+        margin: 1rem 0;
+    }
+}

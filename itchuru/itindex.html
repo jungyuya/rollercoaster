@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IT츄르 📰 - 오늘의 IT 소식</title>
+    <link rel="stylesheet" href="itstyle.css">
+</head>
+
+<body>
+    <header>
+        <div class="wrapper">
+            <h1>📰 IT츄르</h1>
+            <nav>
+                <a href="/index.html">🏠홈으로</a>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="news-page" id="newsPage">
+            <h2>매일 IT 뉴스를 한입에, 츄르!</h2>
+            <p> 네이버와 구글의 최신 IT 뉴스를 요약해 드려요.</p>
+
+            <div class="chatbot-container">
+                <textarea id="newsInput" rows="6" placeholder="요약할 뉴스 내용을 입력하세요"></textarea>
+                <div class="button-group">
+                    <button id="requestSummaryBtn">Gemini로 요약 요청</button>
+                    <button id="requestTodayNewsBtn">오늘의 IT 뉴스 요약</button>
+                </div>
+                <h3>요약 결과</h3>
+                <div id="summaryResult" class="summary-result-box"></div>
+            </div>
+
+            <div class="news-container">
+                <div id="korean-news-list-container"></div>
+                <div id="global-news-list-container"></div>
+            </div>
+        </div>
+    </main>
+
+    <script src="itscript.js" defer></script>
+</body>
+
+</html>
