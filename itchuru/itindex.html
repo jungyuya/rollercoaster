@@ -4,8 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>IT츄르 📰 - 오늘의 IT 소식</title>
+    <title>📰IT츄르 - 오늘의 IT 한입</title>
     <link rel="stylesheet" href="itstyle.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 
 <body>
@@ -21,13 +22,21 @@
     <main>
         <div class="news-page" id="newsPage">
             <h2>매일 IT 뉴스를 한입에, 츄르!</h2>
-            <p> 네이버와 구글의 최신 IT 뉴스를 요약해 드려요.</p>
+            <p> 네이버와 구글의 국내/해외 최신 IT 뉴스를 요약해 드려요.</p>
 
             <div class="chatbot-container">
-                <textarea id="newsInput" rows="6" placeholder="요약할 뉴스 내용을 입력하세요"></textarea>
+                <div class="textarea-wrapper">
+                    <textarea id="newsInput" rows="6" placeholder="뉴스 내용에 대한 궁금증이나 IT관련 질문을 해주세요!"></textarea>
+                    <div class="input-send-wrapper">
+                        <button id="sendChatMessageBtn" class="gemini-send-button">
+                            <i class="fas fa-paper-plane"></i> 
+                        </button> 
+                    </div>
+                </div>
+
                 <div class="button-group">
-                    <button id="requestSummaryBtn">Gemini로 요약 요청</button>
-                    <button id="requestTodayNewsBtn">오늘의 IT 뉴스 요약</button>
+                    <button id="requestSummaryBtn" class="naver-button"> 국내 IT 요약 </button>
+                    <button id="requestTodayNewsBtn" class="google-button"> 해외 IT 한입</button>
                 </div>
                 <h3>요약 결과</h3>
                 <div id="summaryResult" class="summary-result-box"></div>

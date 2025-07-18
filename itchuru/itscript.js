@@ -1,34 +1,11 @@
-// 1. 뉴스 데이터 정의
-const koreanNewsItems = [
-    { id: 1, title: "[가짜뉴스] 네이버, AI 비서 '클로바X' 공개", link: '#' },
-    { id: 2, title: '[가짜뉴스] 카카오, 게임 사업부 분사 결정', link: '#' },
-    { id: 3, title: "[가짜뉴스] 쿠팡, '로켓배송' 전국 확대 발표", link: '#' },
-    { id: 4, title: "[가짜뉴스] 라인, 일본 시장 점유율 1위 달성", link: '#' },
-    { id: 5, title: "[가짜뉴스] 넥슨, 신작 MMORPG '아스가르드2' 출시", link: '#' },
-];
-
-const globalNewsItems = [
-    { id: 1, title: '[Fake News] Apple announces new Vision Pro 2', link: '#' },
-    { id: 2, title: '[Fake News] Google unveils next-gen AI model "Gemini 2.0"', link: '#' },
-    { id: 3, title: '[Fake News] Microsoft to acquire Adobe for $300B', link: '#' },
-    { id: 4, title: '[Fake News] Amazon launches drone delivery service in 10 cities', link: '#' },
-    { id: 5, title: '[Fake News] Tesla unveils new electric pickup truck "Cybertruck Mini"', link: '#' },
-];
-
-// 2. 뉴스 목록을 동적으로 생성하고 DOM에 추가하는 함수
-/**
- * 주어진 데이터를 바탕으로 뉴스 목록 HTML 요소를 생성하고, 지정된 컨테이너에 추가합니다.
- * @param {string} containerId - 뉴스 목록이 삽입될 HTML 요소의 ID.
- * @param {string} titleText - 뉴스 목록의 제목 (예: "국내 IT 뉴스").
- * @param {Array<Object>} items - 렌더링할 뉴스 아이템 배열. 각 아이템은 {id, title, link} 속성을 가집니다.
- * @param {string} themeClass - 뉴스 목록에 적용할 테마 클래스 (예: "korean-naver-theme").
- */
+// 뉴스 목록을 동적으로 생성하고 DOM에 추가하는 함수
 function renderNewsList(containerId, titleText, items, themeClass) {
     const container = document.getElementById(containerId);
     if (!container) {
         console.error(`Error: Container with ID "${containerId}" not found.`);
         return;
     }
+    container.innerHTML = ''; // 기존 내용 지우기
 
     const newsListDiv = document.createElement('div');
     newsListDiv.className = `news-list ${themeClass}`;
@@ -38,37 +15,74 @@ function renderNewsList(containerId, titleText, items, themeClass) {
     newsListDiv.appendChild(h3);
 
     const ul = document.createElement('ul');
-    items.forEach(item => {
+
+    if (!Array.isArray(items) || items.length === 0) {
         const li = document.createElement('li');
-        const a = document.createElement('a');
-        a.href = item.link;
-        a.target = '_blank';
-        a.rel = 'noopener noreferrer';
-        a.textContent = item.title;
-        li.appendChild(a);
+        li.textContent = '뉴스를 불러오는 데 실패했습니다.';
         ul.appendChild(li);
-    });
+    } else {
+        items.forEach(item => {
+            const li = document.createElement('li');
+            const a = document.createElement('a');
+            a.href = item.link;
+            a.target = '_blank';
+            a.rel = 'noopener noreferrer';
+            a.textContent = item.title;
+            li.appendChild(a);
+            ul.appendChild(li);
+        });
+    }
 
     newsListDiv.appendChild(ul);
     container.appendChild(newsListDiv);
 }
 
-// 3. Gemini API 관련 함수
-/**
- * 1. 사용자가 입력창에 입력한 텍스트를 서버로 보내서 요약을 요청하는 함수
- */
-async function requestSummary() {
-    const inputText = document.getElementById('newsInput').value.trim();
-    if (!inputText) {
-        alert('요약할 내용을 입력해주세요!');
-        return;
-    }
+// 네이버 뉴스를 요약하여 표시하는 함수
+async function requestNaverNewsSummary() {
+    const summaryResultDiv = document.getElementById('summaryResult');
+    summaryResultDiv.innerText = '국내 IT 뉴스를 요약하는 중... 🤖';
 
     try {
-        const response = await fetch('/api/summarize', {
+        const response = await fetch('http://127.0.0.1:5000/api/summarize-naver');
+        if (!response.ok) {
+            throw new Error(`서버 오류: ${response.status}`);
+        }
+        const data = await response.json();
+        summaryResultDiv.innerText = data.summary || '요약 결과가 없습니다.';
+    } catch (error) {
+        console.error('국내 뉴스 요약 요청 오류:', error);
+        summaryResultDiv.innerText = '국내 뉴스 요약 중 오류가 발생했습니다. 😿';
+    }
+}
+
+// 구글 뉴스를 요약하여 표시하는 함수
+async function requestGoogleNewsSummary() {
+    const summaryResultDiv = document.getElementById('summaryResult');
+    summaryResultDiv.innerText = '글로벌 IT 뉴스를 요약하는 중... 🤖';
+
+    try {
+        const response = await fetch('http://127.0.0.1:5000/api/summarize-google');
+        if (!response.ok) {
+            throw new Error(`서버 오류: ${response.status}`);
+        }
+        const data = await response.json();
+        summaryResultDiv.innerText = data.summary || '요약 결과가 없습니다.';
+    } catch (error) {
+        console.error('글로벌 뉴스 요약 요청 오류:', error);
+        summaryResultDiv.innerText = '글로벌 뉴스 요약 중 오류가 발생했습니다. 😿';
+    }
+}
+
+// 사용자 입력을 받아 Gemini와 대화하는 함수 (챗봇 기능)
+async function chatWithGemini(message) {
+    const summaryResultDiv = document.getElementById('summaryResult');
+    summaryResultDiv.innerText = 'Gemini와 대화 중... 🤖'; // 로딩 메시지
+
+    try {
+        const response = await fetch('http://127.0.0.1:5000/api/chat', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ text: inputText })
+            body: JSON.stringify({ message: message })
         });
 
         if (!response.ok) {
@@ -76,42 +90,72 @@ async function requestSummary() {
         }
 
         const data = await response.json();
-        document.getElementById('summaryResult').innerText = data.summary || '요약 결과가 없습니다.';
+        summaryResultDiv.innerText = data.response || '응답이 없습니다.';
     } catch (error) {
-        console.error(error);
-        document.getElementById('summaryResult').innerText = '요약 요청 중 오류가 발생했습니다.';
+        console.error('챗봇 요청 오류:', error);
+        summaryResultDiv.innerText = '챗봇 요청 중 오류가 발생했습니다. 😿';
     }
 }
 
-/**
- * 2. 고정 메시지를 서버로 보내서 '오늘의 IT 뉴스 요약'을 요청하는 함수
- */
-async function requestTodayNewsSummary() {
+// 페이지 로드 시 백엔드에서 모든 뉴스 목록을 가져와 렌더링하는 함수
+async function fetchAndRenderAllNews() {
     try {
-        const response = await fetch('/api/summarize', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ text: '오늘의 IT 뉴스를 요약해줘' })
-        });
-
+        const response = await fetch('http://127.0.0.1:5000/api/news');
         if (!response.ok) {
             throw new Error(`서버 오류: ${response.status}`);
         }
-
         const data = await response.json();
-        document.getElementById('summaryResult').innerText = data.summary || '요약 결과가 없습니다.';
+
+        renderNewsList('korean-news-list-container', '🇰🇷 국내 IT 뉴스', data.korean_news, 'korean-naver-theme');
+        renderNewsList('global-news-list-container', '🅶 글로벌 IT 뉴스', data.global_news, 'global-google-theme');
+
     } catch (error) {
-        console.error(error);
-        document.getElementById('summaryResult').innerText = '요약 요청 중 오류가 발생했습니다.';
+        console.error('뉴스 로딩 실패:', error);
+        renderNewsList('korean-news-list-container', '🇰🇷 국내 IT 뉴스', [], 'korean-naver-theme');
+        renderNewsList('global-news-list-container', '🅶 글로벌 IT 뉴스', [], 'global-google-theme');
     }
 }
 
+// --- DOMContentLoaded 이벤트 리스너 ---
+document.addEventListener('DOMContentLoaded', () => {
+    // 1. 페이지 로드 시 뉴스 목록 불러오기
+    fetchAndRenderAllNews();
 
-// 4. 초기화 및 이벤트 리스너 설정
-// 뉴스 목록 렌더링
-renderNewsList('korean-news-list-container', '🇰🇷 국내 IT 뉴스', koreanNewsItems, 'korean-naver-theme');
-renderNewsList('global-news-list-container', '🅶 글로벌 IT 뉴스', globalNewsItems, 'global-google-theme');
+    // 2. 버튼 클릭 이벤트 리스너 설정
+    const requestSummaryBtn = document.getElementById('requestSummaryBtn'); // "국내 IT 요약" 버튼
+    if (requestSummaryBtn) {
+        requestSummaryBtn.addEventListener('click', requestNaverNewsSummary);
+    }
+    
+    const requestTodayNewsBtn = document.getElementById('requestTodayNewsBtn'); // "해외 IT 한입" 버튼
+    if (requestTodayNewsBtn) {
+        requestTodayNewsBtn.addEventListener('click', requestGoogleNewsSummary);
+    }
 
-// 버튼 이벤트 리스너 추가
-document.getElementById('requestSummaryBtn').addEventListener('click', requestSummary);
-document.getElementById('requestTodayNewsBtn').addEventListener('click', requestTodayNewsSummary);
+    // 3. newsInput 텍스트 영역에 엔터 키 입력 시 챗봇 기능 호출
+    const newsInput = document.getElementById('newsInput');
+    if (newsInput) {
+        newsInput.addEventListener('keypress', (event) => {
+            if (event.key === 'Enter' && !event.shiftKey) { // Shift+Enter는 줄바꿈, Enter는 전송
+                event.preventDefault(); // 기본 Enter 동작(줄바꿈) 방지
+                const message = newsInput.value.trim();
+                if (message) {
+                    chatWithGemini(message);
+                    newsInput.value = ''; // 입력창 초기화
+                }
+            }
+        });
+    }
+
+    // 4. "질문하기 (챗봇)" 버튼 클릭 시 챗봇 기능 호출
+    const sendChatMessageBtn = document.getElementById('sendChatMessageBtn');
+    if (sendChatMessageBtn) {
+        sendChatMessageBtn.addEventListener('click', () => {
+            const message = newsInput.value.trim();
+            if (message) {
+                chatWithGemini(message);
+                newsInput.value = ''; // 입력창 초기화
+            }
+        });
+    }
+});
