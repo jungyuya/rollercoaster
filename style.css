@@ -206,7 +206,8 @@ body {
     /* ✨ 텍스트 그림자 강화 */
     box-shadow: var(--shadow-btn);
     /* ✨ [수정]: 그림자 변수 사용 */
-    transition: background var(--transition-medium), transform var(--transition-springy), box-shadow var(--transition-springy); /* ✨ 이 변수 사용 */
+    transition: background var(--transition-medium), transform var(--transition-springy), box-shadow var(--transition-springy);
+    /* ✨ 이 변수 사용 */
     text-decoration: none;
 }
 
@@ -264,6 +265,19 @@ body {
     text-align: center;
     color: var(--text-medium);
     margin-bottom: 1.875rem;
+}
+
+/*깃허브 링크 파란색 꼴보기 싫어서 다른걸로 적용*/
+.github-link {
+    color: #58baff;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.github-link:hover {
+    color: #2389f0;
+    /* 마우스 올릴 때 부드러운 블루 */
+    text-decoration: underline;
 }
 
 /* ========================
