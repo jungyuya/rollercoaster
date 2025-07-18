@@ -35,18 +35,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const nameInput = document.getElementById('text');
     const startButton = document.getElementById('startButton');
     const homeButton = document.getElementById('homeButton');
+    const introHomeButton = document.getElementById('introHomeButton'); // 인트로 홈 버튼 요소 추가 <--- 이 줄이 추가/수정됨
     const backButton = document.getElementById('backButton');
 
     const chatBox = document.querySelector('.chat-box');
     const chatInput = document.querySelector('.chat-input input');
     const sendButton = document.getElementById('sendButton');
     const loader = document.getElementById('loader');
-
-    // 커스텀 메시지 박스 관련 DOM 요소 (chatlastic/index.html에 이 요소를 추가해야 합니다)
-    const customMessageBox = document.getElementById('customMessageBox');
-    const messageBoxText = document.getElementById('messageBoxText');
-    const messageBoxConfirmBtn = document.getElementById('messageBoxConfirmBtn');
-    const messageBoxCancelBtn = document.getElementById('messageBoxCancelBtn');
 
     // --- 상태 변수 ---
     let userMessages = [];
@@ -70,29 +65,6 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log('Current User ID:', currentUserId); // 디버깅용
     }
 
-    /** 커스텀 메시지 박스를 표시하는 함수 */
-    function showMessageBox(message, type = 'alert', onConfirm = null) {
-        messageBoxText.textContent = message;
-        messageBoxCancelBtn.classList.add('hidden'); // 기본적으로 취소 버튼 숨김
-
-        if (type === 'confirm') {
-            messageBoxCancelBtn.classList.remove('hidden');
-            messageBoxConfirmBtn.onclick = () => {
-                customMessageBox.classList.add('hidden');
-                if (onConfirm) onConfirm(true);
-            };
-            messageBoxCancelBtn.onclick = () => {
-                customMessageBox.classList.add('hidden');
-                if (onConfirm) onConfirm(false);
-            };
-        } else { // 'alert' 타입
-            messageBoxConfirmBtn.onclick = () => {
-                customMessageBox.classList.add('hidden');
-                if (onConfirm) onConfirm(); // 확인 버튼 클릭 시 콜백 실행
-            };
-        }
-        customMessageBox.classList.remove('hidden');
-    }
 
     /** 채팅방 초기 상태를 설정하는 함수 */
     function initializeChat() {
@@ -138,17 +110,6 @@ document.addEventListener('DOMContentLoaded', () => {
         chatInput.focus(); // 채팅 입력창에 포커스
     }
 
-    /** 채팅 화면에서 홈으로 돌아가는 함수 */
-    function goHome() {
-        showMessageBox("대화 내용이 모두 사라집니다. 정말로 홈으로 돌아가시겠습니까?", 'confirm', (confirmed) => {
-            if (confirmed) {
-                introSection.style.display = 'flex'; // 인트로 화면은 flex로 설정 (CSS 레이아웃에 맞춤)
-                chatSection.style.display = 'none';
-                initializeChat(); // 채팅방 상태 초기화
-                nameInput.focus(); // 홈으로 돌아왔을 때 이름 입력창에 포커스
-            }
-        });
-    }
 
     /** 메시지 전송 함수 */
     async function sendMessage() {
@@ -240,7 +201,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- 이벤트 리스너 연결 ---
     startButton.addEventListener('click', startChat);
-    homeButton.addEventListener('click', goHome);
     sendButton.addEventListener('click', sendMessage);
     chatInput.addEventListener('keypress', handleKeyPress);
     backButton.addEventListener('click', () => {

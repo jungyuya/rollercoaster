@@ -42,7 +42,6 @@ body {
     font-size: 15px;
     background-color: var(--primary-bg);
     color: var(--text-dark);
-    /* 기본 텍스트 색상 설정 */
 }
 
 main {
@@ -78,7 +77,7 @@ main {
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* intro-box 내부의 모든 자식 요소 중앙 정렬 */
+    position: relative;
 
 }
 
@@ -362,12 +361,26 @@ button:hover {
     font-size: 0.9em;
     border-radius: 25px;
     box-shadow: 0 2px 5px var(--shadow-color-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    white-space: nowrap;
+    /* 텍스트 줄바꿈 방지 */
 }
 
 .home-button:hover {
     background-color: #e8e8e8;
     transform: translateY(-2px);
     box-shadow: 0 4px 8px var(--shadow-color-light);
+}
+
+.intro-absolute-home-button {
+    position: absolute;
+    /* 글로벌 기본값 (모바일 포함 모든 화면에 적용) */
+    top: 20px;
+    right: 20px;
+    z-index: 10;
 }
 
 /* --- 말풍선 UI 핵심 스타일 --- */
@@ -653,3 +666,4 @@ footer {
     color: var(--text-dark);
     box-shadow: 0 4px 8px var(--shadow-color-light);
 }
+
