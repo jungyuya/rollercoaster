@@ -26,7 +26,7 @@ body {
     line-height: 1.6;
 
     /* ✅ 배경 이미지 관련 추가 */
-    background-image: url('츄르.png'); /* 실제 이미지 경로로 수정 */
+    background-image: url('츄르4.png'); /* 실제 이미지 경로로 수정 */
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -460,8 +460,8 @@ main {
     }
 
     nav a {
-        margin: 0 0.5rem;
-        font-size: 0.9rem;
+        font-size: 1.2rem; /* 기존 0.9rem보다 큼 */
+        padding: 0.4rem 0.8rem; /* 버튼 크기 키우기 */
     }
 
     .news-list {
