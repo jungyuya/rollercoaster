@@ -24,6 +24,13 @@ body {
     background-color: var(--bg-color);
     color: var(--text-color);
     line-height: 1.6;
+
+    /* ✅ 배경 이미지 관련 추가 */
+    background-image: url('츄르.png'); /* 실제 이미지 경로로 수정 */
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed; /* 스크롤 시 배경 고정 */
 }
 
 #newsPage {
@@ -40,7 +47,7 @@ header {
     position: sticky;
     top: 0;
     z-index: 100;
-    padding: 1rem 0;
+    padding: 0.5rem 0;
 }
 
 header .wrapper {
@@ -80,7 +87,7 @@ nav a {
     font-weight: 500;
     color: var(--light-text-color);
     transition: color 0.3s ease;
-    font-size: 1.2rem; 
+    font-size: 1.33rem; 
 }
 
 nav a:hover {
@@ -97,7 +104,7 @@ main {
 }
 
 .news-page h2 {
-    font-size: 2.5rem;
+    font-size: 2.3rem;
     font-weight: 700;
     margin-bottom: 0.8rem;
     color: var(--text-color);
