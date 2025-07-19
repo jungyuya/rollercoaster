@@ -1,3 +1,4 @@
+
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap');
 
 :root {
@@ -39,16 +40,33 @@ header {
     position: sticky;
     top: 0;
     z-index: 100;
-    padding: 1rem 2rem;
+    padding: 1rem 0;
 }
 
 header .wrapper {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    max-width: 1280px;
-    margin: 0 auto;
+    position: relative; /* 자식 요소 위치 기준 */
+    height: 60px; /* 고정 높이 */
 }
+
+header h1 {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    margin: 0;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--text-color);
+}
+
+/* 우측 상단 홈 버튼 고정 */
+header nav {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
 
 h1 {
     font-weight: 700;
@@ -58,11 +76,11 @@ h1 {
 }
 
 nav a {
-    margin-left: 1.5rem;
     text-decoration: none;
     font-weight: 500;
     color: var(--light-text-color);
     transition: color 0.3s ease;
+    font-size: 1.2rem; 
 }
 
 nav a:hover {
