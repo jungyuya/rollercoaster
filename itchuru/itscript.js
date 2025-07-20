@@ -1,3 +1,7 @@
+// 🎯 당신의 API Gateway 엔드포인트 주소입니다.
+// 스테이지가 '$default'이므로, URL에 별도의 스테이지 경로를 추가하지 않습니다.
+const API_BASE_URL = 'https://l8z65r6gfd.execute-api.ap-northeast-2.amazonaws.com';
+
 // 뉴스 목록을 동적으로 생성하고 DOM에 추가하는 함수
 function renderNewsList(containerId, titleText, items, themeClass) {
     const container = document.getElementById(containerId);
@@ -75,7 +79,7 @@ async function requestNaverNewsSummary() {
     summaryResultDiv.innerText = '국내 IT 뉴스를 요약하는 중... 🤖';
 
     try {
-        const response = await fetch('http://127.0.0.1:5000/api/summarize-naver');
+        const response = await fetch(`${API_BASE_URL}/api/summarize-naver`); // API_BASE_URL 사용
         if (!response.ok) {
             throw new Error(`서버 오류: ${response.status}`);
         }
@@ -93,7 +97,7 @@ async function requestGoogleNewsSummary() {
     summaryResultDiv.innerText = '글로벌 IT 뉴스를 요약하는 중... 🤖';
 
     try {
-        const response = await fetch('http://127.0.0.1:5000/api/summarize-google');
+        const response = await fetch(`${API_BASE_URL}/api/summarize-google`); // API_BASE_URL 사용
         if (!response.ok) {
             throw new Error(`서버 오류: ${response.status}`);
         }
@@ -111,7 +115,7 @@ async function chatWithGemini(message) {
     summaryResultDiv.innerText = 'Gemini와 대화 중... 🤖';
 
     try {
-        const response = await fetch('http://127.0.0.1:5000/api/chat', {
+        const response = await fetch(`${API_BASE_URL}/api/chat`, { // API_BASE_URL 사용
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ message: message })
@@ -132,7 +136,7 @@ async function chatWithGemini(message) {
 // 페이지 로드 시 모든 뉴스 목록을 가져와 렌더링
 async function fetchAndRenderAllNews() {
     try {
-        const response = await fetch('http://127.0.0.1:5000/api/news');
+        const response = await fetch(`${API_BASE_URL}/api/news`); // API_BASE_URL 사용
         if (!response.ok) {
             throw new Error(`서버 오류: ${response.status}`);
         }
@@ -180,7 +184,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // "질문하기 (챗봇)" 버튼 클릭 시 챗봇 기능 호출
+    // "질문하기(이모티콘 비행기 대체)" 버튼 클릭 시 챗봇 기능 호출
     const sendChatMessageBtn = document.getElementById('sendChatMessageBtn');
     if (sendChatMessageBtn) {
         sendChatMessageBtn.addEventListener('click', () => {
