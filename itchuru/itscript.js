@@ -112,7 +112,7 @@ async function requestGoogleNewsSummary() {
 // 사용자 입력을 받아 Gemini와 대화하는 챗봇 기능
 async function chatWithGemini(message) {
     const summaryResultDiv = document.getElementById('summaryResult');
-    summaryResultDiv.innerText = 'Gemini와 대화 중... 🤖';
+    summaryResultDiv.innerText = '츄르는 지금 생각하는 중... 😺';
 
     try {
         const response = await fetch(`${API_BASE_URL}/api/chat`, { // API_BASE_URL 사용
