@@ -163,8 +163,9 @@ GEMINI_API_KEY=my_google_gen_api_key
 
 ## 개발자 정보
 
-* 이름: 이준규 (Lee Jungyu)
+* 이름: 이준규 (Lee JUN-GYU)
 * 포트폴리오 주소: [https://jungyu.store](https://jungyu.store)
-* AWS Region: ap-northeast-2 (서울)
+* Github : https://github.com/jungyuya
+* E-mail : jungyuya@gmail.com
 
 ---
