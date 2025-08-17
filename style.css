@@ -1699,3 +1699,17 @@ body[data-theme="dark"] ::-webkit-scrollbar-thumb {
 body[data-theme="dark"] ::-webkit-scrollbar-thumb:hover {
     background-color: var(--primary-dark);
 }
+
+/* ===========================
+   Typing Effect 전용 스타일
+   =========================== */
+#typing-effect a {
+  text-decoration: underline;  /* 밑줄 강조 */
+  font-weight: 600;            /* 살짝 두껍게 */
+  color: #c7def8ff;              /* GitHub 링크에 어울리는 파란색 (Tailwind 기본 blue) */
+  transition: color 0.3s ease; /* 마우스 올렸을 때 부드럽게 색 변함 */
+}
+
+#typing-effect a:hover {
+  color: #2275d4ff;              /* hover 시 조금 더 진한 파랑 */
+}

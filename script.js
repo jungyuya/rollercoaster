@@ -1,26 +1,48 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const options = {
-        strings: [
-            "부, 명성, 힘···.",
-            "한때 이 세상의 모든 것을 손에 넣은 사나이!",
-            "해적왕 골드 로저",
-            "그가 죽음을 앞두고 남긴 한마디는,",
-            "전세계 사람들을 바다로 향하게 만들었다.",
-            "내 보물 말이냐? 원한다면 주도록 하지···!",
-            "잘 찾아봐라! 이 세상 전부를 거기에 두고 왔으니까!",
-            "이윽고 세상은 대해적시대를 맞는다!!!"
-        ],
+    const strings = [
+        "안녕하세요, 이준규입니다.😊",
+        "클라우드 환경에서 IaC와 CI/CD를 활용하여,",
+        "인프라를 자동화하고 효율적으로 운영하는 데 관심이 많습니다.",
+        "국내·해외 IT 뉴스요약 'IT츄르' 제작",
+        "심리상담 챗봇 '챗라스틱' 제작",
+        "IaC(CDK) 기반 기술 블로그 제작 및 운영",
+        "EKS 기반 '펫커넥트' 제작",
+        "IaC 및 CI/CD를 통한 인프라 자동화 구성 및 관리",
+        "프로젝트의 자세한 내용은 아래에서 확인해보세요!!😎",
+        '깃허브 → <a href="https://github.com/jungyuya" target="_blank" rel="noopener noreferrer">https://github.com/jungyuya</a>'
+    ];
 
-        typeSpeed: 50 + Math.random() * 20,
-        backSpeed: 18 + Math.random() * 10,
+    const options = {
+        strings: strings,
+        contentType: 'html',   // 중요: HTML 렌더링 허용 (링크 삽입용)
+        typeSpeed: 80,
+        backSpeed: 25,
         backDelay: 2000,
-        startDelay: 100,
+        startDelay: 200,
         loop: true,
         showCursor: true,
         cursorChar: '|',
         smartBackspace: true,
-        fadeOut: true,
-        fadeOutDelay: 400
+        fadeOut: false,
+
+        preStringTyped: function(arrayPos) {
+            // 첫 1~2 문장: 천천히 보여주기
+            if (arrayPos <= 1) {
+                this.typeSpeed = 100 + Math.floor(Math.random() * 40); // 느리게
+                this.backSpeed = 30 + Math.floor(Math.random() * 15);
+                this.backDelay = 2500 + Math.floor(Math.random() * 1000);
+            } else if (arrayPos === strings.length - 1) {
+                // 마지막(깃허브) 문자열: 타이핑은 평소보다 조금 빠르게, 삭제 전 대기 3초
+                this.typeSpeed = 40 + Math.floor(Math.random() * 12);
+                this.backSpeed = 6 + Math.floor(Math.random() * 6);
+                this.backDelay = 3000; // 여기서 3초 대기
+            } else {
+                // 프로젝트 라인: 빠르게 리듬감 있게
+                this.typeSpeed = 28 + Math.floor(Math.random() * 12);
+                this.backSpeed = 1 + Math.floor(Math.random() * 8);
+                this.backDelay = 650 + Math.floor(Math.random() * 450);
+            }
+        }
     };
 
     const typed = new Typed('#typing-effect', options);
