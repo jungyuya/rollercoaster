@@ -16,23 +16,26 @@ document.addEventListener('DOMContentLoaded', () => {
     const adminLogoutBtn = document.getElementById('admin-logout-btn');
 
     // 커스텀 알림/확인 모달 요소
-    const customAlertModal = document.getElementById('custom-alert-modal'); // ✨ 추가
-    const alertMessage = document.getElementById('alert-message'); // ✨ 추가
-    const alertOkBtn = document.getElementById('alert-ok-btn'); // ✨ 추가
+    const customAlertModal = document.getElementById('custom-alert-modal');
+    const alertMessage = document.getElementById('alert-message');
+    const alertOkBtn = document.getElementById('alert-ok-btn');
     const confirmModal = document.getElementById('confirm-modal');
     const confirmMessage = document.getElementById('confirm-message');
     const confirmYesBtn = document.getElementById('confirm-yes-btn');
     const confirmNoBtn = document.getElementById('confirm-no-btn');
 
-    // ✨ 다중 삭제 관련 요소
+    // 다중 삭제 관련 요소
     const deleteSelectedBtn = document.getElementById('delete-selected-btn');
     const selectedCountSpan = document.getElementById('selected-count');
 
-    // --- 2. API 및 토큰 설정 ---
+    // --- 2. API 및 상태 변수 설정 ---
     const API_BASE_URL = 'https://73624ycwk6.execute-api.ap-northeast-2.amazonaws.com/default';
-    const ADMIN_TOKEN = '123456';
+
+    // 하드코딩된 ADMIN_TOKEN을 제거하고, 로그인 성공 시 토큰을 저장할 변수를 만듭니다.
+    let loggedInToken = null;
+
     let isAdmin = false; // 관리자 로그인 상태
-    let selectedImages = new Set(); // ✨ 선택된 이미지의 S3 키를 저장할 Set
+    let selectedImages = new Set(); // 선택된 이미지의 S3 키를 저장할 Set
 
     // --- 커스텀 알림 모달 제어 함수 ---
     const showAlertModal = (message) => {
@@ -83,6 +86,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // --- 4. 모달 및 업로드 관련 기능 (누락되었던 함수 정의) ---
+    const openModal = () => modalOverlay.classList.add('show');
+    const closeModal = () => modalOverlay.classList.remove('show');
+
     // --- 관리자 모드 토글 함수 ---
     const toggleAdminMode = (loggedIn) => {
         isAdmin = loggedIn;
@@ -91,23 +98,24 @@ document.addEventListener('DOMContentLoaded', () => {
             adminLoginBtn.style.display = 'none';
             adminLogoutBtn.style.display = 'inline-block';
             openModalBtn.style.display = 'inline-block'; // 업로드 버튼 표시
-            deleteSelectedBtn.style.display = 'inline-block'; // ✨ 다중 삭제 버튼 표시
-            console.log('관리자 모드 활성화');
+            deleteSelectedBtn.style.display = 'inline-block'; // 다중 삭제 버튼 표시
         } else {
+            // 로그아웃 시 저장된 토큰을 비웁니다.
+            loggedInToken = null;
             adminTokenInput.style.display = 'inline-block';
             adminLoginBtn.style.display = 'inline-block';
             adminLogoutBtn.style.display = 'none';
             openModalBtn.style.display = 'none'; // 업로드 버튼 숨김
-            deleteSelectedBtn.style.display = 'none'; // ✨ 다중 삭제 버튼 숨김
+            deleteSelectedBtn.style.display = 'none'; // 다중 삭제 버튼 숨김
             adminTokenInput.value = '';
-            selectedImages.clear(); // ✨ 로그아웃 시 선택된 이미지 초기화
-            updateSelectedCount(); // ✨ 선택 개수 UI 업데이트
-            console.log('관리자 모드 비활성화');
+            selectedImages.clear(); // 로그아웃 시 선택된 이미지 초기화
+            updateSelectedCount(); // 선택 개수 UI 업데이트
         }
-        loadGallery(); // 관리자 모드 변경 시 갤러리 새로고침 (삭제 버튼/체크박스 표시/숨김)
+        loadGallery(); // 관리자 모드 변경 시 갤러리 새로고침
     };
 
     // --- 관리자 로그인/로그아웃 이벤트 리스너 ---
+    // adminLoginBtn의 이벤트 리스너를 async 함수로 변경합니다.
     adminLoginBtn.addEventListener('click', async () => {
         const enteredToken = adminTokenInput.value;
         if (!enteredToken) {
@@ -149,13 +157,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     adminLogoutBtn.addEventListener('click', () => {
         toggleAdminMode(false);
-        showAlertModal('관리자 로그아웃 되었습니다.'); // 커스텀 알림 사용
+        showAlertModal('관리자 로그아웃 되었습니다.');
     });
 
     // --- 선택된 이미지 개수 업데이트 함수 ---
     const updateSelectedCount = () => {
         selectedCountSpan.textContent = selectedImages.size;
-        // 선택된 이미지가 없으면 다중 삭제 버튼 비활성화
         deleteSelectedBtn.disabled = selectedImages.size === 0;
         if (selectedImages.size === 0) {
             deleteSelectedBtn.classList.remove('active');
@@ -167,14 +174,12 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- 이미지 삭제 함수 (개별) ---
     const deleteImage = async (imageKey) => {
         showConfirmModal('정말로 이 이미지를 삭제하시겠습니까?', async (confirmed) => {
-            if (!confirmed) {
-                return;
-            }
+            if (!confirmed) return;
 
             try {
                 const response = await fetch(`${API_BASE_URL}/image/${imageKey}`, {
                     method: 'DELETE',
-                    headers: { 'Authorization': ADMIN_TOKEN },
+                    headers: { 'Authorization': loggedInToken }, // 저장된 토큰 사용
                 });
 
                 const result = await response.json();
@@ -190,7 +195,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
 
-    // ✨ 이미지 삭제 함수 (다중)
+    // --- 이미지 삭제 함수 (다중) ---
     const deleteSelectedImages = async () => {
         if (selectedImages.size === 0) {
             showAlertModal('삭제할 이미지를 선택해주세요.');
@@ -198,18 +203,16 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         showConfirmModal(`선택된 이미지 ${selectedImages.size}개를 정말로 삭제하시겠습니까?`, async (confirmed) => {
-            if (!confirmed) {
-                return;
-            }
+            if (!confirmed) return;
 
             try {
                 const response = await fetch(`${API_BASE_URL}/images/batch`, {
                     method: 'DELETE',
                     headers: {
-                        'Content-Type': 'application/json', // JSON 바디 전송
-                        'Authorization': ADMIN_TOKEN
+                        'Content-Type': 'application/json',
+                        'Authorization': loggedInToken // 저장된 토큰 사용
                     },
-                    body: JSON.stringify({ keys: Array.from(selectedImages) }), // Set을 배열로 변환하여 전송
+                    body: JSON.stringify({ keys: Array.from(selectedImages) }),
                 });
 
                 const result = await response.json();
@@ -218,8 +221,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
 
                 showAlertModal(result.message);
-                selectedImages.clear(); // 삭제 후 선택 초기화
-                loadGallery(); // 갤러리 새로고침
+                selectedImages.clear();
+                loadGallery();
             } catch (error) {
                 showAlertModal(`❌ 이미지 다중 삭제 오류: ${error.message}`);
             }
@@ -230,29 +233,22 @@ document.addEventListener('DOMContentLoaded', () => {
     const createImageElement = (url) => {
         const galleryItem = document.createElement("div");
         galleryItem.className = "gallery-item";
-        galleryItem.dataset.url = url; // URL을 데이터셋에 저장 (나중에 S3 키 추출용)
+        galleryItem.dataset.url = url;
 
         const img = document.createElement("img");
         img.src = url;
         img.alt = "S3 갤러리 이미지";
         img.className = "gallery-img";
 
-        // 이미지 확대 기능
         img.addEventListener("click", () => {
             const overlay = document.createElement("div");
             overlay.className = "image-overlay";
-
             const enlargedImg = document.createElement("img");
             enlargedImg.src = img.src;
             enlargedImg.alt = img.alt;
-
             overlay.appendChild(enlargedImg);
             document.body.appendChild(overlay);
-
-            overlay.addEventListener("click", () => {
-                overlay.remove();
-            });
-
+            overlay.addEventListener("click", () => overlay.remove());
             const handleEsc = (e) => {
                 if (e.key === "Escape") {
                     overlay.remove();
@@ -264,9 +260,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         galleryItem.appendChild(img);
 
-        // 관리자 모드일 경우 삭제 버튼 및 체크박스 추가
         if (isAdmin) {
-            // 개별 삭제 버튼
             const deleteBtn = document.createElement("button");
             deleteBtn.className = "delete-btn";
             deleteBtn.textContent = '🗑️';
@@ -275,25 +269,23 @@ document.addEventListener('DOMContentLoaded', () => {
             deleteBtn.dataset.key = s3Key;
 
             deleteBtn.addEventListener('click', (e) => {
-                e.stopPropagation(); // 이미지 확대 및 체크박스 클릭 이벤트 방지
+                e.stopPropagation();
                 deleteImage(deleteBtn.dataset.key);
             });
             galleryItem.appendChild(deleteBtn);
 
-            // ✨ 선택 체크박스
             const checkbox = document.createElement('input');
             checkbox.type = 'checkbox';
             checkbox.className = 'select-checkbox';
-            checkbox.dataset.key = s3Key; // S3 키를 데이터셋에 저장
+            checkbox.dataset.key = s3Key;
 
-            // 이전에 선택된 상태였다면 체크박스 체크
             if (selectedImages.has(s3Key)) {
                 checkbox.checked = true;
-                galleryItem.classList.add('selected'); // 선택 시 시각적 표시
+                galleryItem.classList.add('selected');
             }
 
             checkbox.addEventListener('change', (e) => {
-                e.stopPropagation(); // 이미지 확대 이벤트 방지
+                e.stopPropagation();
                 const key = e.target.dataset.key;
                 if (e.target.checked) {
                     selectedImages.add(key);
@@ -302,7 +294,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     selectedImages.delete(key);
                     galleryItem.classList.remove('selected');
                 }
-                updateSelectedCount(); // 선택 개수 UI 업데이트
+                updateSelectedCount();
             });
             galleryItem.appendChild(checkbox);
         }
@@ -315,8 +307,6 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!galleryContainer) return;
         try {
             galleryContainer.innerHTML = '<p>☁️ S3에서 이미지를 불러오는 중...</p>';
-            // 기존 선택 상태를 유지하기 위해 selectedImages Set은 clear 하지 않음
-            // 하지만 UI를 다시 그릴 때 selectedImages에 있는 항목은 체크된 상태로 그려야 함
 
             const response = await fetch(`${API_BASE_URL}/images`);
             if (!response.ok) {
@@ -335,16 +325,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 const item = createImageElement(url);
                 galleryContainer.appendChild(item);
             });
-            updateSelectedCount(); // 갤러리 로드 후 선택 개수 초기 업데이트
+            updateSelectedCount();
         } catch (error) {
             galleryContainer.innerHTML = `<p style="color: red;">${error.message}</p>`;
         }
     };
 
-    // --- 4. 모달 및 업로드 관련 기능 ---
-    const openModal = () => modalOverlay.classList.add('show');
-    const closeModal = () => modalOverlay.classList.remove('show');
-
+    // --- 업로드 폼 제출 이벤트 ---
     uploadForm.addEventListener('submit', async (e) => {
         e.preventDefault();
 
@@ -365,7 +352,7 @@ document.addEventListener('DOMContentLoaded', () => {
         try {
             const response = await fetch(`${API_BASE_URL}/upload`, {
                 method: 'POST',
-                headers: { 'Authorization': ADMIN_TOKEN },
+                headers: { 'Authorization': loggedInToken }, // 저장된 토큰 사용
                 body: formData,
             });
 
@@ -414,7 +401,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // ✨ 다중 삭제 버튼 이벤트 리스너
+    // 다중 삭제 버튼 이벤트 리스너
     deleteSelectedBtn.addEventListener('click', deleteSelectedImages);
 
     // --- 페이지 첫 로드 시 갤러리 불러오기 및 관리자 모드 초기화 ---
