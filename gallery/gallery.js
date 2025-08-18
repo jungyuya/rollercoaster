@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- 1. DOM 요소 선택 ---
     const galleryContainer = document.getElementById("gallery-container");
+    const galleryControls = document.querySelector('.gallery-controls'); // <-- 이 줄 추가
     const openModalBtn = document.getElementById('open-upload-modal-btn');
     const modalOverlay = document.getElementById('upload-modal');
     const closeModalBtn = document.getElementById('close-modal-btn');
@@ -97,21 +98,23 @@ document.addEventListener('DOMContentLoaded', () => {
             adminTokenInput.style.display = 'none';
             adminLoginBtn.style.display = 'none';
             adminLogoutBtn.style.display = 'inline-block';
-            openModalBtn.style.display = 'inline-block'; // 업로드 버튼 표시
-            deleteSelectedBtn.style.display = 'inline-block'; // 다중 삭제 버튼 표시
+            openModalBtn.style.display = 'inline-block';
+            // deleteSelectedBtn.style.display = 'inline-block'; // [삭제] 이 줄을 삭제하거나 주석 처리합니다.
+            galleryControls.style.display = 'block';          // [수정] 컨테이너를 보이게 합니다.
         } else {
             // 로그아웃 시 저장된 토큰을 비웁니다.
             loggedInToken = null;
             adminTokenInput.style.display = 'inline-block';
             adminLoginBtn.style.display = 'inline-block';
             adminLogoutBtn.style.display = 'none';
-            openModalBtn.style.display = 'none'; // 업로드 버튼 숨김
-            deleteSelectedBtn.style.display = 'none'; // 다중 삭제 버튼 숨김
+            openModalBtn.style.display = 'none';
+            // deleteSelectedBtn.style.display = 'none'; // [삭제] 이 줄을 삭제하거나 주석 처리합니다.
+            galleryControls.style.display = 'none';     // [수정] 컨테이너를 다시 숨깁니다.
             adminTokenInput.value = '';
-            selectedImages.clear(); // 로그아웃 시 선택된 이미지 초기화
-            updateSelectedCount(); // 선택 개수 UI 업데이트
+            selectedImages.clear();
+            updateSelectedCount();
         }
-        loadGallery(); // 관리자 모드 변경 시 갤러리 새로고침
+        loadGallery();
     };
 
     // --- 관리자 로그인/로그아웃 이벤트 리스너 ---

@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const strings = [
         "안녕하세요, 이준규입니다.😊",
         "클라우드 환경에서 IaC와 CI/CD를 활용하여,",
-        "인프라를 자동화하고 효율적으로 운영하는 데 관심이 많습니다.",
+        "인프라를 자동화 생성에 관심이 많습니다.",
         "국내·해외 IT 뉴스요약 'IT츄르' 제작",
         "심리상담 챗봇 '챗라스틱' 제작",
         "IaC(CDK) 기반 기술 블로그 제작 및 운영",
@@ -32,10 +32,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 this.backSpeed = 30 + Math.floor(Math.random() * 15);
                 this.backDelay = 2500 + Math.floor(Math.random() * 1000);
             } else if (arrayPos === strings.length - 1) {
-                // 마지막(깃허브) 문자열: 타이핑은 평소보다 조금 빠르게, 삭제 전 대기 3초
+                // 마지막(깃허브) 문자열: 타이핑은 평소보다 조금 빠르게, 삭제 전 대기 5초
                 this.typeSpeed = 40 + Math.floor(Math.random() * 12);
                 this.backSpeed = 6 + Math.floor(Math.random() * 6);
-                this.backDelay = 3000; // 여기서 3초 대기
+                this.backDelay = 5000; // 여기서 3초 대기
             } else {
                 // 프로젝트 라인: 빠르게 리듬감 있게
                 this.typeSpeed = 28 + Math.floor(Math.random() * 12);
