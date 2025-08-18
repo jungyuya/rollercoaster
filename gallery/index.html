@@ -5,13 +5,13 @@
     <meta charset="UTF-8">
     <title>갤러리</title>
     <link rel="stylesheet" href="../style.css">
-    
+
     <link rel="icon" type="image/png" href="/favicons/favicon-96x96.png" sizes="96x96" />
     <link rel="icon" type="image/svg+xml" href="/favicons/favicon.svg" />
     <link rel="shortcut icon" href="/favicons/favicon.ico" />
     <link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png" />
     <link rel="manifest" href="/favicons/site.webmanifest" />
-    </head>
+</head>
 
 <body>
 
@@ -33,7 +33,7 @@
         <h2>📸 갤러리</h2>
         <!--✨ 다중 삭제 버튼 컨테이너 추가-->
         <div class="gallery-controls">
-            <button id="delete-selected-btn" class="action-btn delete-btn-multi" style="display: none;">
+            <button id="delete-selected-btn" class="action-btn delete-btn-multi">
                 선택 삭제 (<span id="selected-count">0</span>)
             </button>
         </div>
@@ -64,7 +64,7 @@
             <p class="admin-notice">🔑 관리자로 로그인해야 업로드/삭제 가능합니다.</p>
             <form id="upload-form">
                 <div class="file-input-wrapper">
-                    <input type="file" id="image-input" name="images" accept="image/*" multiple required> 
+                    <input type="file" id="image-input" name="images" accept="image/*" multiple required>
                     <label for="image-input" class="file-input-label">
                         <span>🖼️ 이미지 선택</span>
                     </label>
