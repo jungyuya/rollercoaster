@@ -1,381 +1,198 @@
+document.addEventListener('DOMContentLoaded', function () {
+    const strings = [
+        "안녕하세요, 이준규입니다.😊",
+        "클라우드 환경에서 IaC와 CI/CD를 활용하여,",
+        "인프라를 자동화하고 효율적으로 운영하는 데 관심이 많습니다.",
+        "국내·해외 IT 뉴스요약 'IT츄르' 제작",
+        "심리상담 챗봇 '챗라스틱' 제작",
+        "IaC(CDK) 기반 기술 블로그 제작 및 운영",
+        "EKS 기반 '펫커넥트' 제작",
+        "IaC 및 CI/CD를 통한 인프라 자동화 구성 및 관리",
+        "프로젝트의 자세한 내용은 아래에서 확인해보세요!!😎",
+        '깃허브 → <a href="https://github.com/jungyuya" target="_blank" rel="noopener noreferrer">https://github.com/jungyuya</a>'
+    ];
+
+    const options = {
+        strings: strings,
+        contentType: 'html',   // 중요: HTML 렌더링 허용 (링크 삽입용)
+        typeSpeed: 80,
+        backSpeed: 25,
+        backDelay: 2000,
+        startDelay: 200,
+        loop: true,
+        showCursor: true,
+        cursorChar: '|',
+        smartBackspace: true,
+        fadeOut: false,
+
+        preStringTyped: function(arrayPos) {
+            // 첫 1~2 문장: 천천히 보여주기
+            if (arrayPos <= 1) {
+                this.typeSpeed = 100 + Math.floor(Math.random() * 40); // 느리게
+                this.backSpeed = 30 + Math.floor(Math.random() * 15);
+                this.backDelay = 2500 + Math.floor(Math.random() * 1000);
+            } else if (arrayPos === strings.length - 1) {
+                // 마지막(깃허브) 문자열: 타이핑은 평소보다 조금 빠르게, 삭제 전 대기 3초
+                this.typeSpeed = 40 + Math.floor(Math.random() * 12);
+                this.backSpeed = 6 + Math.floor(Math.random() * 6);
+                this.backDelay = 3000; // 여기서 3초 대기
+            } else {
+                // 프로젝트 라인: 빠르게 리듬감 있게
+                this.typeSpeed = 28 + Math.floor(Math.random() * 12);
+                this.backSpeed = 1 + Math.floor(Math.random() * 8);
+                this.backDelay = 650 + Math.floor(Math.random() * 450);
+            }
+        }
+    };
+
+    const typed = new Typed('#typing-effect', options);
+});
+
+
+
+const API_ENDPOINT = "https://0oliq70yca.execute-api.ap-northeast-2.amazonaws.com/prod/ContactEmail";
+
+// ⚠️ 사용할 배경 이미지 경로들을 배열에 추가 (실제 로컬경로)
+const HERO_BACKGROUND_IMAGES = [
+    'images/background.jpg',
+    'images/background1.jpg',
+    'images/background2.png',
+    'images/background3.webp',
+    'images/background4.jpg',
+    'images/background5.jpg',
+    'images/background4.webp',
+    'images/background7.jpg'
+];
+
 document.addEventListener('DOMContentLoaded', () => {
+    /* ====================================
+     * ✉️ 연락처 폼 제출 기능
+     * ==================================== */
+    const contactForm = document.getElementById('contact-form');
 
-    // --- 1. DOM 요소 선택 ---
-    const galleryContainer = document.getElementById("gallery-container");
-    const openModalBtn = document.getElementById('open-upload-modal-btn');
-    const modalOverlay = document.getElementById('upload-modal');
-    const closeModalBtn = document.getElementById('close-modal-btn');
-    const uploadForm = document.getElementById('upload-form');
-    const imageInput = document.getElementById('image-input');
-    const fileInputLabel = document.querySelector('.file-input-label span');
-    const uploadStatus = document.getElementById('upload-status');
+    if (contactForm) {
+        contactForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
 
-    // 관리자 로그인 UI 요소
-    const adminTokenInput = document.getElementById('admin-token-input');
-    const adminLoginBtn = document.getElementById('admin-login-btn');
-    const adminLogoutBtn = document.getElementById('admin-logout-btn');
+            const name = contactForm.querySelector('#name')?.value.trim();
+            const email = contactForm.querySelector('#email')?.value.trim();
+            const message = contactForm.querySelector('#message')?.value.trim();
 
-    // 커스텀 알림/확인 모달 요소
-    const customAlertModal = document.getElementById('custom-alert-modal');
-    const alertMessage = document.getElementById('alert-message');
-    const alertOkBtn = document.getElementById('alert-ok-btn');
-    const confirmModal = document.getElementById('confirm-modal');
-    const confirmMessage = document.getElementById('confirm-message');
-    const confirmYesBtn = document.getElementById('confirm-yes-btn');
-    const confirmNoBtn = document.getElementById('confirm-no-btn');
-
-    // 다중 삭제 관련 요소
-    const deleteSelectedBtn = document.getElementById('delete-selected-btn');
-    const selectedCountSpan = document.getElementById('selected-count');
-
-    // --- 2. API 및 상태 변수 설정 ---
-    const API_BASE_URL = 'https://73624ycwk6.execute-api.ap-northeast-2.amazonaws.com/default';
-    
-    // ✨ 하드코딩된 ADMIN_TOKEN을 제거하고, 로그인 성공 시 토큰을 저장할 변수를 만듭니다.
-    let loggedInToken = null; 
-    
-    let isAdmin = false; // 관리자 로그인 상태
-    let selectedImages = new Set(); // 선택된 이미지의 S3 키를 저장할 Set
-
-    // --- 커스텀 알림 모달 제어 함수 ---
-    const showAlertModal = (message) => {
-        alertMessage.textContent = message;
-        customAlertModal.classList.add('show');
-    };
-
-    const hideAlertModal = () => {
-        customAlertModal.classList.remove('show');
-    };
-
-    alertOkBtn.addEventListener('click', hideAlertModal);
-    customAlertModal.addEventListener('click', (e) => {
-        if (e.target === customAlertModal) hideAlertModal();
-    });
-
-    // --- 커스텀 확인 모달 제어 함수 ---
-    let confirmCallback = null;
-
-    const showConfirmModal = (message, onConfirm) => {
-        confirmMessage.textContent = message;
-        confirmCallback = onConfirm;
-        confirmModal.classList.add('show');
-    };
-
-    const hideConfirmModal = () => {
-        confirmModal.classList.remove('show');
-        confirmCallback = null;
-    };
-
-    confirmYesBtn.addEventListener('click', () => {
-        if (confirmCallback) {
-            confirmCallback(true);
-        }
-        hideConfirmModal();
-    });
-
-    confirmNoBtn.addEventListener('click', () => {
-        if (confirmCallback) {
-            confirmCallback(false);
-        }
-        hideConfirmModal();
-    });
-
-    confirmModal.addEventListener('click', (e) => {
-        if (e.target === confirmModal) {
-            hideConfirmModal();
-        }
-    });
-
-    // --- 4. 모달 및 업로드 관련 기능 (누락되었던 함수 정의) ---
-    const openModal = () => modalOverlay.classList.add('show');
-    const closeModal = () => modalOverlay.classList.remove('show');
-
-    // --- 관리자 모드 토글 함수 ---
-    const toggleAdminMode = (loggedIn) => {
-        isAdmin = loggedIn;
-        if (isAdmin) {
-            adminTokenInput.style.display = 'none';
-            adminLoginBtn.style.display = 'none';
-            adminLogoutBtn.style.display = 'inline-block';
-            openModalBtn.style.display = 'inline-block'; // 업로드 버튼 표시
-            deleteSelectedBtn.style.display = 'inline-block'; // 다중 삭제 버튼 표시
-        } else {
-            // 로그아웃 시 저장된 토큰을 비웁니다.
-            loggedInToken = null; 
-            adminTokenInput.style.display = 'inline-block';
-            adminLoginBtn.style.display = 'inline-block';
-            adminLogoutBtn.style.display = 'none';
-            openModalBtn.style.display = 'none'; // 업로드 버튼 숨김
-            deleteSelectedBtn.style.display = 'none'; // 다중 삭제 버튼 숨김
-            adminTokenInput.value = '';
-            selectedImages.clear(); // 로그아웃 시 선택된 이미지 초기화
-            updateSelectedCount(); // 선택 개수 UI 업데이트
-        }
-        loadGallery(); // 관리자 모드 변경 시 갤러리 새로고침
-    };
-
-    // --- 관리자 로그인/로그아웃 이벤트 리스너 ---
-    adminLoginBtn.addEventListener('click', () => {
-        const enteredToken = adminTokenInput.value;
-        if (!enteredToken) {
-            showAlertModal('관리자 토큰을 입력해주세요.');
-            return;
-        }
-        // ✨ 클라이언트에서 토큰을 비교하지 않고, 사용자가 입력한 값을 변수에 저장만 합니다.
-        loggedInToken = enteredToken;
-        toggleAdminMode(true);
-        showAlertModal('관리자 모드로 전환합니다. API 요청 시 토큰 유효성이 검사됩니다.');
-    });
-
-    adminLogoutBtn.addEventListener('click', () => {
-        toggleAdminMode(false);
-        showAlertModal('관리자 로그아웃 되었습니다.');
-    });
-
-    // --- 선택된 이미지 개수 업데이트 함수 ---
-    const updateSelectedCount = () => {
-        selectedCountSpan.textContent = selectedImages.size;
-        deleteSelectedBtn.disabled = selectedImages.size === 0;
-        if (selectedImages.size === 0) {
-            deleteSelectedBtn.classList.remove('active');
-        } else {
-            deleteSelectedBtn.classList.add('active');
-        }
-    };
-
-    // --- 이미지 삭제 함수 (개별) ---
-    const deleteImage = async (imageKey) => {
-        showConfirmModal('정말로 이 이미지를 삭제하시겠습니까?', async (confirmed) => {
-            if (!confirmed) return;
-
-            try {
-                const response = await fetch(`${API_BASE_URL}/image/${imageKey}`, {
-                    method: 'DELETE',
-                    headers: { 'Authorization': loggedInToken }, // ✨ 저장된 토큰 사용
-                });
-
-                const result = await response.json();
-                if (!response.ok) {
-                    throw new Error(result.message || '이미지 삭제에 실패했습니다.');
-                }
-
-                showAlertModal(result.message);
-                loadGallery();
-            } catch (error) {
-                showAlertModal(`❌ 이미지 삭제 오류: ${error.message}`);
-            }
-        });
-    };
-
-    // --- 이미지 삭제 함수 (다중) ---
-    const deleteSelectedImages = async () => {
-        if (selectedImages.size === 0) {
-            showAlertModal('삭제할 이미지를 선택해주세요.');
-            return;
-        }
-
-        showConfirmModal(`선택된 이미지 ${selectedImages.size}개를 정말로 삭제하시겠습니까?`, async (confirmed) => {
-            if (!confirmed) return;
-
-            try {
-                const response = await fetch(`${API_BASE_URL}/images/batch`, {
-                    method: 'DELETE',
-                    headers: { 
-                        'Content-Type': 'application/json',
-                        'Authorization': loggedInToken // ✨ 저장된 토큰 사용
-                    },
-                    body: JSON.stringify({ keys: Array.from(selectedImages) }),
-                });
-
-                const result = await response.json();
-                if (!response.ok) {
-                    throw new Error(result.message || '이미지 삭제에 실패했습니다.');
-                }
-
-                showAlertModal(result.message);
-                selectedImages.clear();
-                loadGallery();
-            } catch (error) {
-                showAlertModal(`❌ 이미지 다중 삭제 오류: ${error.message}`);
-            }
-        });
-    };
-
-    // --- 이미지 요소를 생성하고 갤러리에 추가하는 함수 ---
-    const createImageElement = (url) => {
-        const galleryItem = document.createElement("div");
-        galleryItem.className = "gallery-item";
-        galleryItem.dataset.url = url;
-
-        const img = document.createElement("img");
-        img.src = url;
-        img.alt = "S3 갤러리 이미지";
-        img.className = "gallery-img";
-
-        img.addEventListener("click", () => {
-            const overlay = document.createElement("div");
-            overlay.className = "image-overlay";
-            const enlargedImg = document.createElement("img");
-            enlargedImg.src = img.src;
-            enlargedImg.alt = img.alt;
-            overlay.appendChild(enlargedImg);
-            document.body.appendChild(overlay);
-            overlay.addEventListener("click", () => overlay.remove());
-            const handleEsc = (e) => {
-                if (e.key === "Escape") {
-                    overlay.remove();
-                    document.removeEventListener("keydown", handleEsc);
-                }
-            };
-            document.addEventListener("keydown", handleEsc);
-        });
-
-        galleryItem.appendChild(img);
-
-        if (isAdmin) {
-            const deleteBtn = document.createElement("button");
-            deleteBtn.className = "delete-btn";
-            deleteBtn.textContent = '🗑️';
-            const urlParts = url.split('/');
-            const s3Key = urlParts.slice(urlParts.indexOf('gallery') + 1).join('/');
-            deleteBtn.dataset.key = s3Key;
-            
-            deleteBtn.addEventListener('click', (e) => {
-                e.stopPropagation();
-                deleteImage(deleteBtn.dataset.key);
-            });
-            galleryItem.appendChild(deleteBtn);
-
-            const checkbox = document.createElement('input');
-            checkbox.type = 'checkbox';
-            checkbox.className = 'select-checkbox';
-            checkbox.dataset.key = s3Key;
-
-            if (selectedImages.has(s3Key)) {
-                checkbox.checked = true;
-                galleryItem.classList.add('selected');
-            }
-
-            checkbox.addEventListener('change', (e) => {
-                e.stopPropagation();
-                const key = e.target.dataset.key;
-                if (e.target.checked) {
-                    selectedImages.add(key);
-                    galleryItem.classList.add('selected');
-                } else {
-                    selectedImages.delete(key);
-                    galleryItem.classList.remove('selected');
-                }
-                updateSelectedCount();
-            });
-            galleryItem.appendChild(checkbox);
-        }
-
-        return galleryItem;
-    };
-
-    // --- 3. 갤러리 로딩 함수 ---
-    const loadGallery = async () => {
-        if (!galleryContainer) return;
-        try {
-            galleryContainer.innerHTML = '<p>☁️ S3에서 이미지를 불러오는 중...</p>';
-            
-            const response = await fetch(`${API_BASE_URL}/images`);
-            if (!response.ok) {
-                throw new Error('갤러리를 불러오는데 실패했습니다.');
-            }
-            const imageUrls = await response.json();
-
-            galleryContainer.innerHTML = '';
-
-            if (imageUrls.length === 0) {
-                galleryContainer.innerHTML = '<p>아직 업로드된 이미지가 없어요. 첫 번째 이미지를 올려보세요!</p>';
+            if (!name || !email || !message) {
+                alert('모든 필드를 채워주세요!');
                 return;
             }
 
-            imageUrls.forEach(url => {
-                const item = createImageElement(url);
-                galleryContainer.appendChild(item);
-            });
-            updateSelectedCount();
-        } catch (error) {
-            galleryContainer.innerHTML = `<p style="color: red;">${error.message}</p>`;
-        }
+            const submitButton = contactForm.querySelector('button[type="submit"]');
+            if (submitButton) {
+                submitButton.disabled = true;
+                submitButton.textContent = '전송 중...';
+            }
+
+            try {
+                const response = await fetch(API_ENDPOINT, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name, email, message })
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    alert(`${name}님, 메시지가 성공적으로 전송되었습니다!`);
+                    contactForm.reset();
+                } else {
+                    alert(`메시지 전송 실패: ${data.message || '알 수 없는 서버 오류'}`);
+                    console.error('API 응답 오류:', data);
+                }
+            } catch (error) {
+                alert('메시지 전송 중 네트워크 오류가 발생했습니다. 잠시 후 다시 시도해주세요.');
+                console.error('API 호출 중 치명적인 오류 발생:', error);
+            } finally {
+                if (submitButton) {
+                    submitButton.disabled = false;
+                    submitButton.textContent = '보내기';
+                }
+            }
+        });
+    }
+
+    /* ====================================
+     * 🎓 자격증 이미지 모달 기능
+     * ==================================== */
+    const certItems = document.querySelectorAll('.cert-item');
+    const imageCertModal = document.getElementById('imageCertModal');
+    const certModalImage = document.getElementById('certModalImage');
+    const certModalCloseBtn = imageCertModal?.querySelector('.close-btn');
+
+    const certImages = {
+        'linux-master': 'images/linux.jpg',
+        'network-admin': 'images/network.jpg',
+        'aws-saa': 'images/SAA.jpg'
     };
 
-    // --- 업로드 폼 제출 이벤트 ---
-    uploadForm.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        
-        if (!imageInput.files || imageInput.files.length === 0) {
-            uploadStatus.textContent = '⚠️ 이미지를 먼저 선택해주세요.';
-            uploadStatus.style.color = 'orange';
-            return;
-        }
+    // 모달 닫기 로직을 함수로 캡슐화
+    function closeCertModal() {
+        imageCertModal.classList.remove('show');
+        // 모달이 완전히 사라지는 애니메이션 시간(0.3s) 후에 스크롤바 되돌리기
+        // 이 타이밍은 .modal-overlay의 transition 시간과 일치해야 합니다.
+        setTimeout(() => {
+            document.body.style.overflow = '';
+            certModalImage.src = '';
+        }, 300);
+    }
 
-        const formData = new FormData();
-        for (let i = 0; i < imageInput.files.length; i++) {
-            formData.append('images', imageInput.files[i]);
-        }
+    if (certItems.length > 0 && imageCertModal) {
+        certItems.forEach(item => {
+            // 클릭 이벤트만 남김 (모바일/데스크톱 모두 작동)
+            item.addEventListener('click', () => {
+                const certId = item.dataset.certId;
+                const imageUrl = certImages[certId];
 
-        uploadStatus.textContent = `⏳ ${imageInput.files.length}개의 클라우드로 전송 중...`;
-        uploadStatus.style.color = '#3498db';
-
-        try {
-            const response = await fetch(`${API_BASE_URL}/upload`, {
-                method: 'POST',
-                headers: { 'Authorization': loggedInToken }, // ✨ 저장된 토큰 사용
-                body: formData,
+                if (imageUrl) {
+                    certModalImage.src = imageUrl;
+                    imageCertModal.classList.add('show');
+                    document.body.style.overflow = 'hidden'; // 배경 스크롤 방지
+                }
             });
+        });
 
-            const result = await response.json();
-            if (!response.ok) throw new Error(result.message || '업로드에 실패했습니다.');
-
-            uploadStatus.textContent = result.message;
-            uploadStatus.style.color = '#27ae60';
-            
-            uploadForm.reset();
-            fileInputLabel.textContent = '🖼️ 이미지 선택';
-            
-            setTimeout(() => {
-                closeModal();
-                loadGallery();
-                uploadStatus.textContent = '';
-            }, 1500);
-
-        } catch (error) {
-            uploadStatus.textContent = `❌ 오류: ${error.message}`;
-            uploadStatus.style.color = 'red';
+        // 모달 닫기 버튼 클릭 이벤트
+        if (certModalCloseBtn) {
+            certModalCloseBtn.addEventListener('click', closeCertModal);
         }
-    });
-    
-    // --- 5. 이벤트 리스너 연결 ---
-    openModalBtn.addEventListener('click', () => {
-        if (isAdmin) {
-            openModal();
-        } else {
-            showAlertModal('관리자만 이미지를 업로드할 수 있습니다. 로그인해주세요.');
-        }
-    });
-    closeModalBtn.addEventListener('click', closeModal);
-    modalOverlay.addEventListener('click', (e) => {
-        if (e.target === modalOverlay) closeModal();
-    });
-    
-    imageInput.addEventListener('change', () => {
-        const files = imageInput.files;
-        if (files.length > 1) {
-            fileInputLabel.textContent = `✔️ ${files.length}개의 파일 선택됨`;
-        } else if (files.length === 1) {
-            fileInputLabel.textContent = `✔️ ${files[0].name}`;
-        } else {
-            fileInputLabel.textContent = '🖼️ 이미지 선택';
-        }
-    });
 
-    // 다중 삭제 버튼 이벤트 리스너
-    deleteSelectedBtn.addEventListener('click', deleteSelectedImages);
+        // 모달 외부 클릭 시 닫기
+        imageCertModal.addEventListener('click', (e) => {
+            if (e.target === imageCertModal) {
+                closeCertModal();
+            }
+        });
 
-    // --- 페이지 첫 로드 시 갤러리 불러오기 및 관리자 모드 초기화 ---
-    toggleAdminMode(false); // 초기에는 관리자 모드 비활성화
+        // ESC 키로 모달 닫기
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && imageCertModal.classList.contains('show')) {
+                closeCertModal();
+            }
+        });
+    }
+
+    /* ====================================
+     * 🌟 히어로 섹션 배경 이미지 랜덤 변경 기능
+     * ==================================== */
+    const heroSection = document.getElementById('home');
+
+    function setRandomHeroBackground() {
+        if (heroSection && HERO_BACKGROUND_IMAGES.length > 0) {
+            const randomIndex = Math.floor(Math.random() * HERO_BACKGROUND_IMAGES.length);
+            const selectedImage = HERO_BACKGROUND_IMAGES[randomIndex];
+            heroSection.style.backgroundImage = `url("${selectedImage}")`;
+        }
+    }
+
+    // 페이지 로드 시 배경 이미지 설정
+    setRandomHeroBackground();
+
+    //배경 변환 시간 설정
+    setInterval(setRandomHeroBackground, 4000);
 });
