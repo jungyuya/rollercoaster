@@ -2,7 +2,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const strings = [
         "안녕하세요, 이준규입니다.😊",
         "클라우드 환경에서 IaC와 CI/CD를 활용하여,",
-        "인프라를 자동화 생성에 관심이 많습니다.",
+        "인프라 자동화 배포에 관심이 많습니다.",
+        "진행해 온 프로젝트 소개",
         "국내·해외 IT 뉴스요약 'IT츄르' 제작",
         "심리상담 챗봇 '챗라스틱' 제작",
         "IaC(CDK) 기반 기술 블로그 제작 및 운영",
@@ -61,7 +62,9 @@ const HERO_BACKGROUND_IMAGES = [
     'images/background4.jpg',
     'images/background5.jpg',
     'images/background4.webp',
-    'images/background7.jpg'
+    'images/background7.jpg',
+    'images/background8.webp',
+    'images/background9.jpg'
 ];
 
 document.addEventListener('DOMContentLoaded', () => {
