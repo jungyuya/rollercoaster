@@ -18,7 +18,8 @@ document.addEventListener('DOMContentLoaded', () => {
         maxDate: "today",
         disableMobile: true,
         monthSelectorType: 'dropdown', // 월을 드롭다운 메뉴로 변경
-        defaultDate: "2000-01-01"      // 달력을 열었을 때 기본으로 2000년 1월을 표시
+        defaultDate: "2000-01-01",      
+        "locale": "ko" // 달력 언어를 한국어로 설정
     });
 
 
