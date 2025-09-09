@@ -379,7 +379,9 @@ body[data-theme="dark"] .cert-item:hover {
 
 .project-card img {
     width: 100%;
+    height: 280px; /* 👈 [추가] 이미지의 높이를 고정값으로 지정 */
     display: block;
+    object-fit: cover; /* 👈 [추가] 비율을 유지한 채로 영역을 꽉 채우도록 설정 */
 }
 
 .project-card h3 {

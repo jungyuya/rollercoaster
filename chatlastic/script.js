@@ -16,7 +16,9 @@ document.addEventListener('DOMContentLoaded', () => {
         altFormat: "Y년 m월 d일",          // 보기 좋게
         minDate: "1950-01-01",
         maxDate: "today",
-        disableMobile: true
+        disableMobile: true,
+        monthSelectorType: 'dropdown', // 월을 드롭다운 메뉴로 변경
+        defaultDate: "2000-01-01"      // 달력을 열었을 때 기본으로 2000년 1월을 표시
     });
 
 
