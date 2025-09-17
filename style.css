@@ -761,6 +761,7 @@ body[data-theme="dark"] {
 /* 공통 다크모드 설정 */
 body[data-theme="dark"] {
     background-color: #121212;
+    background-color: #1f1e1eff;
     color: #e0e0e0;
 }
 
