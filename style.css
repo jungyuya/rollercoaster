@@ -1840,7 +1840,8 @@ body[data-theme="dark"] ::-webkit-scrollbar-thumb:hover {
 
     .project-image-wrapper {
         flex: none;
-        height: 200px; /* 모바일에서 이미지 높이 고정 */
+        height: 200px; 
+        width: 100%;
     }
 
     .project-content {

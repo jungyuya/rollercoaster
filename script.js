@@ -207,12 +207,35 @@ const projectData = [
     {
         id: "deepdive-blog",
         title: "블로그 프로젝트 : Deep Dive! ",
-        description: "기존 플랫폼을 뛰어넘는 사용자 경험을 제공하는 지능형 블로그입니다. AI가 글의 핵심을 3줄로 요약해주고, 본문을 음성으로 읽어주는 TTS 기능을 통해 언제 어디서나 쉽게 기술 지식을 습득할 수 있습니다.",        image: "images/deepdive-blog-thumbnail.png", 
+        description: "AWS 서버리스 환경에서 TypeScript 기반 Node.js와 Next.js를 활용하여 직접 기획부터 풀스택 개발, CI/CD 파이프라인 구현 및 배포, 운영까지 진행한 기술 블로그입니다. 제작 과정과 다양한 기술 블로그 포스팅을 확인할 수 있습니다. 기존 대형 블로그 플랫폼 그 이상의 기술과 사용 경험을 만들기 위해 노력했습니다.",
+        image: "images/deepdive-blog-thumbnail.png",
         tags: ["AWS", "Next.js", "AWS CDK", "DevOps", "AI Integration"],
         links: [
-            { text: "서비스 바로가기", url: "https://blog.jungyu.store", icon: "🌐" },
+            { text: "블로그 바로가기", url: "https://blog.jungyu.store", icon: "🌐" },
             { text: "상세 소개", url: "https://docs.google.com/document/d/1BnN1a3AGs5fQwx7btCwQ6wtPT2h2ahBMccugiAm-w9I/edit?usp=sharing", icon: "💻" },
             { text: "GitHub", url: "https://github.com/jungyuya/new-blog", icon: "💻" }
+        ]
+    },
+    {
+        id: "realtime-chat",
+        title: "실시간 채팅 서비스",
+        description: "Go와 React로 구축하여 기존 블로그에 iframe으로 통합한 실시간 채팅 위젯입니다. WebSocket과 JWT를 실시간 채팅 환경을 구현했으며, 서비스 규모에 맞춰 GKE아키텍처를 단일 VM 환경으로 재설계하는 '인프라 최적화'를 수행했습니다. Terraform과 Docker Compose를 통해 운영 비용을 '0원'으로 절감하면서도, SSL 자동화 및 배포 파이프라인을 유지하여 지속 가능한 서비스를 완성했습니다.",
+        image: "images/realtime-chat-thumbnail.png", 
+        tags: ["Go", "React", "Terraform", "GCP", "Docker", "WebSocket"],
+        links: [
+            { text: "서비스 방문", url: "https://chat.jungyu.store", icon: "💬" },
+            { text: "GitHub", url: "https://github.com/jungyuya/realtime-chat", icon: "💻" },
+            { text: "개발 과정 보기", url: "https://blog.jungyu.store/posts/14097f75-8709-4749-80e0-22ad11fa3dee", icon: "📝" } 
+        ]
+    },
+    {
+        id: "itchuru",
+        title: "IT츄르",
+        description: "매일 쏟아지는 IT 뉴스를 Gemini API로 요약하여 제공합니다. 국내 및 해외 IT 소식을 정리하고, AI 챗봇을 통해 뉴스 내용을 요약하고 추가 질문을 가능하도록 구성하였습니다.",
+        image: "images/itchuru.webp",
+        tags: ["AWS Lambda", "Serverless", "Gemini API", "Python"],
+        links: [
+            { text: "서비스 방문", url: "https://jungyu.store/itchuru", icon: "🐱" }
         ]
     },
     {
@@ -240,13 +263,14 @@ const projectData = [
     {
         id: "rollercoaster",
         title: "롤러코스터 (RollerCoaster)",
-        description: "개인 포트폴리오용 웹 앱입니다. Windows에서 WSL(Ubuntu) 환경으로 마이그레이션하여 개발되었으며, Vanilla JS로 SPA와 유사한 경험을 제공하도록 최적화했습니다.",
+        description: "개인 포트폴리오용 웹 앱입니다.",
         image: "images/project3.webp",
         tags: ["Vanilla JS", "WSL/Linux", "Responsive Web"],
         links: [
             { text: "GitHub", url: "https://github.com/jungyuya/rollercoaster", icon: "💻" }
         ]
     },
+    /*
     {
         id: "itchuru",
         title: "IT츄르 (IT-Churu)",
@@ -257,6 +281,7 @@ const projectData = [
             { text: "서비스 방문", url: "https://jungyu.store/itchuru", icon: "🐱" }
         ]
     }
+        */
 ];
 
 function renderProjects() {
