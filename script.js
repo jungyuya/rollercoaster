@@ -199,3 +199,80 @@ document.addEventListener('DOMContentLoaded', () => {
     //배경 변환 시간 설정
     setInterval(setRandomHeroBackground, 4000);
 });
+
+/* ====================================
+ * 📂 프로젝트 데이터 및 렌더링 (가로형 레이아웃)
+ * ==================================== */
+const projectData = [
+    {
+        id: "chatlastic",
+        title: "챗라스틱 (Chatlastic)",
+        description: "사용자의 감정을 분석하여 위로와 조언을 건네는 심리상담 AI 챗봇 웹 애플리케이션입니다. OpenAI API를 활용해 자연스러운 대화를 구현했으며, 프롬프트 엔지니어링을 통해 상담가 페르소나를 적용했습니다.",
+        image: "images/project1.png",
+        tags: ["OpenAI API", "HTML/CSS/JS", "Prompt Engineering"],
+        links: [
+            { text: "발표자료", url: "https://docs.google.com/presentation/d/1uBBbbRDRsrr6D8dfGmaN-vBXXFjmXaDP2wu_v7q5KEg/edit?pli=1&slide=id.p1#slide=id.p1", icon: "📄" },
+            { text: "데모 보기", url: "/chatlastic/", icon: "💬" }
+        ]
+    },
+    {
+        id: "petconnect",
+        title: "펫커넥트 (PetConnect)",
+        description: "유기동물 입양을 돕는 플랫폼으로, AWS EKS 기반의 마이크로서비스 아키텍처로 구축되었습니다. ArgoCD를 도입하여 GitOps 기반의 CI/CD 파이프라인을 구축, 배포 자동화를 실현했습니다.",
+        image: "images/project2.png",
+        tags: ["AWS EKS", "ArgoCD", "Jenkins", "Microservices"],
+        links: [
+            { text: "상세 보기", url: "#", icon: "🔍" } // 필요 시 링크 수정
+        ]
+    },
+    {
+        id: "rollercoaster",
+        title: "롤러코스터 (RollerCoaster)",
+        description: "개인 포트폴리오용 웹 앱입니다. Windows에서 WSL(Ubuntu) 환경으로 마이그레이션하여 개발되었으며, Vanilla JS로 SPA와 유사한 경험을 제공하도록 최적화했습니다.",
+        image: "images/project3.webp",
+        tags: ["Vanilla JS", "WSL/Linux", "Responsive Web"],
+        links: [
+            { text: "GitHub", url: "https://github.com/jungyuya/rollercoaster", icon: "💻" }
+        ]
+    },
+    {
+        id: "itchuru",
+        title: "IT츄르 (IT-Churu)",
+        description: "매일 쏟아지는 IT 뉴스를 Gemini API로 요약하여 제공합니다. AWS Lambda와 API Gateway를 활용한 서버리스(Serverless) 아키텍처로 구축하여 운영 비용을 최소화했습니다.",
+        image: "images/itchuru.webp",
+        tags: ["AWS Lambda", "Serverless", "Gemini API", "Python"],
+        links: [
+            { text: "서비스 방문", url: "https://jungyu.store/itchuru", icon: "🐱" }
+        ]
+    }
+];
+
+function renderProjects() {
+    const container = document.getElementById('project-list-container');
+    if (!container) return;
+
+    container.innerHTML = projectData.map(project => `
+        <article class="project-row">
+            <div class="project-image-wrapper">
+                <img src="${project.image}" alt="${project.title}" loading="lazy">
+            </div>
+            <div class="project-content">
+                <h3 class="project-title">${project.title}</h3>
+                <div class="project-tags">
+                    ${project.tags.map(tag => `<span class="tech-tag">${tag}</span>`).join('')}
+                </div>
+                <p class="project-desc">${project.description}</p>
+                <div class="project-links">
+                    ${project.links.map(link => `
+                        <a href="${link.url}" target="_blank" rel="noopener noreferrer" class="btn-small">
+                            ${link.icon} ${link.text}
+                        </a>
+                    `).join('')}
+                </div>
+            </div>
+        </article>
+    `).join('');
+}
+
+// 페이지 로드 시 렌더링 실행
+document.addEventListener('DOMContentLoaded', renderProjects);

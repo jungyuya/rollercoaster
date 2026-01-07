@@ -1716,3 +1716,161 @@ body[data-theme="dark"] ::-webkit-scrollbar-thumb:hover {
 #typing-effect a:hover {
   color: #2275d4ff;              /* hover 시 조금 더 진한 파랑 */
 } 
+
+/* ====================================
+ * 📂 프로젝트 리스트 (가로형 1x4 레이아웃)
+ * ==================================== */
+.project-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem; /* 프로젝트 간 간격 */
+}
+
+.project-row {
+    display: flex;
+    background: var(--white);
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-card);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid rgba(0,0,0,0.05);
+}
+
+.project-row:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-hover);
+}
+
+/* 좌측 이미지 영역 (40%) */
+.project-image-wrapper {
+    flex: 0 0 40%;
+    position: relative;
+    overflow: hidden;
+    min-height: 250px; /* 최소 높이 확보 */
+}
+
+.project-image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* 비율 유지하며 꽉 채우기 */
+    transition: transform 0.5s ease;
+}
+
+.project-row:hover .project-image-wrapper img {
+    transform: scale(1.05); /* 호버 시 이미지 살짝 확대 */
+}
+
+/* 우측 콘텐츠 영역 (60%) */
+.project-content {
+    flex: 1;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.project-title {
+    font-size: 1.4rem;
+    font-weight: bold;
+    margin-bottom: 0.8rem;
+    color: var(--text-dark);
+}
+
+/* 기술 스택 태그 */
+.project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+.tech-tag {
+    font-size: 0.85rem;
+    background-color: var(--background-gray);
+    color: var(--text-medium);
+    padding: 0.3rem 0.8rem;
+    border-radius: 20px;
+    font-weight: 500;
+}
+
+/* 설명 텍스트 */
+.project-desc {
+    font-size: 1rem;
+    color: var(--text-medium);
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+    text-align: left !important; /* 기존 p 태그 센터 정렬 덮어쓰기 */
+}
+
+/* 링크 버튼 그룹 */
+.project-links {
+    display: flex;
+    gap: 10px;
+}
+
+.btn-small {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 8px 16px;
+    background-color: var(--white);
+    border: 1px solid var(--primary-color);
+    color: var(--primary-color);
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: all 0.2s ease;
+}
+
+.btn-small:hover {
+    background-color: var(--primary-color);
+    color: var(--white);
+    box-shadow: var(--shadow-btn);
+}
+
+/* 📱 모바일 반응형 (768px 이하) */
+@media (max-width: 768px) {
+    .project-row {
+        flex-direction: column; /* 세로 배치로 변경 */
+    }
+
+    .project-image-wrapper {
+        flex: none;
+        height: 200px; /* 모바일에서 이미지 높이 고정 */
+    }
+
+    .project-content {
+        padding: 1.5rem;
+    }
+}
+
+/* 🌙 다크 모드 지원 */
+body[data-theme="dark"] .project-row {
+    background-color: #2a2a2a; /* 카드 배경 어둡게 */
+    border: 1px solid #444;
+}
+
+body[data-theme="dark"] .project-title {
+    color: var(--white);
+}
+
+body[data-theme="dark"] .tech-tag {
+    background-color: #444;
+    color: #ccc;
+}
+
+body[data-theme="dark"] .project-desc {
+    color: #bbb;
+}
+
+body[data-theme="dark"] .btn-small {
+    background-color: transparent;
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+}
+
+body[data-theme="dark"] .btn-small:hover {
+    background-color: var(--primary-color);
+    color: #121212; /* 텍스트 검정 */
+}
