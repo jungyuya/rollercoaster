@@ -26,7 +26,7 @@ document.addEventListener('DOMContentLoaded', function () {
         smartBackspace: true,
         fadeOut: false,
 
-        preStringTyped: function(arrayPos) {
+        preStringTyped: function (arrayPos) {
             // 첫 1~2 문장: 천천히 보여주기
             if (arrayPos <= 1) {
                 this.typeSpeed = 100 + Math.floor(Math.random() * 40); // 느리게
@@ -205,6 +205,17 @@ document.addEventListener('DOMContentLoaded', () => {
  * ==================================== */
 const projectData = [
     {
+        id: "deepdive-blog",
+        title: "블로그 프로젝트 : Deep Dive! ",
+        description: "기존 플랫폼을 뛰어넘는 사용자 경험을 제공하는 지능형 블로그입니다. AI가 글의 핵심을 3줄로 요약해주고, 본문을 음성으로 읽어주는 TTS 기능을 통해 언제 어디서나 쉽게 기술 지식을 습득할 수 있습니다.",        image: "images/deepdive-blog-thumbnail.png", 
+        tags: ["AWS", "Next.js", "AWS CDK", "DevOps", "AI Integration"],
+        links: [
+            { text: "서비스 바로가기", url: "https://blog.jungyu.store", icon: "🌐" },
+            { text: "상세 소개", url: "https://docs.google.com/document/d/1BnN1a3AGs5fQwx7btCwQ6wtPT2h2ahBMccugiAm-w9I/edit?usp=sharing", icon: "💻" },
+            { text: "GitHub", url: "https://github.com/jungyuya/new-blog", icon: "💻" }
+        ]
+    },
+    {
         id: "chatlastic",
         title: "챗라스틱 (Chatlastic)",
         description: "사용자의 감정을 분석하여 위로와 조언을 건네는 심리상담 AI 챗봇 웹 애플리케이션입니다. OpenAI API를 활용해 자연스러운 대화를 구현했으며, 프롬프트 엔지니어링을 통해 상담가 페르소나를 적용했습니다.",
@@ -215,6 +226,7 @@ const projectData = [
             { text: "데모 보기", url: "/chatlastic/", icon: "💬" }
         ]
     },
+    /*
     {
         id: "petconnect",
         title: "펫커넥트 (PetConnect)",
@@ -224,7 +236,7 @@ const projectData = [
         links: [
             { text: "상세 보기", url: "#", icon: "🔍" } // 필요 시 링크 수정
         ]
-    },
+    }, */
     {
         id: "rollercoaster",
         title: "롤러코스터 (RollerCoaster)",

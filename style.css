@@ -1723,7 +1723,7 @@ body[data-theme="dark"] ::-webkit-scrollbar-thumb:hover {
 .project-list {
     display: flex;
     flex-direction: column;
-    gap: 2rem; /* 프로젝트 간 간격 */
+    gap: 2rem;
 }
 
 .project-row {
@@ -1732,35 +1732,38 @@ body[data-theme="dark"] ::-webkit-scrollbar-thumb:hover {
     border-radius: var(--border-radius-lg);
     box-shadow: var(--shadow-card);
     overflow: hidden;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
     border: 1px solid rgba(0,0,0,0.05);
+    transition: box-shadow 0.3s ease, border-color 0.3s ease; 
 }
 
 .project-row:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--shadow-hover);
+    transform: translateY(-2px);  
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+    border-color: rgba(0,0,0,0.1);
 }
 
-/* 좌측 이미지 영역 (40%) */
+/* 좌측 이미지 영역 */
 .project-image-wrapper {
-    flex: 0 0 40%;
+    flex: 0 0 28%;
     position: relative;
     overflow: hidden;
-    min-height: 250px; /* 최소 높이 확보 */
+    min-height: 220px;
+    border-right: 1px solid rgba(0,0,0,0.05); /* 이미지와 내용 사이 구분선 추가 */
 }
 
 .project-image-wrapper img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* 비율 유지하며 꽉 채우기 */
-    transition: transform 0.5s ease;
+    object-fit: cover;
+    /* ✨ [수정] 이미지 확대 효과 제거 또는 아주 미세하게 변경 */
+    transition: transform 0.3s ease; 
 }
 
 .project-row:hover .project-image-wrapper img {
-    transform: scale(1.05); /* 호버 시 이미지 살짝 확대 */
+    transform: scale(1.02); /* 호버 시 이미지 살짝 확대 */
 }
 
-/* 우측 콘텐츠 영역 (60%) */
+/* 우측 콘텐츠 영역 */
 .project-content {
     flex: 1;
     padding: 2rem;
