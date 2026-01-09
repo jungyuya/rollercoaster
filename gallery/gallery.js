@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- 1. DOM 요소 선택 ---
     const galleryContainer = document.getElementById("gallery-container");
-    const galleryControls = document.querySelector('.gallery-controls'); // <-- 이 줄 추가
+    const galleryControls = document.querySelector('.gallery-controls'); 
     const openModalBtn = document.getElementById('open-upload-modal-btn');
     const modalOverlay = document.getElementById('upload-modal');
     const closeModalBtn = document.getElementById('close-modal-btn');
@@ -99,8 +99,7 @@ document.addEventListener('DOMContentLoaded', () => {
             adminLoginBtn.style.display = 'none';
             adminLogoutBtn.style.display = 'inline-block';
             openModalBtn.style.display = 'inline-block';
-            // deleteSelectedBtn.style.display = 'inline-block'; // [삭제] 이 줄을 삭제하거나 주석 처리합니다.
-            galleryControls.style.display = 'block';          // [수정] 컨테이너를 보이게 합니다.
+            galleryControls.style.display = 'block';          
         } else {
             // 로그아웃 시 저장된 토큰을 비웁니다.
             loggedInToken = null;
@@ -108,8 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
             adminLoginBtn.style.display = 'inline-block';
             adminLogoutBtn.style.display = 'none';
             openModalBtn.style.display = 'none';
-            // deleteSelectedBtn.style.display = 'none'; // [삭제] 이 줄을 삭제하거나 주석 처리합니다.
-            galleryControls.style.display = 'none';     // [수정] 컨테이너를 다시 숨깁니다.
+            galleryControls.style.display = 'none';     
             adminTokenInput.value = '';
             selectedImages.clear();
             updateSelectedCount();
