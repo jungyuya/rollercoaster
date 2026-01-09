@@ -38,7 +38,7 @@
                 <li><a href="#about">👤소개</a></li>
                 <li><a href="#projects">💼프로젝트</a></li>
                 <!--<li><a href="#skills">💻기술 스택</a></li> -->
-                <li><a href="#contact">📞연락처</a></li>
+                <!-- <li><a href="#contact">📞연락처</a></li>  -->
                 <li><a href="https://blog.jungyu.store" target="_blank" rel="noopener noreferrer">✍️블로그</a></li>
                 <li><a href="/gallery/">📸갤러리</a></li>
                 <li><a href="/chatlastic/">💬챗라스틱</a></li>
@@ -66,28 +66,50 @@
 
     </section>
 
+    <!-- 교육 사항 (수정 제안) -->
     <section id="education" class="section education">
         <h2>교육 사항</h2>
-        <p>
-            솔데스크 - Ansible 자동화로 구현한 아마존 AWS 클라우드 환경 DevOps<br>
-            [KOSA] NIPA-AWS Developer 부트캠프
-        </p>
+        <div class="resume-list">
+            <div class="resume-item">
+                <span class="resume-date">2023.08 - 2024.02</span>
+                <div class="resume-content">
+                    <h3>KOSA NIPA-AWS Developer 부트캠프</h3>
+                    <p></p>
+                </div>
+            </div>
+            <div class="resume-item">
+                <span class="resume-date">2024.08 - 2024.10</span>
+                <div class="resume-content">
+                    <h3>솔데스크 DevOps 과정</h3>
+                    <p></p>
+                </div>
+            </div>
+        </div>
     </section>
 
     <section id="certification" class="section certification">
         <h2>자격증</h2>
-        <div class="certification-list">
-            <p><span class="cert-item" data-cert-id="linux-master">리눅스마스터 2급</span></p>
-            <p><span class="cert-item" data-cert-id="network-admin">네트워크관리사 2급</span></p>
-            <p><span class="cert-item" data-cert-id="aws-saa">AWS Certified Solutions Architect - Associate</span></p>
-        </div>
+        <ul class="cert-list-styled">
+            <li class="cert-item" data-cert-id="aws-saa">
+                <span class="cert-name">AWS Certified Solutions Architect - Associate</span>
+                <span class="cert-issuer">Amazon Web Services</span>
+            </li>
+            <li class="cert-item" data-cert-id="linux-master">
+                <span class="cert-name">리눅스마스터 2급</span>
+                <span class="cert-issuer">KAIT</span>
+            </li>
+            <li class="cert-item" data-cert-id="network-admin">
+                <span class="cert-name">네트워크관리사 2급</span>
+                <span class="cert-issuer">ICQA</span>
+            </li>
+        </ul>
     </section>
 
-<section id="projects" class="section projects">
-    <h2>프로젝트</h2>
-    <!-- js, css로 관리 -->
-    <div id="project-list-container" class="project-list"></div>
-</section>
+    <section id="projects" class="section projects">
+        <h2>프로젝트</h2>
+        <!-- js, css로 관리 -->
+        <div id="project-list-container" class="project-list"></div>
+    </section>
 
     <section id="skills" class="section skills">
         <h2>기술 스택</h2>
