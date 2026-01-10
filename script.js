@@ -184,12 +184,12 @@ const projectData = [
         title: "IT츄르",
         description: "매일 쏟아지는 IT 뉴스를 Gemini API로 요약하여 제공합니다. 국내 및 해외 IT 소식을 정리하고, AI 챗봇을 통해 뉴스 내용을 요약하고 추가 질문을 가능하도록 구성하였습니다.",
         image: "images/itchuru.webp",
-        tags: ["AWS Lambda", "Serverless", "Gemini API", "Python"],
-        github: "https://github.com/jungyuya/realtime-chat",
+        tags: ["AWS Lambda", "Gemini API", "Python"],
+        github: "https://github.com/jungyuya/itchuru",
         period: "2025.09 ~ 2025.10",
         team: "개인 프로젝트",
         links: [
-            { text: "서비스 방문", url: "https://jungyu.store/itchuru", icon: "🐱" }
+            { text: "서비스 방문", url: "https://jungyu.store/itchuru", icon: "📰" }
         ]
     },
     {
@@ -229,18 +229,6 @@ const projectData = [
         links: [
         ]
     },
-    /*
-    {
-        id: "itchuru",
-        title: "IT츄르 (IT-Churu)",
-        description: "매일 쏟아지는 IT 뉴스를 Gemini API로 요약하여 제공합니다. AWS Lambda와 API Gateway를 활용한 서버리스(Serverless) 아키텍처로 구축하여 운영 비용을 최소화했습니다.",
-        image: "images/itchuru.webp",
-        tags: ["AWS Lambda", "Serverless", "Gemini API", "Python"],
-        links: [
-            { text: "서비스 방문", url: "https://jungyu.store/itchuru", icon: "🐱" }
-        ]
-    }
-        */
 ];
 
 function renderProjects() {

@@ -199,10 +199,10 @@ body {
 .glass-profile-card {
     position: relative;
     z-index: 2;
-    background: rgba(255, 255, 255, 0.4);
+    background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 16px;
     padding: 2.5rem 3rem;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
@@ -255,11 +255,12 @@ body {
 }
 
 .profile-bio {
-    font-size: 1rem;
-    color: rgba(255, 255, 255, 0.85);
+    font-size: 1rem;    
+    color: rgba(255, 255, 255, 0.85) !important;   
     margin-bottom: 1.5rem;
     line-height: 1.6;
     font-weight: 400;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
 }
 
 /* 액션 버튼들 */
