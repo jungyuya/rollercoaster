@@ -1,56 +1,3 @@
-document.addEventListener('DOMContentLoaded', function () {
-    const strings = [
-        "안녕하세요, 이준규입니다.😊",
-        "클라우드 환경에서 IaC와 CI/CD를 활용하여,",
-        "인프라 자동화 배포에 관심이 많습니다.",
-        "진행해 온 프로젝트 소개",
-        "국내·해외 IT 뉴스요약 'IT츄르' 제작",
-        "심리상담 챗봇 '챗라스틱' 제작",
-        "IaC(CDK) 기반 기술 블로그 제작 및 운영",
-        "EKS 기반 '펫커넥트' 제작",
-        "IaC 및 CI/CD를 통한 인프라 자동화 구성 및 관리",
-        "프로젝트의 자세한 내용은 아래에서 확인해보세요!!😎",
-        '깃허브 → <a href="https://github.com/jungyuya" target="_blank" rel="noopener noreferrer">https://github.com/jungyuya</a>'
-    ];
-
-    const options = {
-        strings: strings,
-        contentType: 'html',   // 중요: HTML 렌더링 허용 (링크 삽입용)
-        typeSpeed: 80,
-        backSpeed: 25,
-        backDelay: 2000,
-        startDelay: 200,
-        loop: true,
-        showCursor: true,
-        cursorChar: '|',
-        smartBackspace: true,
-        fadeOut: false,
-
-        preStringTyped: function (arrayPos) {
-            // 첫 1~2 문장: 천천히 보여주기
-            if (arrayPos <= 1) {
-                this.typeSpeed = 100 + Math.floor(Math.random() * 40); // 느리게
-                this.backSpeed = 30 + Math.floor(Math.random() * 15);
-                this.backDelay = 2500 + Math.floor(Math.random() * 1000);
-            } else if (arrayPos === strings.length - 1) {
-                // 마지막(깃허브) 문자열: 타이핑은 평소보다 조금 빠르게, 삭제 전 대기 5초
-                this.typeSpeed = 40 + Math.floor(Math.random() * 12);
-                this.backSpeed = 6 + Math.floor(Math.random() * 6);
-                this.backDelay = 5000; // 여기서 3초 대기
-            } else {
-                // 프로젝트 라인: 빠르게 리듬감 있게
-                this.typeSpeed = 28 + Math.floor(Math.random() * 12);
-                this.backSpeed = 1 + Math.floor(Math.random() * 8);
-                this.backDelay = 650 + Math.floor(Math.random() * 450);
-            }
-        }
-    };
-
-    const typed = new Typed('#typing-effect', options);
-});
-
-
-
 const API_ENDPOINT = "https://0oliq70yca.execute-api.ap-northeast-2.amazonaws.com/prod/ContactEmail";
 
 // ⚠️ 사용할 배경 이미지 경로들을 배열에 추가 (실제 로컬경로)
@@ -71,7 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
     /* ====================================
      * ✉️ 연락처 폼 제출 기능
      * ==================================== */
-    const contactForm = document.getElementById('contact-form');
+    /* const contactForm = document.getElementById('contact-form');
 
     if (contactForm) {
         contactForm.addEventListener('submit', async (e) => {
@@ -118,7 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
         });
-    }
+    } */
 
     /* ====================================
      * 🎓 자격증 이미지 모달 기능
@@ -209,7 +156,7 @@ const projectData = [
         title: "블로그 프로젝트 : Deep Dive! ",
         description: "AWS 서버리스 환경에서 TypeScript 기반 Node.js와 Next.js를 활용하여 직접 기획부터 풀스택 개발, CI/CD 파이프라인 구현 및 배포, 운영까지 진행한 기술 블로그입니다. 제작 과정과 다양한 기술 블로그 포스팅을 확인할 수 있습니다. 기존 대형 블로그 플랫폼 그 이상의 기술과 사용 경험을 만들기 위해 노력했습니다.",
         image: "images/deepdive-blog-thumbnail.png",
-        tags: ["AWS", "Next.js", "Docker", "AWS CDK", "CI/CD", "AI Integration"],
+        tags: ["Node.js", "Next.js", "Docker", "AWS CDK", "CI/CD", "AI Integration"],
         github: "https://github.com/jungyuya/new-blog",
         period: "2025.08 ~ 2026.01",
         team: "개인 프로젝트",
@@ -221,7 +168,7 @@ const projectData = [
     {
         id: "realtime-chat",
         title: "실시간 채팅 서비스",
-        description: "Go와 React로 구축하여 기존 블로그에 iframe으로 통합한 실시간 채팅 위젯입니다. WebSocket과 JWT를 실시간 채팅 환경을 구현했으며, 서비스 규모에 맞춰 GKE아키텍처를 단일 VM 환경으로 재설계하는 '인프라 최적화'를 수행했습니다. Terraform과 Docker Compose를 통해 운영 비용을 '0원'으로 유지하면서도, SSL 자동화 및 배포 파이프라인을 유지하여 지속 가능한 서비스를 완성했습니다.",
+        description: "Go와 React로 구축하여 기존 블로그에 iframe으로 통합한 실시간 채팅 위젯입니다. WebSocket과 JWT를 실시간 채팅 환경을 구현했으며, 서비스 규모에 맞춰 GKE아키텍처를 단일 VM 환경으로 재설계하는 인프라 최적화를 수행했습니다. Terraform과 Docker Compose를 통해 프리티어로 유지하면서도, SSL 자동화 및 배포 파이프라인을 유지하여 지속 가능한 서비스를 완성했습니다.",
         image: "images/realtime-chat-thumbnail.png",
         tags: ["Go", "React", "Terraform", "GCP", "Docker", "WebSocket"],
         github: "https://github.com/jungyuya/realtime-chat",
@@ -250,9 +197,9 @@ const projectData = [
         title: "챗라스틱 (Chatlastic)",
         description: "사용자의 감정을 분석하여 위로와 조언을 건네는 심리상담 AI 챗봇 웹 애플리케이션입니다. OpenAI API를 활용해 자연스러운 대화를 구현했으며, 프롬프트 엔지니어링을 통해 상담가 페르소나를 적용했습니다.",
         image: "images/project1.png",
-        tags: ["OpenAI API", "HTML/CSS/JS", "Prompt Engineering"],
+        tags: ["OpenAI API", "HTML/CSS/JS", "Node.js", "CI/CD", "Serverless"],
         github: "https://github.com/jungyuya/chatlastic",
-        period: "2023.11 ~ 2024.02<br>2025.06 ~ 2025.07 (리팩토링)",
+        period: "2023.11 ~ 2024.02",
         team: "팀 프로젝트 (3인)",
         links: [
             { text: "서비스 방문", url: "/chatlastic/", icon: "💬" },
