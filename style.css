@@ -1351,3 +1351,80 @@ body[data-theme="dark"] .file-input-label {
     background-color: #333;
     color: var(--white);
 }
+
+/* ====================================
+ * 📸 갤러리 추가 스타일 (이미지 확대 & 다크모드 보강)
+ * ==================================== */
+
+/* 1. 이미지 확대 모달 */
+.image-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9); /* 배경을 아주 어둡게 */
+    z-index: 3000; /* 다른 요소보다 위에 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: zoom-out;
+    animation: fadeIn 0.3s forwards;
+}
+
+.image-overlay img {
+    max-width: 90%;
+    max-height: 90%;
+    border-radius: 8px;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+    object-fit: contain;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* 2. 갤러리 다크모드 디테일 보강 */
+body[data-theme="dark"] .gallery-grid {
+    background: #1c1c1c; /* 섹션 박스와 동일한 배경색 */
+    border: 1px solid #333;
+}
+
+body[data-theme="dark"] .gallery-item {
+    background: #2a2a2a;
+    border-color: #444;
+}
+
+body[data-theme="dark"] .gallery-controls {
+    color: var(--text-dark);
+}
+
+/* 관리자 로그인 박스 다크모드 */
+body[data-theme="dark"] .admin-login-container {
+    background-color: #1c1c1c;
+    border: 1px solid #333;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+}
+
+body[data-theme="dark"] .admin-login-container input {
+    background-color: #2a2a2a;
+    border-color: #444;
+    color: #fff;
+}
+
+/* 업로드 모달 다크모드 */
+body[data-theme="dark"] .modal-content {
+    background-color: #1c1c1c;
+    color: #e0e0e0;
+}
+
+body[data-theme="dark"] .file-input-label {
+    background-color: #2a2a2a;
+    color: #ccc;
+    border: 1px solid #444;
+}
+
+body[data-theme="dark"] .file-input-label:hover {
+    background-color: #333;
+}

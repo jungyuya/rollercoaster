@@ -3,9 +3,11 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>갤러리</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- 뷰포트 메타태그 추가 -->
+    <title>갤러리 | RollerCoaster</title>
     <link rel="stylesheet" href="../style.css">
 
+    <!-- 파비콘 -->
     <link rel="icon" type="image/png" href="/favicons/favicon-96x96.png" sizes="96x96" />
     <link rel="icon" type="image/svg+xml" href="/favicons/favicon.svg" />
     <link rel="shortcut icon" href="/favicons/favicon.ico" />
@@ -17,10 +19,15 @@
 
     <header>
         <nav class="navbar">
-            <a href="index.html" class="nav-logo">🎢 RollerCoaster</a>
+            <a href="../index.html" class="nav-logo"> <!-- 경로 수정: ../index.html -->
+                <img src="../images/homelogo.png" alt="Portfolio" class="logo-image" />
+                <span class="logo-text">RollerCoaster</span>
+            </a>
             <ul class="nav-menu">
-                <li><a href="/">🏠홈</a></li>
-                <li><a href="/gallery/">📸갤러리</a></li>
+                <li><a href="../index.html#about">👤소개</a></li>
+                <li><a href="../index.html#projects">💼프로젝트</a></li>
+                <li><a href="https://blog.jungyu.store" target="_blank">✍️블로그</a></li>
+                <li><a href="index.html">📸갤러리</a></li>
             </ul>
 
             <div class="hamburger">
@@ -31,15 +38,19 @@
 
     <section class="section gallery">
         <h2>📸 갤러리</h2>
-        <!--✨ 다중 삭제 버튼 컨테이너 추가-->
+        
+        <!-- 다중 삭제 버튼 -->
         <div class="gallery-controls">
             <button id="delete-selected-btn" class="action-btn delete-btn-multi">
                 선택 삭제 (<span id="selected-count">0</span>)
             </button>
         </div>
+
+        <!-- 갤러리 그리드 -->
         <div class="gallery-grid" id="gallery-container"></div>
     </section>
 
+    <!-- 다크모드 토글 -->
     <div class="dark-toggle-container">
         <label class="switch">
             <input type="checkbox" id="dark-mode-toggle" aria-label="다크 모드 토글">
@@ -54,7 +65,8 @@
         <button id="admin-logout-btn" style="display: none;">관리자 로그아웃</button>
     </div>
 
-    <button id="open-upload-modal-btn" class="upload-fab" title="새 이미지 업로드">+</button>
+    <!-- 업로드 버튼 -->
+    <button id="open-upload-modal-btn" class="upload-fab" title="새 이미지 업로드" style="display: none;">+</button>
 
     <!-- 업로드 모달 -->
     <div id="upload-modal" class="modal-overlay">
@@ -75,7 +87,7 @@
         </div>
     </div>
 
-    <!-- 커스텀 알림/확인 모달 -->
+    <!-- 알림 모달 -->
     <div id="custom-alert-modal" class="modal-overlay">
         <div class="modal-content alert-content">
             <p id="alert-message"></p>
@@ -83,6 +95,7 @@
         </div>
     </div>
 
+    <!-- 확인 모달 -->
     <div id="confirm-modal" class="modal-overlay">
         <div class="modal-content confirm-content">
             <p id="confirm-message"></p>
@@ -93,10 +106,10 @@
         </div>
     </div>
 
+    <!-- 스크립트 로드 순서 중요 -->
     <script src="gallery.js"></script>
-    <script src="../common.js"></script>
-    <script src="../script.js"></script>
-    <script src="https://unpkg.com/typed.js@2.0.16/dist/typed.umd.js"></script>
+    <script src="../common.js"></script> 
+    <!-- script.js는 메인 페이지용이므로 제거함 -->
 </body>
 
 </html>

@@ -170,7 +170,7 @@ const projectData = [
         title: "실시간 채팅 서비스",
         description: "Go와 React로 구축하여 기존 블로그에 iframe으로 통합한 실시간 채팅 위젯입니다. WebSocket과 JWT를 실시간 채팅 환경을 구현했으며, 서비스 규모에 맞춰 GKE아키텍처를 단일 VM 환경으로 재설계하는 인프라 최적화를 수행했습니다. Terraform과 Docker Compose를 통해 프리티어로 유지하면서도, SSL 자동화 및 배포 파이프라인을 유지하여 지속 가능한 서비스를 완성했습니다.",
         image: "images/realtime-chat-thumbnail.png",
-        tags: ["Go", "React", "Terraform", "GCP", "Docker", "WebSocket"],
+        tags: ["Go", "React", "Terraform", "GCP", "ArgoCD", "Docker", "WebSocket"],
         github: "https://github.com/jungyuya/realtime-chat",
         period: "2025.11 ~ 2025.12",
         team: "개인 프로젝트",
@@ -262,7 +262,7 @@ function renderProjects() {
 
             <!-- 우측 컬럼 -->
             <div class="project-content">
-                <!-- ✨ [변경] 헤더 영역: 제목 + GitHub 아이콘 -->
+                <!--  헤더 영역: 제목 + GitHub 아이콘 -->
                 <div class="project-header">
                     <h3 class="project-title">${project.title}</h3>
                     
