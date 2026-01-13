@@ -63,9 +63,9 @@
                     <h1 class="profile-name">이준규</h1>
                     <span class="profile-role">Cloud Engineer</span>
                     <p class="profile-bio">
-                       <!-- AWS 인프라 자동화와 CI/CD 파이프라인 구축에 집중하며,<br>
-                        안정적이고 효율적인 클라우드 환경을 설계하는 엔지니어입니다.-->
-                        E-mail : jungyuya@gmail.com
+                        AWS 인프라 자동화와 CI/CD 파이프라인 구축에 집중하며,<br>
+                        안정적이고 효율적인 클라우드 환경을 설계하는 엔지니어입니다.
+
                     </p>
 
                     <div class="profile-actions">
@@ -151,17 +151,6 @@
 
     </section>
 
-    <!--
-    <section id="contact" class="section contact">
-        <h2>연락하기</h2>
-        <form id="contact-form">
-            <input type="text" id="name" placeholder="이름" required />
-            <input type="email" id="email" placeholder="이메일" required />
-            <textarea id="message" placeholder="메시지" rows="4" required></textarea>
-            <button type="submit" class="btn">보내기</button>
-        </form>
-    </section> -->
-
     <footer>
         &copy; 2025 ~ 2026 LEE JUNGYU Portfolio Web. All rights reserved.
     </footer>
@@ -173,10 +162,7 @@
         </label>
     </div>
 
-    <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
-    <script src="common.js"></script>
-    <script src="script.js"></script>
-
+    <!-- 1. 자격증 모달 -->
     <div id="imageCertModal" class="modal-overlay">
         <div class="modal-content">
             <button class="close-btn">&times;</button>
@@ -184,6 +170,33 @@
                 style="max-width: 100%; height: auto; border-radius: 8px;">
         </div>
     </div>
+
+    <!-- 2. 아키텍처 슬라이더 모달 -->
+    <div id="arch-modal" class="modal-overlay">
+        <div class="modal-content arch-modal-content">
+            <button class="close-btn" id="close-arch-modal">&times;</button>
+
+            <h3 id="arch-modal-title">System Architectures</h3>
+
+            <div class="arch-slider-container">
+                <button class="slider-btn prev" id="arch-prev-btn">&#10094;</button>
+
+                <div class="arch-image-wrapper" id="arch-wrapper">
+                    <img id="arch-image" src="" alt="Architecture Diagram">
+
+                    <div class="slider-counter" id="arch-counter">1 / 1</div>
+                </div>
+
+                <button class="slider-btn next" id="arch-next-btn">&#10095;</button>
+            </div>
+
+            <p class="arch-description"></p>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+    <script src="common.js"></script>
+    <script src="script.js"></script>
 
 </body>
 

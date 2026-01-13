@@ -16,54 +16,14 @@ const HERO_BACKGROUND_IMAGES = [
 
 document.addEventListener('DOMContentLoaded', () => {
     /* ====================================
-     * ✉️ 연락처 폼 제출 기능
+     * ✉️ 연락처 폼 제출 기능 (현재 비활성화됨)
      * ==================================== */
     /* const contactForm = document.getElementById('contact-form');
 
     if (contactForm) {
         contactForm.addEventListener('submit', async (e) => {
             e.preventDefault();
-
-            const name = contactForm.querySelector('#name')?.value.trim();
-            const email = contactForm.querySelector('#email')?.value.trim();
-            const message = contactForm.querySelector('#message')?.value.trim();
-
-            if (!name || !email || !message) {
-                alert('모든 필드를 채워주세요!');
-                return;
-            }
-
-            const submitButton = contactForm.querySelector('button[type="submit"]');
-            if (submitButton) {
-                submitButton.disabled = true;
-                submitButton.textContent = '전송 중...';
-            }
-
-            try {
-                const response = await fetch(API_ENDPOINT, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ name, email, message })
-                });
-
-                const data = await response.json();
-
-                if (response.ok) {
-                    alert(`${name}님, 메시지가 성공적으로 전송되었습니다!`);
-                    contactForm.reset();
-                } else {
-                    alert(`메시지 전송 실패: ${data.message || '알 수 없는 서버 오류'}`);
-                    console.error('API 응답 오류:', data);
-                }
-            } catch (error) {
-                alert('메시지 전송 중 네트워크 오류가 발생했습니다. 잠시 후 다시 시도해주세요.');
-                console.error('API 호출 중 치명적인 오류 발생:', error);
-            } finally {
-                if (submitButton) {
-                    submitButton.disabled = false;
-                    submitButton.textContent = '보내기';
-                }
-            }
+            // ... (생략된 폼 로직)
         });
     } */
 
@@ -83,13 +43,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 모달 닫기 로직을 함수로 캡슐화
     function closeCertModal() {
-        imageCertModal.classList.remove('show');
-        // 모달이 완전히 사라지는 애니메이션 시간(0.3s) 후에 스크롤바 되돌리기
-        // 이 타이밍은 .modal-overlay의 transition 시간과 일치해야 합니다.
-        setTimeout(() => {
-            document.body.style.overflow = '';
-            certModalImage.src = '';
-        }, 300);
+        if (imageCertModal) {
+            imageCertModal.classList.remove('show');
+            // 모달이 완전히 사라지는 애니메이션 시간(0.3s) 후에 스크롤바 되돌리기
+            setTimeout(() => {
+                document.body.style.overflow = '';
+                if (certModalImage) certModalImage.src = '';
+            }, 300);
+        }
     }
 
     if (certItems.length > 0 && imageCertModal) {
@@ -99,7 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const certId = item.dataset.certId;
                 const imageUrl = certImages[certId];
 
-                if (imageUrl) {
+                if (imageUrl && certModalImage) {
                     certModalImage.src = imageUrl;
                     imageCertModal.classList.add('show');
                     document.body.style.overflow = 'hidden'; // 배경 스크롤 방지
@@ -144,7 +105,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setRandomHeroBackground();
 
     //배경 변환 시간 설정
-    setInterval(setRandomHeroBackground, 4000);
+    setInterval(setRandomHeroBackground, 5000);
 });
 
 /* ====================================
@@ -160,6 +121,13 @@ const projectData = [
         github: "https://github.com/jungyuya/new-blog",
         period: "2025.08 ~ 2026.01",
         team: "개인 프로젝트",
+        architectures: [
+            "architectures/blog_arch_1.jpg", // 전체 아키텍처
+            "architectures/blog_arch_2.png", // CI/CD 파이프라인
+            "architectures/blog_arch_3.jpg", // Polly TTS 음성 파이프라인
+            "architectures/blog_arch_4.jpg", // Open Search 파이프라인
+            "architectures/blog_arch_5.png", // 이미지 리사이징 
+        ],
         links: [
             { text: "블로그 바로가기", url: "https://blog.jungyu.store", icon: "🌐" },
             { text: "상세 소개", url: "https://docs.google.com/document/d/1BnN1a3AGs5fQwx7btCwQ6wtPT2h2ahBMccugiAm-w9I/edit?usp=sharing", icon: "💻" },
@@ -174,6 +142,10 @@ const projectData = [
         github: "https://github.com/jungyuya/realtime-chat",
         period: "2025.11 ~ 2025.12",
         team: "개인 프로젝트",
+        architectures: [
+            "architectures/chat_arch_1.png", // GKE 아키텍처
+            "architectures/chat_arch_2.png", // VM 파이프라인
+        ],
         links: [
             { text: "서비스 방문", url: "https://chat.jungyu.store", icon: "💬" },
             { text: "개발 과정 보기", url: "https://blog.jungyu.store/posts/14097f75-8709-4749-80e0-22ad11fa3dee", icon: "📝" }
@@ -231,19 +203,23 @@ const projectData = [
     },
 ];
 
+/* ====================================
+ * 📂 프로젝트 렌더링 및 아키텍처 모달 로직
+ * ==================================== */
+
+// 1. 프로젝트 렌더링 함수
 function renderProjects() {
     const container = document.getElementById('project-list-container');
     if (!container) return;
 
-    const githubIconSvg = `
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
-            <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.419-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
-        </svg>
-    `;
+    // GitHub 아이콘 SVG
+    const githubIconSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.419-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>`;
+
+    // 아키텍처 아이콘 SVG (다이어그램 모양)
+    const archIconSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="3" width="12" height="8" rx="2" /><line x1="9" y1="7" x2="9.01" y2="7" /><line x1="12" y1="7" x2="15" y2="7" /><path d="M12 11v3" /><path d="M6 18v-1a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v1" /><circle cx="6" cy="19" r="2" /><circle cx="12" cy="19" r="2" /><circle cx="18" cy="19" r="2" /></svg>`;
 
     container.innerHTML = projectData.map(project => `
         <article class="project-row">
-            <!-- 좌측 컬럼 -->
             <div class="project-left-col">
                 <div class="project-img-box">
                     <img src="${project.image}" alt="${project.title}" loading="lazy">
@@ -260,17 +236,27 @@ function renderProjects() {
                 </div>
             </div>
 
-            <!-- 우측 컬럼 -->
             <div class="project-content">
-                <!--  헤더 영역: 제목 + GitHub 아이콘 -->
                 <div class="project-header">
                     <h3 class="project-title">${project.title}</h3>
                     
-                    ${project.github ? `
-                        <a href="${project.github}" target="_blank" rel="noopener noreferrer" class="github-corner-icon" aria-label="GitHub Repository">
-                            ${githubIconSvg}
-                        </a>
-                    ` : ''}
+                    <div class="header-icons">
+                        <!-- ✨ 아키텍처 버튼 (상단 이동) -->
+                        ${project.architectures && project.architectures.length > 0 ? `
+                            <button class="icon-btn btn-arch" data-id="${project.id}" aria-label="Architecture">
+                                ${archIconSvg}
+                                <!-- ✨ 툴팁 요소 추가 -->
+                                <span class="arch-tooltip">🏗️ Architecture!</span>
+                            </button>
+                        ` : ''}
+
+                        <!-- GitHub 버튼 -->
+                        ${project.github ? `
+                            <a href="${project.github}" target="_blank" rel="noopener noreferrer" class="icon-btn btn-github" aria-label="GitHub Code" title="GitHub Repository">
+                                ${githubIconSvg}
+                            </a>
+                        ` : ''}
+                    </div>
                 </div>
 
                 <div class="project-tags">
@@ -279,7 +265,7 @@ function renderProjects() {
                 <p class="project-desc">${project.description}</p>
                 
                 <div class="project-links">
-                    <!-- GitHub 버튼은 위로 갔으므로 여기선 제거 -->
+                    <!-- 하단에는 일반 링크만 남김 -->
                     ${project.links.map(link => `
                         <a href="${link.url}" target="_blank" rel="noopener noreferrer" class="btn-small">
                             ${link.icon} ${link.text}
@@ -291,5 +277,130 @@ function renderProjects() {
     `).join('');
 }
 
-// 페이지 로드 시 렌더링 실행
-document.addEventListener('DOMContentLoaded', renderProjects);
+// 2. 아키텍처 모달 관련 로직
+const archModal = document.getElementById('arch-modal');
+const archImage = document.getElementById('arch-image');
+const archCounter = document.getElementById('arch-counter');
+const prevBtn = document.getElementById('arch-prev-btn');
+const nextBtn = document.getElementById('arch-next-btn');
+const closeArchBtn = document.getElementById('close-arch-modal');
+
+let currentArchImages = [];
+let currentArchIndex = 0;
+
+function openArchModal(images) {
+    if (!images || images.length === 0) return;
+
+    currentArchImages = images;
+    currentArchIndex = 0;
+
+    updateArchSlider();
+    if (archModal) {
+        archModal.classList.add('show');
+        document.body.style.overflow = 'hidden';
+    }
+}
+
+function closeArchModal() {
+    if (archModal) {
+        archModal.classList.remove('show');
+        document.body.style.overflow = '';
+    }
+}
+
+function updateArchSlider() {
+    if (archImage && archCounter) {
+        archImage.src = currentArchImages[currentArchIndex];
+        archCounter.textContent = `${currentArchIndex + 1} / ${currentArchImages.length}`;
+    }
+}
+
+// 3. 이벤트 리스너 연결 (DOMContentLoaded 내부)
+document.addEventListener('DOMContentLoaded', () => {
+    // 프로젝트 렌더링
+    renderProjects();
+
+    // 아키텍처 버튼 클릭 이벤트 위임
+    const projectListContainer = document.getElementById('project-list-container');
+    if (projectListContainer) {
+        projectListContainer.addEventListener('click', (e) => {
+            const btn = e.target.closest('.btn-arch');
+            if (btn) {
+                const projectId = btn.dataset.id;
+                const project = projectData.find(p => p.id === projectId);
+                if (project && project.architectures) {
+                    openArchModal(project.architectures);
+                }
+            }
+        });
+    }
+
+    // 슬라이더 버튼 이벤트
+    if (prevBtn) {
+        prevBtn.addEventListener('click', () => {
+            currentArchIndex = (currentArchIndex - 1 + currentArchImages.length) % currentArchImages.length;
+            updateArchSlider();
+        });
+    }
+
+    if (nextBtn) {
+        nextBtn.addEventListener('click', () => {
+            currentArchIndex = (currentArchIndex + 1) % currentArchImages.length;
+            updateArchSlider();
+        });
+    }
+
+    // 닫기 버튼
+    if (closeArchBtn) {
+        closeArchBtn.addEventListener('click', closeArchModal);
+    }
+
+    // 모달 배경 클릭 시 닫기
+    if (archModal) {
+        archModal.addEventListener('click', (e) => {
+            if (e.target === archModal) closeArchModal();
+        });
+    }
+
+    // 키보드 이벤트 (ESC, 화살표)
+    window.addEventListener('keydown', (e) => {
+        if (archModal && archModal.classList.contains('show')) {
+            if (e.key === 'Escape') closeArchModal();
+            if (e.key === 'ArrowLeft') prevBtn?.click();
+            if (e.key === 'ArrowRight') nextBtn?.click();
+        }
+    });
+    const archButtons = document.querySelectorAll('.btn-arch');
+
+    if (archButtons.length > 0) {
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.8 // 버튼이 80% 이상 보일 때 트리거
+        };
+
+        const tooltipObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const btn = entry.target;
+                    const tooltip = btn.querySelector('.arch-tooltip');
+
+                    if (tooltip) {
+                        // 툴팁 표시 (CSS 애니메이션으로 2초 뒤 사라짐)
+                        tooltip.classList.add('show');
+
+                        // 한 번 보여줬으면 관찰 중단 
+                        observer.unobserve(btn);
+
+                        // 2.5초 뒤에 DOM에서 클래스 완전히 제거 
+                        setTimeout(() => {
+                            tooltip.classList.remove('show');
+                        }, 2500);
+                    }
+                }
+            });
+        }, observerOptions);
+
+        archButtons.forEach(btn => tooltipObserver.observe(btn));
+    }
+});
