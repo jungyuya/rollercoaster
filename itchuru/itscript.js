@@ -1,4 +1,3 @@
-// 🎯 당신의 API Gateway 엔드포인트 주소입니다.
 // 스테이지가 '$default'이므로, URL에 별도의 스테이지 경로를 추가하지 않습니다.
 const API_BASE_URL = 'https://l8z65r6gfd.execute-api.ap-northeast-2.amazonaws.com';
 

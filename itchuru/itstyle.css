@@ -1,37 +1,28 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&display=swap');
 
+/* IT츄르 전용 변수 */
 :root {
-    --primary-color: #4CAF50;
-    --text-color: #333333;
-    --light-text-color: #666666;
-    --bg-color: #f8f9fa;
-    --header-bg: #ffffff;
+    --naver-green: #03c75a;
+    --google-blue: #4285F4;
+    --gemini-purple: #5b21b6;
     --card-bg: #ffffff;
     --border-color: #e0e0e0;
     --shadow-light: rgba(0, 0, 0, 0.08);
     --shadow-medium: rgba(0, 0, 0, 0.12);
-
-    /* 버튼 색상 변수 */
-    --naver-green: #03c75a;
-    --google-blue: #4285F4;
-    --gemini-purple: #5b21b6;
 }
 
+/* Body 배경 유지 */
 body {
     margin: 0;
     font-family: 'Noto Sans KR', sans-serif;
     background-color: var(--bg-color);
     color: var(--text-color);
     line-height: 1.6;
-
-    /* ✅ 배경 이미지 관련 추가 */
     background-image: url('츄르4.png');
-    /* 실제 이미지 경로로 수정 */
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
     background-attachment: fixed;
-    /* 스크롤 시 배경 고정 */
 }
 
 footer {
@@ -42,88 +33,30 @@ footer {
     color: #555;
 }
 
-
-#newsPage {
-    max-width: 1280px;
-    margin: 0 auto;
-    padding: 0;
-    font-weight: normal;
-}
-
-/* Header Styles */
-header {
-    background-color: var(--header-bg);
-    box-shadow: 0 4px 8px var(--shadow-light);
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    padding: 0.5rem 0;
-}
-
-header .wrapper {
-    position: relative;
-    /* 자식 요소 위치 기준 */
-    height: 60px;
-    /* 고정 높이 */
-}
-
-header h1 {
-    position: absolute;
-    left: 1rem;
-    top: 50%;
-    transform: translateY(-50%);
-    margin: 0;
-    font-size: 1.8rem;
-    font-weight: 700;
-    color: var(--text-color);
-}
-
-/* 우측 상단 홈 버튼 고정 */
-header nav {
-    position: absolute;
-    right: 1rem;
-    top: 50%;
-    transform: translateY(-50%);
-}
-
-
-h1 {
-    font-weight: 700;
-    color: var(--text-color);
-    margin: 0;
-    font-size: 1.8rem;
-}
-
-nav a {
-    text-decoration: none;
-    font-weight: 500;
-    color: var(--light-text-color);
-    transition: color 0.3s ease;
-    font-size: 1.33rem;
-}
-
-nav a:hover {
-    color: var(--primary-color);
-}
+/* 🗑️ [삭제] 기존 Header 스타일 제거 (style.css가 담당) */
+/* header { ... } */
+/* header .wrapper { ... } */
+/* header h1 { ... } */
+/* header nav { ... } */
+/* nav a { ... } */
 
 /* Main Content Area */
-main {
-    padding: 3rem 2rem;
-}
-
 .news-page {
     text-align: center;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 1rem;
 }
 
 .news-page h2 {
     font-size: 2.3rem;
     font-weight: 700;
     margin-bottom: 0.8rem;
-    color: var(--text-color);
+    color: #333;
 }
 
 .news-page p {
-    color: var(--light-text-color);
+    color: #666;
     margin-bottom: 2rem;
     font-size: 1.1rem;
 }
@@ -138,59 +71,45 @@ main {
     max-width: 700px;
     margin-left: auto;
     margin-right: auto;
+    border: 1px solid var(--border-color);
 }
 
 .textarea-wrapper {
     display: flex;
-    /* Flexbox 레이아웃으로 변경 */
     align-items: flex-end;
-    /* 텍스트 영역이 늘어나도 버튼은 항상 하단에 위치 */
     width: 100%;
     border: 1px solid var(--border-color);
     border-radius: 12px;
-    /* 디자인 통일성을 위해 radius 조정 */
     background-color: var(--card-bg);
     padding: 0.3rem 0.3rem 0.3rem 1rem;
-    /* 내부 여백 미세 조정 */
     box-sizing: border-box;
     margin-bottom: 1rem;
     transition: border-color 0.3s ease;
 }
 
 .textarea-wrapper:focus-within {
-    border-color: var(--primary-color);
-    /* 입력창 활성화 시 테두리 색상 변경 */
+    border-color: var(--naver-green);
 }
 
 #newsInput {
     flex-grow: 1;
-    /* 사용 가능한 모든 공간을 차지 */
     border: none;
-    /* 테두리는 부모 요소(.textarea-wrapper)에서 처리 */
     background-color: transparent;
     font-size: 1rem;
     font-family: 'Noto Sans KR', sans-serif;
     resize: vertical;
-    /* 세로 크기 조절 기능 유지 */
     outline: none;
-    /* 포커스 시 외곽선 제거 */
     padding: 0.6rem 0;
-    /* 상하 여백만 지정 */
     min-height: 40px;
-    /* 최소 높이 지정 */
-    color: var(--text-color);
-    /* 기존의 width, padding-right 등은 더 이상 필요 없음 */
+    color: #333;
 }
 
-/* 입력창 내 전송 버튼 래퍼 */
 .input-send-wrapper {
     flex-shrink: 0;
-    /* 버튼이 찌그러지는 것을 방지 */
     margin-left: 0.5rem;
-    /* 텍스트 입력창과 버튼 사이 간격 */
 }
 
-/* Gemini 전송 버튼 스타일 */
+/* Gemini 전송 버튼 */
 .gemini-send-button {
     background-color: var(--gemini-purple);
     color: white;
@@ -211,11 +130,6 @@ main {
 .gemini-send-button:hover {
     background-color: #4c1d95;
     transform: scale(1.05);
-}
-
-.gemini-send-button i {
-    margin: 0;
-    color: white;
 }
 
 .button-group {
@@ -239,75 +153,53 @@ main {
     max-width: 200px;
 }
 
-/* --- 각 버튼별 테마 색상 및 스타일 --- */
+.naver-button { background-color: var(--naver-green); }
+.naver-button:hover { background-color: #02b251; transform: translateY(-2px); }
 
-/* 네이버 버튼 스타일 */
-.naver-button {
-    background-color: var(--naver-green);
-}
-
-.naver-button:hover {
-    background-color: #02b251;
-    transform: translateY(-2px);
-}
-
-/* 구글 버튼 스타일 */
-.google-button {
-    background-color: var(--google-blue);
-}
-
-.google-button:hover {
-    background-color: #357ae8;
-    transform: translateY(-2px);
-}
+.google-button { background-color: var(--google-blue); }
+.google-button:hover { background-color: #357ae8; transform: translateY(-2px); }
 
 /* 요약 결과 박스 */
 .summary-result-box {
     text-align: left;
-    background-color: var(--bg-color);
+    background-color: #f9f9f9;
     padding: 1.5rem;
     border-radius: 8px;
     min-height: 100px;
     line-height: 1.7;
-    color: var(--text-color);
+    color: #333;
     white-space: pre-wrap;
     word-wrap: break-word;
     box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
+    border: 1px solid var(--border-color);
 }
 
-/* News Container (Flexbox for Domestic/Global lists) */
+/* News Container */
 .news-container {
     display: flex;
     flex-wrap: wrap;
-    /* 카드가 한 줄에 다 들어가지 않으면 다음 줄로 넘김 */
     gap: 2.5rem;
     justify-content: center;
-    align-items: stretch;
-    /* 모든 카드의 높이를 동일하게 맞춤 */
+    align-items: flex-start;
 }
 
-/* Common News List Card Style */
+/* ✨ [수정] News List Card - 너비 보정 */
 .news-list {
-    /* 고정 width 대신 flex 속성으로 유연한 너비 설정 */
-    flex: 1 1 380px;
-    /* grow(팽창), shrink(수축), basis(기본 너비) */
-    max-width: 420px;
-    /* 카드가 너무 커지는 것을 방지 */
+    /* 기존: flex: 1 1 380px; max-width: 420px; */
+    /* 변경: border-box로 인해 줄어든 패딩만큼 너비를 늘려줍니다. */
+    flex: 1 1 450px; 
+    max-width: 500px; /* 카드가 더 넓게 퍼지도록 허용 */
     min-width: 320px;
-    /* 카드가 너무 작아지는 것을 방지 */
+    
     background-color: var(--card-bg);
     border: 1px solid var(--border-color);
     border-radius: 16px;
     display: flex;
-    /* 내부 요소 정렬을 위해 flex 사용 */
     flex-direction: column;
-    /* 내부 요소를 세로로 쌓음 */
     padding: 2rem;
     text-align: left;
     box-shadow: 0 6px 16px var(--shadow-light);
-    transition:
-        transform 0.3s ease,
-        box-shadow 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .news-list:hover {
@@ -323,53 +215,43 @@ main {
     font-size: 1.6rem;
     font-weight: 600;
     flex-shrink: 0;
-    /* 제목은 높이가 줄어들지 않도록 고정 */
 }
 
 .news-list ul {
-
     overflow-y: auto;
-    /* 내용이 많아지면 스크롤 생성 */
     flex-grow: 1;
-    /* 제목을 제외한 나머지 공간을 모두 차지 */
     min-height: 200px;
-    /* 리스트의 최소 높이를 지정해 카드가 너무 작아지는 것 방지 */
     padding: 0;
     margin: 0;
     list-style-type: none;
 }
 
-/* 뉴스 목록 항목 (<li>) 스타일 */
 .news-list li {
     display: flex;
     align-items: center;
     margin: 1.2rem 0;
 }
 
-/* 뉴스 링크 (<a>) 스타일 */
 .news-list li a {
     flex-grow: 1;
-    /* 아이콘을 제외한 모든 공간을 차지 */
     min-width: 0;
-    /* 중요! flex 아이템이 내용보다 작아질 수 있게 허용하여 ellipsis가 동작하게 함 */
     text-decoration: none;
-    color: var(--text-color);
+    color: #333;
     font-weight: 500;
     transition: color 0.3s ease;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     margin-right: 8px;
-    /* 오른쪽 아이콘과의 간격 */
     vertical-align: middle;
 }
 
 .news-list a:hover {
-    color: var(--primary-color);
+    color: var(--naver-green);
     text-decoration: underline;
 }
 
-/* 뉴스 출처 아이콘 (N, G) 스타일 */
+/* 아이콘 스타일 */
 .news-source-icon {
     display: inline-flex;
     align-items: center;
@@ -382,65 +264,50 @@ main {
     color: white;
     margin-right: 8px;
     flex-shrink: 0;
-    /* 아이콘 크기가 줄어들지 않도록 고정 */
     vertical-align: middle;
 }
 
-/* 새 탭 열기 아이콘 스타일 */
 .open-new-tab-icon {
     font-size: 0.8em;
-    color: var(--light-text-color);
-    /* margin-left: auto; <<< 제거해도 flex-grow 때문에 동일하게 동작합니다. */
+    color: #999;
     cursor: pointer;
     flex-shrink: 0;
-    /* 아이콘 크기가 줄어들지 않도록 고정 */
     transition: color 0.3s ease;
     vertical-align: middle;
 }
 
 .open-new-tab-icon:hover {
-    color: var(--primary-color);
+    color: var(--google-blue);
 }
 
-/* G 글로벌 IT 뉴스 헤더 아이콘 스타일 (itscript.js에서 <span> 추가 시) */
 .google-h3-icon {
     display: inline-block;
-    width: 24px;
-    height: 24px;
-    line-height: 24px;
-    text-align: center;
-    border-radius: 4px;
+    width: 24px; height: 24px; line-height: 24px;
+    text-align: center; border-radius: 4px;
     background-color: var(--google-blue);
-    color: white;
-    font-size: 0.8em;
-    font-weight: bold;
-    margin-right: 8px;
-    vertical-align: middle;
+    color: white; font-size: 0.8em; font-weight: bold;
+    margin-right: 8px; vertical-align: middle;
 }
 
-/* koreanNewsStyle.css (Naver Theme) */
+/* 테마별 스타일 */
 .news-list.korean-naver-theme {
     border: 1px solid var(--naver-green);
     box-shadow: 0 6px 16px rgba(3, 199, 90, 0.15);
     background-color: #f7fcf9;
 }
-
 .news-list.korean-naver-theme h3 {
     color: var(--naver-green);
     border-bottom-color: var(--naver-green);
 }
-
 .news-list.korean-naver-theme a:hover {
     color: var(--naver-green);
 }
 
-/* globalNewsStyle.css (Google Theme) */
 .news-list.global-google-theme {
     border: 1px solid var(--google-blue);
     box-shadow: 0 6px 16px rgba(66, 133, 244, 0.15);
     background-color: #f8faff;
 }
-
 .news-list.global-google-theme h3 {
     background: linear-gradient(to right, #4285f4, #ea4335, #fbbc05, #34a853);
     background-clip: text;
@@ -448,83 +315,21 @@ main {
     -webkit-text-fill-color: transparent;
     border-bottom-color: var(--google-blue);
 }
-
 .news-list.global-google-theme a:hover {
     color: var(--google-blue);
 }
 
-/* Responsive Design */
-@media (max-width: 900px) {
-
-    main {
-        padding: 2rem 1rem;
-    }
-}
-
+/* 모바일 대응 */
 @media (max-width: 600px) {
-    header .wrapper {
-        flex-direction: column;
-        gap: 0.5rem;
-    }
-
-    h1 {
-        font-size: 1.5rem;
-    }
-
-    nav a {
-        font-size: 1.2rem;
-        /* 기존 0.9rem보다 큼 */
-        padding: 0.4rem 0.8rem;
-        /* 버튼 크기 키우기 */
-    }
-
-    .news-list {
-        padding: 1.5rem;
-        /* 모바일에서 내부 여백 축소 */
-    }
-
-    .news-list h3 {
-        font-size: 1.3rem;
-        /* 모바일에서 제목 폰트 크기 축소 */
-    }
-
-    /* Small screen button group adjustments */
-    .button-group {
-        gap: 0.8rem;
-        /* 모바일에서 버튼 간격 살짝 줄임 */
-    }
-
-    .button-group button {
-        flex-grow: 1;
-        /* 버튼들이 가용 공간을 균등하게 차지하도록 설정 */
-        flex-basis: 0;
-        /* 모든 버튼이 동일한 너비에서 시작하도록 초기화 */
-        max-width: 100%;
-        /* 기존의 90% 제한 제거 */
-    }
-
-    /* Small screen chatbot input adjustments */
-    .input-send-wrapper {
-        bottom: 8px;
-        right: 8px;
-    }
+    .news-list { padding: 1.5rem; }
+    .news-list h3 { font-size: 1.3rem; }
+    .button-group { gap: 0.8rem; }
+    .button-group button { flex-grow: 1; flex-basis: 0; max-width: 100%; }
+    .input-send-wrapper { bottom: 8px; right: 8px; }
 }
 
-/* Custom Scrollbar Styles (WebKit browsers like Chrome, Safari) */
-.news-list ul::-webkit-scrollbar {
-    width: 8px;
-}
-
-.news-list ul::-webkit-scrollbar-track {
-    background: var(--bg-color);
-    border-radius: 10px;
-}
-
-.news-list ul::-webkit-scrollbar-thumb {
-    background: var(--light-text-color);
-    border-radius: 10px;
-}
-
-.news-list ul::-webkit-scrollbar-thumb:hover {
-    background: var(--primary-color);
-}
+/* Scrollbar */
+.news-list ul::-webkit-scrollbar { width: 8px; }
+.news-list ul::-webkit-scrollbar-track { background: var(--bg-color); border-radius: 10px; }
+.news-list ul::-webkit-scrollbar-thumb { background: #999; border-radius: 10px; }
+.news-list ul::-webkit-scrollbar-thumb:hover { background: var(--naver-green); }

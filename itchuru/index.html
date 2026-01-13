@@ -14,30 +14,42 @@
     <meta property="og:description" content="국내/해외 IT 뉴스를 한입에 요약해주는 IT츄르!" />
     <meta property="og:image" content="https://jungyu.store/itchuru/og-churu.png" />
     <meta property="og:url" content="https://jungyu.store/itchuru/itindex.html" />
-    <meta property="og:site_name" content="IT츄르" />
 
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="📰 IT츄르 - 오늘의 IT 한입" />
-    <meta name="twitter:description" content="국내/해외 IT 뉴스를 한입에 요약해주는 IT츄르!" />
-    <meta name="twitter:image" content="https://jungyu.store/itchuru/og-churu.png" />
-
+    <!-- ✨ 1. 메인 스타일 (헤더 디자인용) -->
+    <link rel="stylesheet" href="../style.css">
+    <!-- ✨ 2. IT츄르 스타일 (본문용 - 순서 중요!) -->
     <link rel="stylesheet" href="itstyle.css">
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 
 <body>
+
+    <!-- ✨ 3. 헤더: 메인 포트폴리오 네비게이션으로 교체 -->
     <header>
-        <div class="wrapper">
-            <h1>📰 IT츄르</h1>
-            <nav>
-                <a href="../">🏠HOME</a>
-            </nav>
-        </div>
+        <nav class="navbar">
+            <a href="index.html" class="nav-logo">
+                <!-- 로고 텍스트 IT츄르로 변경 -->
+                <span class="logo-text" style="font-size: 1.5rem;">📰 IT츄르</span>
+            </a>
+            <ul class="nav-menu">
+                <!-- 상위 경로(../)로 이동 -->
+                <li><a href="../index.html">🏠HOME</a></li>
+                <!-- <li><a href="../index.html#about">👤소개</a></li>
+                <li><a href="../index.html#projects">💼프로젝트</a></li> -->
+                <li><a href="https://blog.jungyu.store" target="_blank">✍️블로그</a></li>
+            </ul>
+
+            <div class="hamburger">
+                <span></span><span></span><span></span>
+            </div>
+        </nav>
     </header>
 
-    <main>
+    <!-- ✨ 4. 헤더 높이만큼 여백 추가 -->
+    <main style="padding-top: 80px;">
         <div class="news-page" id="newsPage">
-            <h2>매일 IT뉴스를 한입에, 츄르!</h2>
+            <h2 style="margin-top: 0;">매일 IT뉴스를 한입에, 츄르!</h2>
             <p> 네이버와 구글의 국내/해외 최신 IT 뉴스를 요약해 드려요.</p>
 
             <div class="chatbot-container">
@@ -71,6 +83,8 @@
         </div>
     </footer>
 
+    <!-- ✨ 5. 햄버거 메뉴 작동을 위한 common.js -->
+    <script src="../common.js"></script>
     <script src="itscript.js" defer></script>
 </body>
 
