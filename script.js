@@ -16,18 +16,6 @@ const HERO_BACKGROUND_IMAGES = [
 
 document.addEventListener('DOMContentLoaded', () => {
     /* ====================================
-     * ✉️ 연락처 폼 제출 기능 (현재 비활성화됨)
-     * ==================================== */
-    /* const contactForm = document.getElementById('contact-form');
-
-    if (contactForm) {
-        contactForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            // ... (생략된 폼 로직)
-        });
-    } */
-
-    /* ====================================
      * 🎓 자격증 이미지 모달 기능
      * ==================================== */
     const certItems = document.querySelectorAll('.cert-item');
@@ -45,7 +33,6 @@ document.addEventListener('DOMContentLoaded', () => {
     function closeCertModal() {
         if (imageCertModal) {
             imageCertModal.classList.remove('show');
-            // 모달이 완전히 사라지는 애니메이션 시간(0.3s) 후에 스크롤바 되돌리기
             setTimeout(() => {
                 document.body.style.overflow = '';
                 if (certModalImage) certModalImage.src = '';
@@ -186,7 +173,7 @@ const projectData = [
         image: "images/project2.png",
         tags: ["AWS EKS", "ArgoCD", "Jenkins", "Microservices"],
         links: [
-            { text: "상세 보기", url: "#", icon: "🔍" } // 필요 시 링크 수정
+            { text: "상세 보기", url: "#", icon: "🔍" } 
         ]
     }, */
     {
@@ -386,13 +373,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     const tooltip = btn.querySelector('.arch-tooltip');
 
                     if (tooltip) {
-                        // 툴팁 표시 (CSS 애니메이션으로 2초 뒤 사라짐)
                         tooltip.classList.add('show');
-
-                        // 한 번 보여줬으면 관찰 중단 
                         observer.unobserve(btn);
-
-                        // 2.5초 뒤에 DOM에서 클래스 완전히 제거 
                         setTimeout(() => {
                             tooltip.classList.remove('show');
                         }, 2500);
