@@ -135,7 +135,7 @@ const projectData = [
         ],
         links: [
             { text: "서비스 방문", url: "https://chat.jungyu.store", icon: "💬" },
-            { text: "개발 과정 보기", url: "https://blog.jungyu.store/posts/14097f75-8709-4749-80e0-22ad11fa3dee", icon: "📝" }
+            { text: "상세 소개", url: "https://github.com/jungyuya/realtime-chat/blob/main/README.md", icon: "📝" }
         ]
     },
     {
