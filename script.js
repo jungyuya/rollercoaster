@@ -117,13 +117,13 @@ const projectData = [
         ],
         links: [
             { text: "블로그 바로가기", url: "https://blog.jungyu.store", icon: "🌐" },
-            { text: "상세 소개", url: "https://docs.google.com/document/d/1BnN1a3AGs5fQwx7btCwQ6wtPT2h2ahBMccugiAm-w9I/edit?usp=sharing", icon: "💻" },
+            { text: "상세 소개", url: "https://blog.jungyu.store/posts/29ad0db7-939a-4f28-9b17-4d39739ee8ba", icon: "💻" },
         ]
     },
     {
         id: "realtime-chat",
         title: "실시간 채팅 서비스",
-        description: "Go와 React로 구축하여 기존 블로그에 iframe으로 통합한 실시간 채팅 위젯입니다. WebSocket과 JWT를 실시간 채팅 환경을 구현했으며, 서비스 규모에 맞춰 GKE아키텍처를 단일 VM 환경으로 재설계하는 인프라 최적화를 수행했습니다. Terraform과 Docker Compose를 통해 프리티어로 유지하면서도, SSL 자동화 및 배포 파이프라인을 유지하여 지속 가능한 서비스를 완성했습니다.",
+        description: "Go와 React로 구축하여 기존 블로그에 iframe으로 통합한 실시간 채팅 위젯입니다. WebSocket과 JWT를 실시간 채팅 환경을 구현했으며, 서비스 규모에 맞춰 GKE아키텍처를 단일 VM 환경으로 재설계하는 인프라 최적화를 수행했습니다. Terraform과 Docker Compose를 통해 프리티어로 유지하면서, SSL 자동화 및 배포 파이프라인을 유지하여 지속 가능한 서비스를 완성했습니다.",
         image: "images/realtime-chat-thumbnail.png",
         tags: ["Go", "React", "Terraform", "GCP", "ArgoCD", "Docker", "WebSocket"],
         github: "https://github.com/jungyuya/realtime-chat",
@@ -135,7 +135,25 @@ const projectData = [
         ],
         links: [
             { text: "서비스 방문", url: "https://chat.jungyu.store", icon: "💬" },
-            { text: "상세 소개", url: "https://github.com/jungyuya/realtime-chat/blob/main/README.md", icon: "📝" }
+            { text: "상세 소개", url: "https://blog.jungyu.store/posts/4b4c5cbe-e893-4cf3-bad4-ea4202de36eb", icon: "📝" }
+        ]
+    },
+    {
+        id: "rag-chatbot",
+        title: "블로그 전용 RAG 챗봇 서비스",
+        description: "블로그에 Bedrock과 OpenSearch를 연동하여, 단순 검색을 넘어 의미 단위의 검색을 위한 RAG챗봇을 구현했습니다. Lambda와 DynamoDB Stream을 활용한 이벤트 기반 파이프라인으로 실시간 데이터 인덱싱을 구현했으며, 맥락 인식 검색과 환각 방지 로직을 통해 답변의 정확도를 높였습니다. 또한, 일일 쿼터 시스템을 도입하여 비용 효율성을 극대화했습니다.",
+        image: "images/rag-chatbot-thumbnail.png",
+        tags: ["Amazon Bedrock", "OpenSearch", "RAG", "DDB Stream", "Vector Search"],
+        github: "https://github.com/jungyuya/new-blog",
+        period: "2026.01 ~ 진행 중",
+        team: "개인 프로젝트",
+        architectures: [
+            "architectures/RAG_arch_1.png", // 데이터 인덱싱 과정
+            "architectures/RAG_arch_2.png", // User가 질문 및 답변을 받는 과정
+        ],
+        links: [
+            { text: "서비스 방문", url: "https://blog.jungyu.store", icon: "🤖" },
+            { text: "상세 소개", url: "https://blog.jungyu.store/posts/d887b20f-9df3-4b86-a8b2-224b861c1828", icon: "📄" }, // RAG 전용 리드미 링크
         ]
     },
     {
