@@ -120,6 +120,7 @@ const projectData = [
             { text: "상세 소개", url: "https://blog.jungyu.store/posts/29ad0db7-939a-4f28-9b17-4d39739ee8ba", icon: "💻" },
         ]
     },
+
     {
         id: "realtime-chat",
         title: "실시간 채팅 서비스",
@@ -145,7 +146,7 @@ const projectData = [
         image: "images/rag-chatbot-thumbnail.png",
         tags: ["Amazon Bedrock", "OpenSearch", "RAG", "DDB Stream", "Vector Search"],
         github: "https://github.com/jungyuya/new-blog",
-        period: "2026.01 ~ 진행 중",
+        period: "2026.01 ~ 2026.02",
         team: "개인 프로젝트",
         architectures: [
             "architectures/RAG_arch_1.png", // 데이터 인덱싱 과정
@@ -154,6 +155,23 @@ const projectData = [
         links: [
             { text: "서비스 방문", url: "https://blog.jungyu.store", icon: "🤖" },
             { text: "상세 소개", url: "https://blog.jungyu.store/posts/d887b20f-9df3-4b86-a8b2-224b861c1828", icon: "📄" }, // RAG 전용 리드미 링크
+        ]
+    },
+    {
+        id: "quizdive",
+        title: "QuizDive : AI 플래시카드 생성 서비스",
+        description: "Tencent Cloud와 GCP 멀티 클라우드 환경에서, 사진 한 장을 학습 카드로 자동 변환하는 서비스입니다. Tencent EdgeOne Pages와 COS를 활용하여 서버리스 아키텍처를 설계했고, GCP Vision API와 Gemini AI를 연동하여 학습 효율을 극대화했습니다. IndexedDB를 통한 로컬 데이터로 최적화된 학습 카드를 제공합니다.",
+        image: "images/quizdive.png",
+        tags: ["Tencent Cloud", "EdgeOne", "Gemini API", "Google Vision", "Terraform"],
+        github: "https://github.com/jungyuya/quizdive",
+        period: "2026.02 ~ 진행 중",
+        team: "개인 프로젝트",
+        architectures: [
+            "architectures/quiz_arch_1.png", // 전체 시스템 아키텍처
+            /* "architectures/quiz_arch_2.png", // 데이터 흐름 파이프라인 */
+        ],
+        links: [
+            { text: "서비스 방문", url: "https://quiz.jungyu.store", icon: "🃏" },
         ]
     },
     {
