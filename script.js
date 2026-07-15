@@ -116,8 +116,8 @@ const projectData = [
             "architectures/blog_arch_5.png", // 이미지 리사이징 
         ],
         links: [
-            { text: "블로그 바로가기", url: "https://blog.jungyu.store", icon: "🌐" },
-            { text: "상세 소개", url: "https://blog.jungyu.store/posts/29ad0db7-939a-4f28-9b17-4d39739ee8ba", icon: "💻" },
+            { text: "블로그 바로가기", url: "https://blog.jungyu.xyz", icon: "🌐" },
+            { text: "상세 소개", url: "https://blog.jungyu.xyz/posts/29ad0db7-939a-4f28-9b17-4d39739ee8ba", icon: "💻" },
         ]
     },
 
@@ -135,8 +135,8 @@ const projectData = [
             "architectures/chat_arch_2.png", // VM 파이프라인
         ],
         links: [
-            { text: "서비스 방문", url: "https://chat.jungyu.store", icon: "💬" },
-            { text: "상세 소개", url: "https://blog.jungyu.store/posts/4b4c5cbe-e893-4cf3-bad4-ea4202de36eb", icon: "📝" }
+            { text: "서비스 방문", url: "https://chat.jungyu.xyz", icon: "💬" },
+            { text: "상세 소개", url: "https://blog.jungyu.xyz/posts/4b4c5cbe-e893-4cf3-bad4-ea4202de36eb", icon: "📝" }
         ]
     },
     {
@@ -153,8 +153,8 @@ const projectData = [
             "architectures/RAG_arch_2.png", // User가 질문 및 답변을 받는 과정
         ],
         links: [
-            { text: "서비스 방문", url: "https://blog.jungyu.store", icon: "🤖" },
-            { text: "상세 소개", url: "https://blog.jungyu.store/posts/d887b20f-9df3-4b86-a8b2-224b861c1828", icon: "📄" }, // RAG 전용 리드미 링크
+            { text: "서비스 방문", url: "https://blog.jungyu.xyz", icon: "🤖" },
+            { text: "상세 소개", url: "https://blog.jungyu.xyz/posts/d887b20f-9df3-4b86-a8b2-224b861c1828", icon: "📄" }, // RAG 전용 리드미 링크
         ]
     },
     {
@@ -171,7 +171,7 @@ const projectData = [
             /* "architectures/quiz_arch_2.png", // 데이터 흐름 파이프라인 */
         ],
         links: [
-            { text: "서비스 방문", url: "https://quiz.jungyu.store", icon: "🃏" },
+            { text: "서비스 방문", url: "https://quiz.jungyu.xyz", icon: "🃏" },
         ]
     },
     {
@@ -184,7 +184,7 @@ const projectData = [
         period: "2025.09 ~ 2025.10",
         team: "개인 프로젝트",
         links: [
-            { text: "서비스 방문", url: "https://jungyu.store/itchuru", icon: "📰" }
+            { text: "서비스 방문", url: "https://jungyu.xyz/itchuru", icon: "📰" }
         ]
     },
     {

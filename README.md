@@ -1,6 +1,6 @@
 이준규's 포트폴리오 웹 페이지 프로젝트 <Br>
 프로젝트 명 : RollerCoaster (가제) <br>
-http://jungyu.store/
+https://jungyu.xyz/
 
 ## 프로젝트 개요
 RollerCoaster는 정적 웹사이트 기반의 개인 포트폴리오 프로젝트입니다.<br>
@@ -117,7 +117,7 @@ GEMINI_API_KEY=my_google_gen_api_key
 📱 사용자 브라우저
 │
 ▼
-🟦 CloudFront (jungyu.store 도메인)
+🟦 CloudFront (jungyu.xyz 도메인)
 │
 ▼
 🟦 S3 (정적 웹 호스팅)
@@ -164,7 +164,7 @@ GEMINI_API_KEY=my_google_gen_api_key
 ## 개발자 정보
 
 * 이름: 이준규 (Lee JUN-GYU)
-* 포트폴리오 주소: [https://jungyu.store](https://jungyu.store)
+* 포트폴리오 주소: [https://jungyu.xyz](https://jungyu.xyz)
 * Github : https://github.com/jungyuya
 * E-mail : jungyuya@gmail.com
 
